@@ -64,6 +64,28 @@
         [dir="ltr"] .admin-panel { right: auto; left: -450px; border-left: none; border-right: 2px solid var(--primary); }
         [dir="ltr"] .admin-panel.open { left: 0; right: auto; }
         @media (max-width: 768px) { .admin-panel { width: 100%; right: -100%; } }
+        .admin-trigger {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9998;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(99,102,241,0.4);
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .admin-trigger:hover {
+        transform: scale(1.1) rotate(90deg); }
+        /* للغة الإنجليزية */
+        [dir="ltr"] .admin-trigger { right: auto; left: 30px; }
     </style>
 <base target="_blank">
 </head>
@@ -362,7 +384,7 @@
                 <button onclick="resetData()" class="w-full magnetic-btn justify-center" style="background: #ef4444;"><i class="fas fa-trash"></i> إعادة تعيين</button>
             </div>
         </div>
-        <div class="text-center text-gray-500 text-sm"><p>اضغط Ctrl + Shift + A لإخفاء</p></div>
+        <div class="text-center text-gray-500 text-sm"><p>اضغط Ctrl + Shift + ~ أو ⚙️ لفتح/إغلاق</p></div>
     </div>
 
     <!-- Toast -->
@@ -613,7 +635,7 @@
             showToast('جاري إرسال الرسالة...');
             fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
             .then(r => { if (r.ok) { showToast('تم الإرسال بنجاح!'); form.reset(); } else showToast('حدث خطأ. حاول مرة أخرى.'); })
-            .catch(() => showToast('حدث خطأ في الاتصال.'));
+            .catch(function() { showToast('حدث خطأ في الاتصال.'); });
         });
     }
 
@@ -646,9 +668,14 @@
 
     function initAdminPanel() {
         renderAdminTabs();
-        document.getElementById('primaryColor').value = siteData.settings?.primaryColor || '#6366f1';
-        document.getElementById('secondaryColor').value = siteData.settings?.secondaryColor || '#8b5cf6';
+        var pc = document.getElementById('primaryColor');
+        sc = document.getElementById('secondaryColor');
+        if (pc) pc.value = siteData.settings && siteData.settings.primaryColor ? 
+    siteData.settings.primaryColor : '#6366f1';
+        if (sc) sc.value = siteData.settings && siteData.settings.secondaryColor ? 
+    siteData.settings.secondaryColor : '#8b5cf6';
     }
+   
 
     function renderAdminTabs() {
         const list = document.getElementById('adminTabsList');
@@ -761,7 +788,7 @@
 
     function initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+            if (e.ctrlKey && e.shiftKey && e.key == 'S') {
                 e.preventDefault();
                 toggleAdmin();
             }
