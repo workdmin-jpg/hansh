@@ -8,9 +8,9 @@
     <meta property="og:title" content="Bashier - حلول رقمية مبتكرة">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -391,6 +391,16 @@
     <div class="toast" id="toast"></div>
 
     <script>
+    // ✅ Fallback إذا فشل GSAP
+    if (typeof gsap === 'undefined') {
+        window.gsap = {
+            registerPlugin: function() {},
+            fromTo: function() { return { duration: function() {} }; },
+            to: function() {}
+        };
+        window.ScrollTrigger = { create: function() {} };
+    }    
+
     // Data
     const defaultData = {
         tabs: [
@@ -405,7 +415,7 @@
             { id: 'contact', nameAr: 'تواصل معنا', nameEn: 'Contact', visible: true }
         ],
         projects: [
-            { id: 1, titleAr: 'تصميم هوية بصرية', titleEn: 'Brand Identity', category: 'design', image: 'https://picsum.photos/seed/brand1/800/600', descriptionAr: 'تصميم هوية بصرية كاملة', descriptionEn: 'Complete brand identity design', client: 'TechStart', date: '2026-01', technologies: ['Illustrator', 'Figma'] },
+            { id: 1, titleAr: 'تصميم هوية بصرية', titleEn: 'Brand Identity', category: 'design', image: 'https://placehold.co/800x600/6366f1/ffffff?text=Project', descriptionAr: 'تصميم هوية بصرية كاملة', descriptionEn: 'Complete brand identity design', client: 'TechStart', date: '2026-01', technologies: ['Illustrator', 'Figma'] },
             { id: 2, titleAr: 'موقع تجارة إلكترونية', titleEn: 'E-commerce Website', category: 'web', image: 'https://picsum.photos/seed/ecom1/800/600', descriptionAr: 'متجر إلكتروني متكامل', descriptionEn: 'Full e-commerce store', client: 'ShopMax', date: '2026-02', technologies: ['React', 'Node.js'] },
             { id: 3, titleAr: 'تطبيق توصيل', titleEn: 'Delivery App', category: 'app', image: 'https://picsum.photos/seed/food1/800/600', descriptionAr: 'تطبيق توصيل طلبات', descriptionEn: 'Food delivery app', client: 'FoodExpress', date: '2026-02', technologies: ['Flutter', 'Firebase'] },
             { id: 4, titleAr: 'حملة تسويقية', titleEn: 'Marketing Campaign', category: 'marketing', image: 'https://picsum.photos/seed/market1/800/600', descriptionAr: 'حملة على وسائل التواصل', descriptionEn: 'Social media campaign', client: 'FashionHub', date: '2026-03', technologies: ['Meta Ads', 'Google Ads'] },
