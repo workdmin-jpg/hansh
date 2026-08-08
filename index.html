@@ -361,13 +361,28 @@
                 <div><label class="block text-sm mb-2">اللون الثانوي</label><input type="color" id="secondaryColor" class="w-full h-10 rounded-lg cursor-pointer" value="#8b5cf6" onchange="updateColors()"></div>
             </div>
         </div>
+          <!-- ====== محرر المحتوى الكامل ====== -->
         <div class="mb-8">
-            <h3 class="text-lg font-bold mb-4">تعديل المحتوى</h3>
-            <div class="space-y-4">
-                <div><label class="block text-sm mb-2">عنوان الشركة</label><input type="text" id="companyName" class="form-input" value="Bashier" onchange="updateContent()"></div>
-                <div><label class="block text-sm mb-2">البريد الإلكتروني</label><input type="email" id="companyEmail" class="form-input" value="info@bashier.com" onchange="updateContent()"></div>
-            </div>
+           <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+           <i class="fas fa-edit text-cyan-400"></i> محرر المحتوى
+           </h3>
+    
+         <!-- تبويبات المحرر -->
+        <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+        <button onclick="showEditor('hero')" class="editor-tab active px-3 py-1 rounded-full bg-indigo-500 text-white text-xs">الرئيسية</button>
+        <button onclick="showEditor('about')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">عن الشركة</button>
+        <button onclick="showEditor('projects')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">المشاريع</button>
+        <button onclick="showEditor('news')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأخبار</button>
+        <button onclick="showEditor('testimonials')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الشهادات</button>
+        <button onclick="showEditor('faq')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأسئلة</button>
+        <button onclick="showEditor('contact')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">التواصل</button>
         </div>
+
+         <!-- محتوى المحرر -->
+        <div id="editorContent" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+        <!-- يُملأ تلقائياً -->
+       </div>
+       </div>
         <div class="mb-8">
             <h3 class="text-lg font-bold mb-4">إدارة البيانات</h3>
             <div class="space-y-3">
@@ -672,14 +687,343 @@
     function initAdminPanel() {
         renderAdminTabs();
         var pc = document.getElementById('primaryColor');
-        sc = document.getElementById('secondaryColor');
+        var sc = document.getElementById('secondaryColor');
         if (pc) pc.value = siteData.settings && siteData.settings.primaryColor ? 
     siteData.settings.primaryColor : '#6366f1';
-        if (sc) sc.value = siteData.settings && siteData.settings.secondaryColor ? 
+        if (sc) sc.value = siteData.settings && siteData.settings.secondaryColor ?  
     siteData.settings.secondaryColor : '#8b5cf6';
+        renderEditorContent(); // ← أضف هذا السطر
     }
    
+// ====== محرر المحتوى ======
+var currentEditor = 'hero';
 
+function showEditor(section) {
+    currentEditor = section;
+    // تحديث الأزرار
+    document.querySelectorAll('.editor-tab').forEach(function(btn) {
+        btn.classList.remove('bg-indigo-500', 'text-white');
+        btn.classList.add('bg-white/10', 'text-gray-300');
+    });
+    event.target.classList.remove('bg-white/10', 'text-gray-300');
+    event.target.classList.add('bg-indigo-500', 'text-white');
+    
+    renderEditorContent();
+}
+
+function renderEditorContent() {
+    var container = document.getElementById('editorContent');
+    if (!container) return;
+    
+    var html = '';
+    
+    if (currentEditor === 'hero') {
+        html = 
+            '<div><label class="block text-sm mb-2">العنوان الرئيسي (عربي)</label><input type="text" id="editHeroTitleAr" class="form-input" value="' + (siteData.hero?.titleAr || 'نبني المستقبل الرقمي') + '" onchange="saveHero()"></div>' +
+            '<div><label class="block text-sm mb-2">العنوان الرئيسي (إنجليزي)</label><input type="text" id="editHeroTitleEn" class="form-input" value="' + (siteData.hero?.titleEn || 'We Build The Future') + '" onchange="saveHero()"></div>' +
+            '<div><label class="block text-sm mb-2">الوصف (عربي)</label><textarea id="editHeroDescAr" rows="3" class="form-input" onchange="saveHero()">' + (siteData.hero?.descAr || 'نقدم حلول رقمية متكاملة') + '</textarea></div>' +
+            '<div><label class="block text-sm mb-2">الوصف (إنجليزي)</label><textarea id="editHeroDescEn" rows="3" class="form-input" onchange="saveHero()">' + (siteData.hero?.descEn || 'We provide comprehensive digital solutions') + '</textarea></div>';
+    }
+    else if (currentEditor === 'about') {
+        html = 
+            '<div><label class="block text-sm mb-2">عنوان القسم (عربي)</label><input type="text" id="editAboutTitleAr" class="form-input" value="' + (siteData.about?.titleAr || 'نحن نصنع الفرق') + '" onchange="saveAbout()"></div>' +
+            '<div><label class="block text-sm mb-2">النص (عربي)</label><textarea id="editAboutTextAr" rows="4" class="form-input" onchange="saveAbout()">' + (siteData.about?.textAr || 'نحن فريق من المحترفين...') + '</textarea></div>' +
+            '<div><label class="block text-sm mb-2">النص (إنجليزي)</label><textarea id="editAboutTextEn" rows="4" class="form-input" onchange="saveAbout()">' + (siteData.about?.textEn || 'We are a team of professionals...') + '</textarea></div>' +
+            '<div><label class="block text-sm mb-2">رابط صورة About</label><input type="text" id="editAboutImage" class="form-input" value="' + (siteData.about?.image || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800') + '" onchange="saveAbout()"></div>' +
+            '<div class="mt-2"><p class="text-xs text-gray-500 mb-1">أو ارفع صورة:</p><input type="file" accept="image/*" onchange="uploadImage(this, \'about\')" class="text-sm"></div>';
+    }
+    else if (currentEditor === 'projects') {
+        html = '<div class="space-y-4">';
+        siteData.projects.forEach(function(p, i) {
+            html += 
+                '<div class="p-4 bg-white/5 rounded-xl border border-white/10">' +
+                '<div class="flex justify-between items-center mb-2">' +
+                '<span class="font-bold text-sm">مشروع #' + (i+1) + '</span>' +
+                '<button onclick="deleteProject(' + i + ')" class="text-red-400 hover:text-red-300 text-sm"><i class="fas fa-trash"></i> حذف</button>' +
+                '</div>' +
+                '<input type="text" class="form-input mb-2" placeholder="العنوان (عربي)" value="' + p.titleAr + '" onchange="editProject(' + i + ', \'titleAr\', this.value)">' +
+                '<input type="text" class="form-input mb-2" placeholder="العنوان (إنجليزي)" value="' + p.titleEn + '" onchange="editProject(' + i + ', \'titleEn\', this.value)">' +
+                '<select class="form-input mb-2" onchange="editProject(' + i + ', \'category\', this.value)">' +
+                '<option value="design"' + (p.category=='design'?' selected':'') + '>تصميم</option>' +
+                '<option value="web"' + (p.category=='web'?' selected':'') + '>ويب</option>' +
+                '<option value="app"' + (p.category=='app'?' selected':'') + '>تطبيقات</option>' +
+                '<option value="marketing"' + (p.category=='marketing'?' selected':'') + '>تسويق</option>' +
+                '</select>' +
+                '<input type="text" class="form-input mb-2" placeholder="رابط الصورة" value="' + p.image + '" onchange="editProject(' + i + ', \'image\', this.value)">' +
+                '<div class="mt-1"><input type="file" accept="image/*" onchange="uploadProjectImage(this, ' + i + ')" class="text-sm"></div>' +
+                '<textarea class="form-input mt-2" rows="2" placeholder="وصف (عربي)" onchange="editProject(' + i + ', \'descriptionAr\', this.value)">' + p.descriptionAr + '</textarea>' +
+                '</div>';
+        });
+        html += '<button onclick="addProject()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة مشروع جديد</button></div>';
+    }
+    else if (currentEditor === 'news') {
+        html = '<div class="space-y-4">';
+        siteData.news.forEach(function(n, i) {
+            html += 
+                '<div class="p-4 bg-white/5 rounded-xl">' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">خبر #' + (i+1) + '</span><button onclick="deleteNews(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<input type="text" class="form-input mb-2" value="' + n.titleAr + '" onchange="editNews(' + i + ', \'titleAr\', this.value)">' +
+                '<input type="text" class="form-input mb-2" value="' + n.titleEn + '" onchange="editNews(' + i + ', \'titleEn\', this.value)">' +
+                '<input type="date" class="form-input mb-2" value="' + n.date + '" onchange="editNews(' + i + ', \'date\', this.value)">' +
+                '<input type="text" class="form-input" placeholder="رابط الصورة" value="' + n.image + '" onchange="editNews(' + i + ', \'image\', this.value)">' +
+                '</div>';
+        });
+        html += '<button onclick="addNews()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة خبر</button></div>';
+    }
+    else if (currentEditor === 'testimonials') {
+        html = '<div class="space-y-4">';
+        siteData.testimonials.forEach(function(t, i) {
+            html += 
+                '<div class="p-4 bg-white/5 rounded-xl">' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">شهادة #' + (i+1) + '</span><button onclick="deleteTestimonial(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<input type="text" class="form-input mb-2" value="' + t.nameAr + '" onchange="editTestimonial(' + i + ', \'nameAr\', this.value)">' +
+                '<input type="text" class="form-input mb-2" value="' + t.nameEn + '" onchange="editTestimonial(' + i + ', \'nameEn\', this.value)">' +
+                '<input type="text" class="form-input mb-2" value="' + t.company + '" onchange="editTestimonial(' + i + ', \'company\', this.value)">' +
+                '<textarea class="form-input" rows="2" onchange="editTestimonial(' + i + ', \'textAr\', this.value)">' + t.textAr + '</textarea>' +
+                '</div>';
+        });
+        html += '<button onclick="addTestimonial()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة شهادة</button></div>';
+    }
+    else if (currentEditor === 'faq') {
+        html = '<div class="space-y-4">';
+        siteData.faq.forEach(function(f, i) {
+            html += 
+                '<div class="p-4 bg-white/5 rounded-xl">' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">سؤال #' + (i+1) + '</span><button onclick="deleteFAQ(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<input type="text" class="form-input mb-2" value="' + f.questionAr + '" onchange="editFAQ(' + i + ', \'questionAr\', this.value)">' +
+                '<textarea class="form-input" rows="2" onchange="editFAQ(' + i + ', \'answerAr\', this.value)">' + f.answerAr + '</textarea>' +
+                '</div>';
+        });
+        html += '<button onclick="addFAQ()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة سؤال</button></div>';
+    }
+    else if (currentEditor === 'contact') {
+        html = 
+            '<div><label class="block text-sm mb-2">البريد الإلكتروني</label><input type="email" id="editContactEmail" class="form-input" value="' + (siteData.contact?.email || 'info@bashier.com') + '" onchange="saveContact()"></div>' +
+            '<div><label class="block text-sm mb-2">الهاتف</label><input type="text" id="editContactPhone" class="form-input" value="' + (siteData.contact?.phone || '+966 50 000 0000') + '" onchange="saveContact()"></div>' +
+            '<div><label class="block text-sm mb-2">العنوان (عربي)</label><input type="text" id="editContactAddressAr" class="form-input" value="' + (siteData.contact?.addressAr || 'الرياض، المملكة العربية السعودية') + '" onchange="saveContact()"></div>' +
+            '<div><label class="block text-sm mb-2">العنوان (إنجليزي)</label><input type="text" id="editContactAddressEn" class="form-input" value="' + (siteData.contact?.addressEn || 'Riyadh, Saudi Arabia') + '" onchange="saveContact()"></div>' +
+            '<div><label class="block text-sm mb-2">رابط فيسبوك</label><input type="text" id="editContactFacebook" class="form-input" value="' + (siteData.contact?.facebook || 'https://facebook.com/bashier') + '" onchange="saveContact()"></div>' +
+            '<div><label class="block text-sm mb-2">رابط إنستقرام</label><input type="text" id="editContactInstagram" class="form-input" value="' + (siteData.contact?.instagram || 'https://instagram.com/bashier') + '" onchange="saveContact()"></div>' +
+            '<div><label class="block text-sm mb-2">رابط تيك توك</label><input type="text" id="editContactTiktok" class="form-input" value="' + (siteData.contact?.tiktok || 'https://tiktok.com/@bashier') + '" onchange="saveContact()"></div>';
+    }
+    
+    container.innerHTML = html;
+}
+
+// ====== دوال الحفظ ======
+function saveHero() {
+    if (!siteData.hero) siteData.hero = {};
+    siteData.hero.titleAr = document.getElementById('editHeroTitleAr').value;
+    siteData.hero.titleEn = document.getElementById('editHeroTitleEn').value;
+    siteData.hero.descAr = document.getElementById('editHeroDescAr').value;
+    siteData.hero.descEn = document.getElementById('editHeroDescEn').value;
+    saveData();
+    updateHeroDisplay();
+    showToast('تم حفظ الرئيسية');
+}
+
+function saveAbout() {
+    if (!siteData.about) siteData.about = {};
+    siteData.about.titleAr = document.getElementById('editAboutTitleAr').value;
+    siteData.about.textAr = document.getElementById('editAboutTextAr').value;
+    siteData.about.textEn = document.getElementById('editAboutTextEn').value;
+    siteData.about.image = document.getElementById('editAboutImage').value;
+    saveData();
+    updateAboutDisplay();
+    showToast('تم حفظ عن الشركة');
+}
+
+function saveContact() {
+    if (!siteData.contact) siteData.contact = {};
+    siteData.contact.email = document.getElementById('editContactEmail').value;
+    siteData.contact.phone = document.getElementById('editContactPhone').value;
+    siteData.contact.addressAr = document.getElementById('editContactAddressAr').value;
+    siteData.contact.addressEn = document.getElementById('editContactAddressEn').value;
+    siteData.contact.facebook = document.getElementById('editContactFacebook').value;
+    siteData.contact.instagram = document.getElementById('editContactInstagram').value;
+    siteData.contact.tiktok = document.getElementById('editContactTiktok').value;
+    saveData();
+    updateContactDisplay();
+    showToast('تم حفظ بيانات التواصل');
+}
+
+// ====== دوال المشاريع ======
+function editProject(index, field, value) {
+    siteData.projects[index][field] = value;
+    saveData();
+    renderProjects();
+    showToast('تم تعديل المشروع');
+}
+
+function deleteProject(index) {
+    if (!confirm('هل أنت متأكد من الحذف؟')) return;
+    siteData.projects.splice(index, 1);
+    saveData();
+    renderEditorContent();
+    renderProjects();
+    showToast('تم حذف المشروع');
+}
+
+function addProject() {
+    var newId = siteData.projects.length > 0 ? Math.max.apply(null, siteData.projects.map(function(p){return p.id})) + 1 : 1;
+    siteData.projects.push({
+        id: newId,
+        titleAr: 'مشروع جديد',
+        titleEn: 'New Project',
+        category: 'design',
+        image: 'https://placehold.co/800x600/6366f1/ffffff?text=New+Project',
+        descriptionAr: 'وصف المشروع الجديد',
+        descriptionEn: 'New project description',
+        client: 'Client',
+        date: '2026-01',
+        technologies: ['HTML', 'CSS']
+    });
+    saveData();
+    renderEditorContent();
+    renderProjects();
+    showToast('تم إضافة المشروع');
+}
+
+// ====== دوال الأخبار ======
+function editNews(index, field, value) {
+    siteData.news[index][field] = value;
+    saveData();
+    renderNews();
+}
+
+function deleteNews(index) {
+    if (!confirm('هل أنت متأكد؟')) return;
+    siteData.news.splice(index, 1);
+    saveData();
+    renderEditorContent();
+    renderNews();
+    showToast('تم الحذف');
+}
+
+function addNews() {
+    siteData.news.push({
+        id: Date.now(),
+        titleAr: 'خبر جديد',
+        titleEn: 'New News',
+        date: new Date().toISOString().split('T')[0],
+        image: 'https://placehold.co/800x400/6366f1/ffffff?text=News',
+        excerptAr: 'نص الخبر الجديد...',
+        excerptEn: 'New news text...'
+    });
+    saveData();
+    renderEditorContent();
+    renderNews();
+    showToast('تم الإضافة');
+}
+
+// ====== دوال الشهادات ======
+function editTestimonial(index, field, value) {
+    siteData.testimonials[index][field] = value;
+    saveData();
+    renderTestimonials();
+}
+
+function deleteTestimonial(index) {
+    if (!confirm('هل أنت متأكد؟')) return;
+    siteData.testimonials.splice(index, 1);
+    saveData();
+    renderEditorContent();
+    renderTestimonials();
+}
+
+function addTestimonial() {
+    siteData.testimonials.push({
+        id: Date.now(),
+        nameAr: 'عميل جديد',
+        nameEn: 'New Client',
+        roleAr: 'مدير',
+        roleEn: 'Manager',
+        company: 'Company',
+        image: 'https://placehold.co/200x200/6366f1/ffffff?text=User',
+        textAr: 'نص الشهادة...',
+        textEn: 'Testimonial text...',
+        rating: 5
+    });
+    saveData();
+    renderEditorContent();
+    renderTestimonials();
+}
+
+// ====== دوال الأسئلة ======
+function editFAQ(index, field, value) {
+    siteData.faq[index][field] = value;
+    saveData();
+    renderFAQ();
+}
+
+function deleteFAQ(index) {
+    if (!confirm('هل أنت متأكد؟')) return;
+    siteData.faq.splice(index, 1);
+    saveData();
+    renderEditorContent();
+    renderFAQ();
+}
+
+function addFAQ() {
+    siteData.faq.push({
+        id: Date.now(),
+        questionAr: 'سؤال جديد؟',
+        questionEn: 'New question?',
+        answerAr: 'إجابة السؤال الجديد...',
+        answerEn: 'Answer to new question...'
+    });
+    saveData();
+    renderEditorContent();
+    renderFAQ();
+}
+
+// ====== رفع الصور ======
+function uploadImage(input, target) {
+    var file = input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var base64 = e.target.result;
+        if (target === 'about') {
+            if (!siteData.about) siteData.about = {};
+            siteData.about.image = base64;
+            document.getElementById('editAboutImage').value = base64.substring(0, 50) + '...';
+            updateAboutDisplay();
+        }
+        saveData();
+        showToast('تم رفع الصورة');
+    };
+    reader.readAsDataURL(file);
+}
+
+function uploadProjectImage(input, index) {
+    var file = input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        siteData.projects[index].image = e.target.result;
+        saveData();
+        renderProjects();
+        showToast('تم رفع صورة المشروع');
+    };
+    reader.readAsDataURL(file);
+}
+
+// ====== تحديث العرض ======
+function updateHeroDisplay() {
+    // يتم تحديث تلقائياً عند التحميل
+    location.reload();
+}
+
+function updateAboutDisplay() {
+    var img = document.querySelector('#about img');
+    if (img && siteData.about?.image) img.src = siteData.about.image;
+}
+
+function updateContactDisplay() {
+    // يتم تحديث تلقائياً عند التحميل
+    location.reload();
+}
     function renderAdminTabs() {
         const list = document.getElementById('adminTabsList');
         if (!list) return;
