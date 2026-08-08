@@ -2,6 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bashier - حلول رقمية مبتكرة</title>
     <meta name="description" content="Bashier - نقدم حلول رقمية متكاملة">
@@ -36,9 +38,9 @@
         .admin-panel.open { right: 0; }
         .admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .admin-overlay.open { opacity: 1; pointer-events: all; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 16px 32px; background: var(--primary); color: white; border-radius: 12px; font-weight: 600; z-index: 10001; opacity: 0; transition: all 0.4s; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 16px 32px; background: var(--primary); color: white; border-radius: 12px; font-weight: 600; z-index: 100; opacity: 0; transition: all 0.4s; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-        .loader { position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.5s; }
+        .loader { position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 50; transition: opacity 0.5s; }
         .loader.hidden { opacity: 0; pointer-events: none; }
         .loader-spinner { width: 60px; height: 60px; border: 4px solid rgba(99, 102, 241, 0.2); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -64,7 +66,7 @@
         [dir="ltr"] .admin-panel { right: auto; left: -450px; border-left: none; border-right: 2px solid var(--primary); }
         [dir="ltr"] .admin-panel.open { left: 0; right: auto; }
         @media (max-width: 768px) { .admin-panel { width: 100%; right: -100%; } }
-        .admin-trigger {position: fixed;bottom: 30px; right: 30px; z-index: 99999; /* أعلى قيمة */width: 60px;
+        .admin-trigger {position: fixed;bottom: 30px; right: 30px; z-index: 50; /* أعلى قيمة */width: 60px;
         height: 60px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6);
         border: 3px solid white; color: white; font-size: 1.5rem; cursor: pointer; box-shadow: 0 10px 40px rgba(99,102,241,0.6);
         transition: all 0.3s; display: flex; align-items: center; justify-content: center; animation: pulse 2s infinite;
@@ -87,14 +89,14 @@
     <div class="loader" id="loader"><div class="loader-spinner"></div></div>
     
     <!-- Language Toggle -->
-    <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">EN</button>
+    <button type="button" class="lang-toggle" id="langToggle" onclick="toggleLanguage()">EN</button>
     
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="text-2xl font-black tracking-tight" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Bashier</a>
         <div class="hidden md:flex items-center gap-8" id="navLinks"></div>
-            <button class="md:hidden text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+            <button type="button" class="md:hidden text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
         </div>
         <div class="md:hidden hidden mt-4 pb-4" id="mobileMenu"><div class="flex flex-col gap-4" id="mobileNavLinks"></div></div>
     </nav>
@@ -135,7 +137,7 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="relative">
                     <div class="relative z-10 rounded-3xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل" class="w-full h-auto">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل" class="w-full h-auto">
                     </div>
                     <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-indigo-500/30 rounded-3xl -z-0"></div>
                 </div>
@@ -222,11 +224,11 @@
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto">نفخر بأعمالنا ونسعى دائماً للتميز في كل مشروع</p>
             </div>
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="filter-btn active" onclick="filterProjects('all', this)">الكل</button>
-                <button class="filter-btn" onclick="filterProjects('design', this)">تصميم</button>
-                <button class="filter-btn" onclick="filterProjects('web', this)">ويب</button>
-                <button class="filter-btn" onclick="filterProjects('app', this)">تطبيقات</button>
-                <button class="filter-btn" onclick="filterProjects('marketing', this)">تسويق</button>
+                <button type="button" class="filter-btn active" onclick="filterProjects('all', this)">الكل</button>
+                <button type="button" class="filter-btn" onclick="filterProjects('design', this)">تصميم</button>
+                <button type="button" class="filter-btn" onclick="filterProjects('web', this)">ويب</button>
+                <button type="button" class="filter-btn" onclick="filterProjects('app', this)">تطبيقات</button>
+                <button type="button" class="filter-btn" onclick="filterProjects('marketing', this)">تسويق</button>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
         </div>
@@ -236,7 +238,7 @@
     <div id="projectModal" class="fixed inset-0 bg-black/95 z-[10000] overflow-y-auto hidden">
         <div class="min-h-screen px-6 py-12">
             <div class="max-w-5xl mx-auto">
-                <button onclick="closeProjectModal()" class="fixed top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"><i class="fas fa-times text-xl"></i></button>
+                <button type="button" onclick="closeProjectModal()" class="fixed top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"><i class="fas fa-times text-xl"></i></button>
                 <div id="projectModalContent"></div>
             </div>
         </div>
@@ -317,11 +319,11 @@
                     <div class="p-8 rounded-3xl bg-white/5 border border-white/10">
                         <h3 class="text-xl font-bold mb-6">تابعنا</h3>
                         <div class="flex gap-4">
-                            <a href="https://facebook.com/bashier" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://instagram.com/bashier" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="https://tiktok.com/@bashier" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                            <a href="https://twitter.com/bashier" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                            <a href="https://linkedin.com/company/bashier" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://facebook.com/bashier" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a rel="noopener noreferrer">
+                            <a href="https://instagram.com/bashier" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a rel="noopener noreferrer">
+                            <a href="https://tiktok.com/@bashier" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a rel="noopener noreferrer">
+                            <a href="https://twitter.com/bashier" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a rel="noopener noreferrer">
+                            <a href="https://linkedin.com/company/bashier" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a rel="noopener noreferrer">
                         </div>
                     </div>
                 </div>
@@ -347,7 +349,7 @@
     <div class="admin-panel" id="adminPanel">
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-2xl font-black" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚙️ لوحة التحكم</h2>
-            <button onclick="toggleAdmin()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"><i class="fas fa-times"></i></button>
+            <button type="button" onclick="toggleAdmin()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"><i class="fas fa-times"></i></button>
         </div>
         <div class="mb-8">
             <h3 class="text-lg font-bold mb-4">إدارة التبويبات</h3>
@@ -369,13 +371,13 @@
     
          <!-- تبويبات المحرر -->
         <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
-        <button onclick="showEditor('hero')" class="editor-tab active px-3 py-1 rounded-full bg-indigo-500 text-white text-xs">الرئيسية</button>
-        <button onclick="showEditor('about')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">عن الشركة</button>
-        <button onclick="showEditor('projects')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">المشاريع</button>
-        <button onclick="showEditor('news')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأخبار</button>
-        <button onclick="showEditor('testimonials')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الشهادات</button>
-        <button onclick="showEditor('faq')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأسئلة</button>
-        <button onclick="showEditor('contact')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">التواصل</button>
+        <button type="button" onclick="showEditor('hero')" class="editor-tab active px-3 py-1 rounded-full bg-indigo-500 text-white text-xs">الرئيسية</button>
+        <button type="button" onclick="showEditor('about')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">عن الشركة</button>
+        <button type="button" onclick="showEditor('projects')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">المشاريع</button>
+        <button type="button" onclick="showEditor('news')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأخبار</button>
+        <button type="button" onclick="showEditor('testimonials')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الشهادات</button>
+        <button type="button" onclick="showEditor('faq')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأسئلة</button>
+        <button type="button" onclick="showEditor('contact')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">التواصل</button>
         </div>
 
         <!-- محتوى المحرر -->
@@ -386,15 +388,15 @@
         <div class="mb-8">
             <h3 class="text-lg font-bold mb-4">إدارة البيانات</h3>
             <div class="space-y-3">
-                <button onclick="exportData()" class="w-full magnetic-btn justify-center"><i class="fas fa-download"></i> تصدير البيانات (JSON)</button>
-                <button onclick="document.getElementById('importFile').click()" class="w-full magnetic-btn justify-center" style="background: transparent; border: 2px solid var(--primary);"><i class="fas fa-upload"></i> استيراد البيانات</button>
+                <button type="button" onclick="exportData()" class="w-full magnetic-btn justify-center"><i class="fas fa-download"></i> تصدير البيانات (JSON)</button>
+                <button type="button" onclick="document.getElementById('importFile').click()" class="w-full magnetic-btn justify-center" style="background: transparent; border: 2px solid var(--primary);"><i class="fas fa-upload"></i> استيراد البيانات</button>
                 <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
-                <button onclick="resetData()" class="w-full magnetic-btn justify-center" style="background: #ef4444;"><i class="fas fa-trash"></i> إعادة تعيين</button>
+                <button type="button" onclick="resetData()" class="w-full magnetic-btn justify-center" style="background: #ef4444;"><i class="fas fa-trash"></i> إعادة تعيين</button>
             </div>
         </div>
-        <div class="text-center text-gray-500 text-sm"><p>اضغط Ctrl + Shift + ~ أو ⚙️ لفتح/إغلاق</p></div>
+        <div class="text-center text-gray-500 text-sm"><p>اضغط Ctrl + Shift + A أو ⚙️ لفتح/إغلاق</p></div>
     </div>
-                <button class="admin-trigger" onclick="toggleAdmin()" title="لوحة التحكم"><i class="fas fa-cog"></i></button>
+                <button type="button" class="admin-trigger" onclick="toggleAdmin()" title="لوحة التحكم"><i class="fas fa-cog"></i></button>
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
@@ -407,6 +409,13 @@
             to: function() {}
         };
         window.ScrollTrigger = { create: function() {} };
+
+    // XSS Protection: Sanitize HTML before inserting
+    function sanitizeHTML(str) {
+        const temp = document.createElement('div');
+        temp.textContent = str;
+        return temp.innerHTML;
+    }
     }    
 
     // Data
@@ -556,7 +565,7 @@
         const content = document.getElementById('projectModalContent');
         content.innerHTML = `
             <div class="mb-8">
-                <img src="${p.image}" class="w-full rounded-3xl mb-6">
+                <img loading="lazy" alt="" src="${p.image}" class="w-full rounded-3xl mb-6">
                 <div class="flex flex-wrap gap-2 mb-4">
                     <span class="px-4 py-2 bg-indigo-500/20 rounded-full text-indigo-300 text-sm">${p.category}</span>
                     <span class="px-4 py-2 bg-purple-500/20 rounded-full text-purple-300 text-sm">${p.client}</span>
@@ -566,8 +575,8 @@
                 <div class="flex flex-wrap gap-2">${p.technologies.map(t => `<span class="px-4 py-2 bg-white/10 rounded-full">${t}</span>`).join('')}</div>
             </div>
             <div class="flex justify-between">
-                ${p.id > 1 ? `<button onclick="openProjectModal(${p.id - 1})" class="magnetic-btn"><i class="fas fa-arrow-right"></i> السابق</button>` : '<div></div>'}
-                ${p.id < siteData.projects.length ? `<button onclick="openProjectModal(${p.id + 1})" class="magnetic-btn">التالي <i class="fas fa-arrow-left"></i></button>` : '<div></div>'}
+                ${p.id > 1 ? `<button type="button" onclick="openProjectModal(${p.id - 1})" class="magnetic-btn"><i class="fas fa-arrow-right"></i> السابق</button>` : '<div></div>'}
+                ${p.id < siteData.projects.length ? `<button type="button" onclick="openProjectModal(${p.id + 1})" class="magnetic-btn">التالي <i class="fas fa-arrow-left"></i></button>` : '<div></div>'}
             </div>
         `;
         modal.classList.remove('hidden');
@@ -584,7 +593,7 @@
         if (!grid) return;
         grid.innerHTML = siteData.news.map(n => `
             <div class="news-card">
-                <img src="${n.image}" alt="${currentLang === 'ar' ? n.titleAr : n.titleEn}" class="w-full h-48 object-cover">
+                <img loading="lazy" src="${n.image}" alt="${currentLang === 'ar' ? n.titleAr : n.titleEn}" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <span class="text-indigo-400 text-sm">${n.date}</span>
                     <h3 class="text-xl font-bold mt-2 mb-3">${currentLang === 'ar' ? n.titleAr : n.titleEn}</h3>
@@ -600,7 +609,7 @@
         grid.innerHTML = siteData.testimonials.map(t => `
             <div class="testimonial-card">
                 <div class="flex items-center gap-4 mb-4">
-                    <img src="${t.image}" alt="${currentLang === 'ar' ? t.nameAr : t.nameEn}" class="w-14 h-14 rounded-full object-cover">
+                    <img loading="lazy" src="${t.image}" alt="${currentLang === 'ar' ? t.nameAr : t.nameEn}" class="w-14 h-14 rounded-full object-cover">
                     <div>
                         <h4 class="font-bold">${currentLang === 'ar' ? t.nameAr : t.nameEn}</h4>
                         <p class="text-gray-400 text-sm">${currentLang === 'ar' ? t.roleAr : t.roleEn} - ${t.company}</p>
@@ -617,7 +626,7 @@
         if (!grid) return;
         grid.innerHTML = siteData.partners.map(p => `
             <div class="flex items-center justify-center p-4">
-                <img src="${p.logo}" alt="${p.name}" class="partner-logo max-h-16 object-contain" title="${p.name}">
+                <img loading="lazy" src="${p.logo}" alt="${p.name}" class="partner-logo max-h-16 object-contain" title="${p.name}">
             </div>
         `).join('');
     }
@@ -738,7 +747,7 @@ function renderEditorContent() {
                 '<div class="p-4 bg-white/5 rounded-xl border border-white/10">' +
                 '<div class="flex justify-between items-center mb-2">' +
                 '<span class="font-bold text-sm">مشروع #' + (i+1) + '</span>' +
-                '<button onclick="deleteProject(' + i + ')" class="text-red-400 hover:text-red-300 text-sm"><i class="fas fa-trash"></i> حذف</button>' +
+                '<button type="button" onclick="deleteProject(' + i + ')" class="text-red-400 hover:text-red-300 text-sm"><i class="fas fa-trash"></i> حذف</button>' +
                 '</div>' +
                 '<input type="text" class="form-input mb-2" placeholder="العنوان (عربي)" value="' + p.titleAr + '" onchange="editProject(' + i + ', \'titleAr\', this.value)">' +
                 '<input type="text" class="form-input mb-2" placeholder="العنوان (إنجليزي)" value="' + p.titleEn + '" onchange="editProject(' + i + ', \'titleEn\', this.value)">' +
@@ -753,47 +762,47 @@ function renderEditorContent() {
                 '<textarea class="form-input mt-2" rows="2" placeholder="وصف (عربي)" onchange="editProject(' + i + ', \'descriptionAr\', this.value)">' + p.descriptionAr + '</textarea>' +
                 '</div>';
         });
-        html += '<button onclick="addProject()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة مشروع جديد</button></div>';
+        html += '<button type="button" onclick="addProject()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة مشروع جديد</button></div>';
     }
     else if (currentEditor === 'news') {
         html = '<div class="space-y-4">';
         siteData.news.forEach(function(n, i) {
             html += 
                 '<div class="p-4 bg-white/5 rounded-xl">' +
-                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">خبر #' + (i+1) + '</span><button onclick="deleteNews(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">خبر #' + (i+1) + '</span><button type="button" onclick="deleteNews(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
                 '<input type="text" class="form-input mb-2" value="' + n.titleAr + '" onchange="editNews(' + i + ', \'titleAr\', this.value)">' +
                 '<input type="text" class="form-input mb-2" value="' + n.titleEn + '" onchange="editNews(' + i + ', \'titleEn\', this.value)">' +
                 '<input type="date" class="form-input mb-2" value="' + n.date + '" onchange="editNews(' + i + ', \'date\', this.value)">' +
                 '<input type="text" class="form-input" placeholder="رابط الصورة" value="' + n.image + '" onchange="editNews(' + i + ', \'image\', this.value)">' +
                 '</div>';
         });
-        html += '<button onclick="addNews()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة خبر</button></div>';
+        html += '<button type="button" onclick="addNews()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة خبر</button></div>';
     }
     else if (currentEditor === 'testimonials') {
         html = '<div class="space-y-4">';
         siteData.testimonials.forEach(function(t, i) {
             html += 
                 '<div class="p-4 bg-white/5 rounded-xl">' +
-                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">شهادة #' + (i+1) + '</span><button onclick="deleteTestimonial(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">شهادة #' + (i+1) + '</span><button type="button" onclick="deleteTestimonial(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
                 '<input type="text" class="form-input mb-2" value="' + t.nameAr + '" onchange="editTestimonial(' + i + ', \'nameAr\', this.value)">' +
                 '<input type="text" class="form-input mb-2" value="' + t.nameEn + '" onchange="editTestimonial(' + i + ', \'nameEn\', this.value)">' +
                 '<input type="text" class="form-input mb-2" value="' + t.company + '" onchange="editTestimonial(' + i + ', \'company\', this.value)">' +
                 '<textarea class="form-input" rows="2" onchange="editTestimonial(' + i + ', \'textAr\', this.value)">' + t.textAr + '</textarea>' +
                 '</div>';
         });
-        html += '<button onclick="addTestimonial()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة شهادة</button></div>';
+        html += '<button type="button" onclick="addTestimonial()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة شهادة</button></div>';
     }
     else if (currentEditor === 'faq') {
         html = '<div class="space-y-4">';
         siteData.faq.forEach(function(f, i) {
             html += 
                 '<div class="p-4 bg-white/5 rounded-xl">' +
-                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">سؤال #' + (i+1) + '</span><button onclick="deleteFAQ(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">سؤال #' + (i+1) + '</span><button type="button" onclick="deleteFAQ(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
                 '<input type="text" class="form-input mb-2" value="' + f.questionAr + '" onchange="editFAQ(' + i + ', \'questionAr\', this.value)">' +
                 '<textarea class="form-input" rows="2" onchange="editFAQ(' + i + ', \'answerAr\', this.value)">' + f.answerAr + '</textarea>' +
                 '</div>';
         });
-        html += '<button onclick="addFAQ()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة سؤال</button></div>';
+        html += '<button type="button" onclick="addFAQ()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة سؤال</button></div>';
     }
     else if (currentEditor === 'contact') {
         html = 
@@ -1030,9 +1039,9 @@ function updateContactDisplay() {
             <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
                 <span>${t.nameAr}</span>
                 <div class="flex gap-2">
-                    <button onclick="moveTab(${i}, -1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-up"></i></button>
-                    <button onclick="moveTab(${i}, 1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-down"></i></button>
-                    <button onclick="toggleTab(${i})" class="w-8 h-8 rounded ${t.visible ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}"><i class="fas fa-eye${t.visible ? '' : '-slash'}"></i></button>
+                    <button type="button" onclick="moveTab(${i}, -1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-up"></i></button>
+                    <button type="button" onclick="moveTab(${i}, 1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-down"></i></button>
+                    <button type="button" onclick="toggleTab(${i})" class="w-8 h-8 rounded ${t.visible ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}"><i class="fas fa-eye${t.visible ? '' : '-slash'}"></i></button>
                 </div>
             </div>
         `).join('');
@@ -1134,7 +1143,7 @@ function updateContactDisplay() {
 
     function initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key == 'S') {
+            if (e.ctrlKey && e.shiftKey && e.key == 'A') {
                 e.preventDefault();
                 toggleAdmin();
             }
