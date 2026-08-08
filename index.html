@@ -354,12 +354,35 @@
             <div id="adminTabsList" class="space-y-2 mb-4"></div>
             <div class="flex gap-2"><input type="text" id="newTabName" class="form-input flex-1" placeholder="اسم التبويب الجديد"><button onclick="addTab()" class="magnetic-btn px-4"><i class="fas fa-plus"></i></button></div>
         </div>
-        <div class="mb-8">
-            <h3 class="text-lg font-bold mb-4">إعدادات التصميم</h3>
-            <div class="space-y-4">
-                <div><label class="block text-sm mb-2">اللون الرئيسي</label><input type="color" id="primaryColor" class="w-full h-10 rounded-lg cursor-pointer" value="#6366f1" onchange="updateColors()"></div>
-                <div><label class="block text-sm mb-2">اللون الثانوي</label><input type="color" id="secondaryColor" class="w-full h-10 rounded-lg cursor-pointer" value="#8b5cf6" onchange="updateColors()"></div>
-            </div>
+     <!-- ✅ الجديد: إعدادات التصميم + خلفية -->
+<div class="mb-8">
+    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+        <i class="fas fa-palette text-purple-400"></i> إعدادات التصميم
+    </h3>
+    <div class="space-y-4">
+        <div>
+            <label class="block text-sm mb-2">اللون الرئيسي</label>
+            <input type="color" id="primaryColor" class="w-full h-10 rounded-lg cursor-pointer" value="#6366f1">
+        </div>
+        <div>
+            <label class="block text-sm mb-2">اللون الثانوي</label>
+            <input type="color" id="secondaryColor" class="w-full h-10 rounded-lg cursor-pointer" value="#8b5cf6">
+        </div>
+        <div>
+            <label class="block text-sm mb-2">لون خلفية الموقع</label>
+            <input type="color" id="bgColor" class="w-full h-10 rounded-lg cursor-pointer" value="#0f172a">
+        </div>
+        <div>
+            <label class="block text-sm mb-2">صورة خلفية الموقع (اختياري)</label>
+            <input type="text" id="bgImage" class="form-input mb-2" placeholder="رابط الصورة أو اتركه فارغاً">
+            <input type="file" accept="image/*" id="bgImageFile" class="text-sm" onchange="uploadBgImage(this)">
+        </div>
+    </div>
+    <!-- ⭐ زر الحفظ -->
+    <button onclick="applyDesignChanges()" class="w-full magnetic-btn justify-center mt-4">
+        <i class="fas fa-save"></i> حفظ التعديلات
+    </button>
+</div>
         </div>
           <!-- ====== محرر المحتوى الكامل ====== -->
         <div class="mb-8">
@@ -506,21 +529,54 @@
         renderNews();
         renderTestimonials();
         renderFAQ();
+        smoothScrollTo();
     }
 
     function initNavigation() {
-        const nav = document.getElementById('navLinks');
-        const mobileNav = document.getElementById('mobileNavLinks');
-        const footer = document.getElementById('footerLinks');
-        const links = siteData.tabs.filter(t => t.visible).map(t => 
-            `<a href="#${t.id}" class="nav-link text-sm font-semibold hover:text-indigo-400 transition-colors">${currentLang === 'ar' ? t.nameAr : t.nameEn}</a>`
-        ).join('');
-        if (nav) nav.innerHTML = links;
-        if (mobileNav) mobileNav.innerHTML = links;
-        if (footer) footer.innerHTML = siteData.tabs.filter(t => t.visible).map(t => 
-            `<li><a href="#${t.id}" class="text-gray-400 hover:text-indigo-400 transition-colors">${currentLang === 'ar' ? t.nameAr : t.nameEn}</a></li>`
-        ).join('');
+    var nav = document.getElementById('navLinks');
+    var mobileNav = document.getElementById('mobileNavLinks');
+    var footer = document.getElementById('footerLinks');
+    
+    var links = siteData.tabs.filter(function(t) { return t.visible; }).map(function(t) {
+        return '<a href="#' + t.id + '" class="nav-link text-sm font-semibold hover:text-indigo-400 transition-colors" onclick="smoothScrollTo(\'' + t.id + '\'); return false;">' + (currentLang === 'ar' ? t.nameAr : t.nameEn) + '</a>';
+    }).join('');
+    
+    if (nav) nav.innerHTML = links;
+    if (mobileNav) mobileNav.innerHTML = links;
+    if (footer) footer.innerHTML = siteData.tabs.filter(function(t) { return t.visible; }).map(function(t) {
+        return '<li><a href="#' + t.id + '" onclick="smoothScrollTo(\'' + t.id + '\'); return false;" class="text-gray-400 hover:text-indigo-400 transition-colors">' + (currentLang === 'ar' ? t.nameAr : t.nameEn) + '</a></li>';
+    }).join('');
+    
+    // إضافة event listeners للروابط
+    setTimeout(function() {
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = this.getAttribute('href').substring(1);
+                smoothScrollTo(target);
+            });
+        });
+    }, 100);
+}
+
+// ✅ دالة الانتقال السلس
+function smoothScrollTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    
+    // إغلاق القائمة المحمولة
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) mobileMenu.classList.add('hidden');
+    
+    // إغلاق لوحة التحكم
+    var adminPanel = document.getElementById('adminPanel');
+    if (adminPanel && adminPanel.classList.contains('open')) {
+        toggleAdmin();
     }
+    
+    // الانتقال السلس
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
     function toggleMobileMenu() {
         document.getElementById('mobileMenu').classList.toggle('hidden');
@@ -718,12 +774,41 @@ function renderEditorContent() {
     var html = '';
     
     if (currentEditor === 'hero') {
-        html = 
-            '<div><label class="block text-sm mb-2">العنوان الرئيسي (عربي)</label><input type="text" id="editHeroTitleAr" class="form-input" value="' + (siteData.hero?.titleAr || 'نبني المستقبل الرقمي') + '" onchange="saveHero()"></div>' +
-            '<div><label class="block text-sm mb-2">العنوان الرئيسي (إنجليزي)</label><input type="text" id="editHeroTitleEn" class="form-input" value="' + (siteData.hero?.titleEn || 'We Build The Future') + '" onchange="saveHero()"></div>' +
-            '<div><label class="block text-sm mb-2">الوصف (عربي)</label><textarea id="editHeroDescAr" rows="3" class="form-input" onchange="saveHero()">' + (siteData.hero?.descAr || 'نقدم حلول رقمية متكاملة') + '</textarea></div>' +
-            '<div><label class="block text-sm mb-2">الوصف (إنجليزي)</label><textarea id="editHeroDescEn" rows="3" class="form-input" onchange="saveHero()">' + (siteData.hero?.descEn || 'We provide comprehensive digital solutions') + '</textarea></div>';
-    }
+    html = 
+        '<div class="space-y-3">' +
+        '<div><label class="block text-sm mb-1 text-indigo-400">العنوان الرئيسي (عربي)</label><input type="text" id="editHeroTitleAr" class="form-input" value="' + (siteData.hero?.titleAr || 'نبني') + '"></div>' +
+        '<div><label class="block text-sm mb-1 text-indigo-400">العنوان الرئيسي (إنجليزي)</label><input type="text" id="editHeroTitleEn" class="form-input" value="' + (siteData.hero?.titleEn || 'We Build') + '"></div>' +
+        
+        '<div><label class="block text-sm mb-1 text-purple-400">العنوان الملون (عربي)</label><input type="text" id="editHeroHighlightAr" class="form-input" value="' + (siteData.hero?.highlightAr || 'المستقبل') + '"></div>' +
+        '<div><label class="block text-sm mb-1 text-purple-400">العنوان الملون (إنجليزي)</label><input type="text" id="editHeroHighlightEn" class="form-input" value="' + (siteData.hero?.highlightEn || 'The Future') + '"></div>' +
+        
+        '<div><label class="block text-sm mb-1 text-indigo-400">العنوان الأخير (عربي)</label><input type="text" id="editHeroEndAr" class="form-input" value="' + (siteData.hero?.endAr || 'الرقمي') + '"></div>' +
+        '<div><label class="block text-sm mb-1 text-indigo-400">العنوان الأخير (إنجليزي)</label><input type="text" id="editHeroEndEn" class="form-input" value="' + (siteData.hero?.endEn || 'Digital') + '"></div>' +
+        
+        '<div><label class="block text-sm mb-1 text-cyan-400">العنوان الفرعي (عربي)</label><input type="text" id="editHeroSubtitleAr" class="form-input" value="' + (siteData.hero?.subtitleAr || '✨ نحول الأفكار إلى واقع') + '"></div>' +
+        '<div><label class="block text-sm mb-1 text-cyan-400">العنوان الفرعي (إنجليزي)</label><input type="text" id="editHeroSubtitleEn" class="form-input" value="' + (siteData.hero?.subtitleEn || '✨ Turning Ideas Into Reality') + '"></div>' +
+        
+        '<div><label class="block text-sm mb-1">الوصف (عربي)</label><textarea id="editHeroDescAr" rows="2" class="form-input">' + (siteData.hero?.descAr || 'نقدم حلول رقمية متكاملة...') + '</textarea></div>' +
+        '<div><label class="block text-sm mb-1">الوصف (إنجليزي)</label><textarea id="editHeroDescEn" rows="2" class="form-input">' + (siteData.hero?.descEn || 'We provide comprehensive digital solutions...') + '</textarea></div>' +
+        
+        '<div><label class="block text-sm mb-1">زر 1 - النص (عربي)</label><input type="text" id="editHeroBtn1Ar" class="form-input" value="' + (siteData.hero?.btn1Ar || 'استكشف أعمالنا') + '"></div>' +
+        '<div><label class="block text-sm mb-1">زر 1 - النص (إنجليزي)</label><input type="text" id="editHeroBtn1En" class="form-input" value="' + (siteData.hero?.btn1En || 'Explore Our Work') + '"></div>' +
+        '<div><label class="block text-sm mb-1">رابط زر 1</label><input type="text" id="editHeroBtn1Link" class="form-input" value="' + (siteData.hero?.btn1Link || '#projects') + '"></div>' +
+        
+        '<div><label class="block text-sm mb-1">زر 2 - النص (عربي)</label><input type="text" id="editHeroBtn2Ar" class="form-input" value="' + (siteData.hero?.btn2Ar || 'تواصل معنا') + '"></div>' +
+        '<div><label class="block text-sm mb-1">زر 2 - النص (إنجليزي)</label><input type="text" id="editHeroBtn2En" class="form-input" value="' + (siteData.hero?.btn2En || 'Get In Touch') + '"></div>' +
+        '<div><label class="block text-sm mb-1">رابط زر 2</label><input type="text" id="editHeroBtn2Link" class="form-input" value="' + (siteData.hero?.btn2Link || '#contact') + '"></div>' +
+        
+        '<div class="grid grid-cols-2 gap-2">' +
+        '<div><label class="block text-xs mb-1">إحصائية 1</label><input type="text" id="editHeroStat1" class="form-input" value="' + (siteData.hero?.stat1 || '150') + '"><input type="text" id="editHeroStat1Label" class="form-input mt-1" value="' + (siteData.hero?.stat1Label || 'مشروع منجز') + '"></div>' +
+        '<div><label class="block text-xs mb-1">إحصائية 2</label><input type="text" id="editHeroStat2" class="form-input" value="' + (siteData.hero?.stat2 || '50') + '"><input type="text" id="editHeroStat2Label" class="form-input mt-1" value="' + (siteData.hero?.stat2Label || 'عميل سعيد') + '"></div>' +
+        '<div><label class="block text-xs mb-1">إحصائية 3</label><input type="text" id="editHeroStat3" class="form-input" value="' + (siteData.hero?.stat3 || '8') + '"><input type="text" id="editHeroStat3Label" class="form-input mt-1" value="' + (siteData.hero?.stat3Label || 'سنوات خبرة') + '"></div>' +
+        '<div><label class="block text-xs mb-1">إحصائية 4</label><input type="text" id="editHeroStat4" class="form-input" value="' + (siteData.hero?.stat4 || '25') + '"><input type="text" id="editHeroStat4Label" class="form-input mt-1" value="' + (siteData.hero?.stat4Label || 'جائزة') + '"></div>' +
+        '</div>' +
+        
+        '<button onclick="saveHero()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-save"></i> حفظ تعديلات الرئيسية</button>' +
+        '</div>';
+}
     else if (currentEditor === 'about') {
         html = 
             '<div><label class="block text-sm mb-2">عنوان القسم (عربي)</label><input type="text" id="editAboutTitleAr" class="form-input" value="' + (siteData.about?.titleAr || 'نحن نصنع الفرق') + '" onchange="saveAbout()"></div>' +
@@ -815,11 +900,73 @@ function saveHero() {
     if (!siteData.hero) siteData.hero = {};
     siteData.hero.titleAr = document.getElementById('editHeroTitleAr').value;
     siteData.hero.titleEn = document.getElementById('editHeroTitleEn').value;
+    siteData.hero.highlightAr = document.getElementById('editHeroHighlightAr').value;
+    siteData.hero.highlightEn = document.getElementById('editHeroHighlightEn').value;
+    siteData.hero.endAr = document.getElementById('editHeroEndAr').value;
+    siteData.hero.endEn = document.getElementById('editHeroEndEn').value;
+    siteData.hero.subtitleAr = document.getElementById('editHeroSubtitleAr').value;
+    siteData.hero.subtitleEn = document.getElementById('editHeroSubtitleEn').value;
     siteData.hero.descAr = document.getElementById('editHeroDescAr').value;
     siteData.hero.descEn = document.getElementById('editHeroDescEn').value;
+    siteData.hero.btn1Ar = document.getElementById('editHeroBtn1Ar').value;
+    siteData.hero.btn1En = document.getElementById('editHeroBtn1En').value;
+    siteData.hero.btn1Link = document.getElementById('editHeroBtn1Link').value;
+    siteData.hero.btn2Ar = document.getElementById('editHeroBtn2Ar').value;
+    siteData.hero.btn2En = document.getElementById('editHeroBtn2En').value;
+    siteData.hero.btn2Link = document.getElementById('editHeroBtn2Link').value;
+    siteData.hero.stat1 = document.getElementById('editHeroStat1').value;
+    siteData.hero.stat1Label = document.getElementById('editHeroStat1Label').value;
+    siteData.hero.stat2 = document.getElementById('editHeroStat2').value;
+    siteData.hero.stat2Label = document.getElementById('editHeroStat2Label').value;
+    siteData.hero.stat3 = document.getElementById('editHeroStat3').value;
+    siteData.hero.stat3Label = document.getElementById('editHeroStat3Label').value;
+    siteData.hero.stat4 = document.getElementById('editHeroStat4').value;
+    siteData.hero.stat4Label = document.getElementById('editHeroStat4Label').value;
+    
     saveData();
-    updateHeroDisplay();
-    showToast('تم حفظ الرئيسية');
+    updateHeroOnPage();
+    showToast('✅ تم حفظ الرئيسية');
+}
+
+function updateHeroOnPage() {
+    var h = siteData.hero;
+    if (!h) return;
+    
+    // تحديث العنوان الفرعي
+    var badge = document.querySelector('#home .mb-6 span');
+    if (badge) badge.textContent = currentLang === 'ar' ? h.subtitleAr : h.subtitleEn;
+    
+    // تحديث العناوين
+    var titles = document.querySelectorAll('#home h1 span');
+    if (titles[0]) titles[0].textContent = currentLang === 'ar' ? h.titleAr : h.titleEn;
+    if (titles[2]) titles[2].textContent = currentLang === 'ar' ? h.endAr : h.endEn;
+    
+    // تحديث الوصف
+    var desc = document.querySelector('#home p.text-xl');
+    if (desc) desc.textContent = currentLang === 'ar' ? h.descAr : h.descEn;
+    
+    // تحديث الأزرار
+    var btns = document.querySelectorAll('#home .magnetic-btn');
+    if (btns[0]) {
+        btns[0].setAttribute('href', h.btn1Link || '#projects');
+        btns[0].innerHTML = '<span>' + (currentLang === 'ar' ? h.btn1Ar : h.btn1En) + '</span> <i class="fas fa-arrow-left"></i>';
+    }
+    if (btns[1]) {
+        btns[1].setAttribute('href', h.btn2Link || '#contact');
+        btns[1].innerHTML = '<span>' + (currentLang === 'ar' ? h.btn2Ar : h.btn2En) + '</span>';
+    }
+    
+    // تحديث الإحصائيات
+    var counters = document.querySelectorAll('.counter');
+    var labels = document.querySelectorAll('.counter + div');
+    if (counters[0]) { counters[0].dataset.target = h.stat1; counters[0].textContent = h.stat1; }
+    if (labels[0]) labels[0].textContent = currentLang === 'ar' ? h.stat1Label : h.stat1Label;
+    if (counters[1]) { counters[1].dataset.target = h.stat2; counters[1].textContent = h.stat2; }
+    if (labels[1]) labels[1].textContent = currentLang === 'ar' ? h.stat2Label : h.stat2Label;
+    if (counters[2]) { counters[2].dataset.target = h.stat3; counters[2].textContent = h.stat3; }
+    if (labels[2]) labels[2].textContent = currentLang === 'ar' ? h.stat3Label : h.stat3Label;
+    if (counters[3]) { counters[3].dataset.target = h.stat4; counters[3].textContent = h.stat4; }
+    if (labels[3]) labels[3].textContent = currentLang === 'ar' ? h.stat4Label : h.stat4Label;
 }
 
 function saveAbout() {
@@ -1066,22 +1213,59 @@ function updateContactDisplay() {
         initNavigation();
     }
 
-    function updateColors() {
-        const primary = document.getElementById('primaryColor').value;
-        const secondary = document.getElementById('secondaryColor').value;
-        document.documentElement.style.setProperty('--primary', primary);
-        document.documentElement.style.setProperty('--secondary', secondary);
-        if (!siteData.settings) siteData.settings = {};
-        siteData.settings.primaryColor = primary;
-        siteData.settings.secondaryColor = secondary;
-        saveData();
+  function applyDesignChanges() {
+    var primary = document.getElementById('primaryColor').value;
+    var secondary = document.getElementById('secondaryColor').value;
+    var bg = document.getElementById('bgColor').value;
+    var bgImg = document.getElementById('bgImage').value;
+    
+    document.documentElement.style.setProperty('--primary', primary);
+    document.documentElement.style.setProperty('--secondary', secondary);
+    document.documentElement.style.setProperty('--dark', bg);
+    
+    if (!siteData.settings) siteData.settings = {};
+    siteData.settings.primaryColor = primary;
+    siteData.settings.secondaryColor = secondary;
+    siteData.settings.bgColor = bg;
+    siteData.settings.bgImage = bgImg;
+    
+    // تطبيق الخلفية
+    if (bgImg) {
+        document.body.style.background = 'url(' + bgImg + ') center/cover fixed no-repeat';
+    } else {
+        document.body.style.background = bg;
     }
+    
+    saveData();
+    showToast('✅ تم حفظ التعديلات بنجاح!');
+}
 
-    function applyColors() {
-        if (siteData.settings?.primaryColor) document.documentElement.style.setProperty('--primary', siteData.settings.primaryColor);
-        if (siteData.settings?.secondaryColor) document.documentElement.style.setProperty('--secondary', siteData.settings.secondaryColor);
+function applyColors() {
+    if (siteData.settings?.primaryColor) {
+        document.documentElement.style.setProperty('--primary', siteData.settings.primaryColor);
     }
+    if (siteData.settings?.secondaryColor) {
+        document.documentElement.style.setProperty('--secondary', siteData.settings.secondaryColor);
+    }
+    if (siteData.settings?.bgColor) {
+        document.documentElement.style.setProperty('--dark', siteData.settings.bgColor);
+        document.body.style.background = siteData.settings.bgColor;
+    }
+    if (siteData.settings?.bgImage) {
+        document.body.style.background = 'url(' + siteData.settings.bgImage + ') center/cover fixed no-repeat';
+    }
+}
 
+function uploadBgImage(input) {
+    var file = input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('bgImage').value = e.target.result;
+        showToast('تم رفع الصورة - اضغط حفظ');
+    };
+    reader.readAsDataURL(file);
+}
     function updateContent() {
         if (!siteData.settings) siteData.settings = {};
         siteData.settings.companyName = document.getElementById('companyName').value;
