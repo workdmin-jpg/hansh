@@ -2,8 +2,6 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bashier - حلول رقمية مبتكرة</title>
     <meta name="description" content="Bashier - نقدم حلول رقمية متكاملة">
@@ -38,9 +36,9 @@
         .admin-panel.open { right: 0; }
         .admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .admin-overlay.open { opacity: 1; pointer-events: all; }
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 16px 32px; background: var(--primary); color: white; border-radius: 12px; font-weight: 600; z-index: 100; opacity: 0; transition: all 0.4s; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); padding: 16px 32px; background: var(--primary); color: white; border-radius: 12px; font-weight: 600; z-index: 10001; opacity: 0; transition: all 0.4s; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-        .loader { position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 50; transition: opacity 0.5s; }
+        .loader { position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.5s; }
         .loader.hidden { opacity: 0; pointer-events: none; }
         .loader-spinner { width: 60px; height: 60px; border: 4px solid rgba(99, 102, 241, 0.2); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -66,7 +64,7 @@
         [dir="ltr"] .admin-panel { right: auto; left: -450px; border-left: none; border-right: 2px solid var(--primary); }
         [dir="ltr"] .admin-panel.open { left: 0; right: auto; }
         @media (max-width: 768px) { .admin-panel { width: 100%; right: -100%; } }
-        .admin-trigger {position: fixed;bottom: 30px; right: 30px; z-index: 50; /* أعلى قيمة */width: 60px;
+        .admin-trigger {position: fixed;bottom: 30px; right: 30px; z-index: 99999; /* أعلى قيمة */width: 60px;
         height: 60px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6);
         border: 3px solid white; color: white; font-size: 1.5rem; cursor: pointer; box-shadow: 0 10px 40px rgba(99,102,241,0.6);
         transition: all 0.3s; display: flex; align-items: center; justify-content: center; animation: pulse 2s infinite;
@@ -89,14 +87,14 @@
     <div class="loader" id="loader"><div class="loader-spinner"></div></div>
     
     <!-- Language Toggle -->
-    <button type="button" class="lang-toggle" id="langToggle" onclick="toggleLanguage()">EN</button>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">EN</button>
     
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="text-2xl font-black tracking-tight" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Bashier</a>
         <div class="hidden md:flex items-center gap-8" id="navLinks"></div>
-            <button type="button" class="md:hidden text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+            <button class="md:hidden text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
         </div>
         <div class="md:hidden hidden mt-4 pb-4" id="mobileMenu"><div class="flex flex-col gap-4" id="mobileNavLinks"></div></div>
     </nav>
@@ -137,7 +135,7 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="relative">
                     <div class="relative z-10 rounded-3xl overflow-hidden">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل" class="w-full h-auto">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل" class="w-full h-auto">
                     </div>
                     <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-indigo-500/30 rounded-3xl -z-0"></div>
                 </div>
@@ -224,11 +222,11 @@
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto">نفخر بأعمالنا ونسعى دائماً للتميز في كل مشروع</p>
             </div>
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button type="button" class="filter-btn active" onclick="filterProjects('all', this)">الكل</button>
-                <button type="button" class="filter-btn" onclick="filterProjects('design', this)">تصميم</button>
-                <button type="button" class="filter-btn" onclick="filterProjects('web', this)">ويب</button>
-                <button type="button" class="filter-btn" onclick="filterProjects('app', this)">تطبيقات</button>
-                <button type="button" class="filter-btn" onclick="filterProjects('marketing', this)">تسويق</button>
+                <button class="filter-btn active" onclick="filterProjects('all', this)">الكل</button>
+                <button class="filter-btn" onclick="filterProjects('design', this)">تصميم</button>
+                <button class="filter-btn" onclick="filterProjects('web', this)">ويب</button>
+                <button class="filter-btn" onclick="filterProjects('app', this)">تطبيقات</button>
+                <button class="filter-btn" onclick="filterProjects('marketing', this)">تسويق</button>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
         </div>
@@ -238,7 +236,7 @@
     <div id="projectModal" class="fixed inset-0 bg-black/95 z-[10000] overflow-y-auto hidden">
         <div class="min-h-screen px-6 py-12">
             <div class="max-w-5xl mx-auto">
-                <button type="button" onclick="closeProjectModal()" class="fixed top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"><i class="fas fa-times text-xl"></i></button>
+                <button onclick="closeProjectModal()" class="fixed top-6 right-6 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"><i class="fas fa-times text-xl"></i></button>
                 <div id="projectModalContent"></div>
             </div>
         </div>
@@ -319,11 +317,11 @@
                     <div class="p-8 rounded-3xl bg-white/5 border border-white/10">
                         <h3 class="text-xl font-bold mb-6">تابعنا</h3>
                         <div class="flex gap-4">
-                            <a href="https://facebook.com/bashier" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a rel="noopener noreferrer">
-                            <a href="https://instagram.com/bashier" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a rel="noopener noreferrer">
-                            <a href="https://tiktok.com/@bashier" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a rel="noopener noreferrer">
-                            <a href="https://twitter.com/bashier" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a rel="noopener noreferrer">
-                            <a href="https://linkedin.com/company/bashier" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a rel="noopener noreferrer">
+                            <a href="https://facebook.com/bashier" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com/bashier" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="https://tiktok.com/@bashier" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://twitter.com/bashier" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="https://linkedin.com/company/bashier" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
@@ -349,7 +347,7 @@
     <div class="admin-panel" id="adminPanel">
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-2xl font-black" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚙️ لوحة التحكم</h2>
-            <button type="button" onclick="toggleAdmin()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"><i class="fas fa-times"></i></button>
+            <button onclick="toggleAdmin()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"><i class="fas fa-times"></i></button>
         </div>
         <div class="mb-8">
             <h3 class="text-lg font-bold mb-4">إدارة التبويبات</h3>
@@ -371,13 +369,13 @@
     
          <!-- تبويبات المحرر -->
         <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
-        <button type="button" onclick="showEditor('hero')" class="editor-tab active px-3 py-1 rounded-full bg-indigo-500 text-white text-xs">الرئيسية</button>
-        <button type="button" onclick="showEditor('about')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">عن الشركة</button>
-        <button type="button" onclick="showEditor('projects')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">المشاريع</button>
-        <button type="button" onclick="showEditor('news')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأخبار</button>
-        <button type="button" onclick="showEditor('testimonials')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الشهادات</button>
-        <button type="button" onclick="showEditor('faq')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأسئلة</button>
-        <button type="button" onclick="showEditor('contact')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">التواصل</button>
+        <button onclick="showEditor('hero')" class="editor-tab active px-3 py-1 rounded-full bg-indigo-500 text-white text-xs">الرئيسية</button>
+        <button onclick="showEditor('about')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">عن الشركة</button>
+        <button onclick="showEditor('projects')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">المشاريع</button>
+        <button onclick="showEditor('news')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأخبار</button>
+        <button onclick="showEditor('testimonials')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الشهادات</button>
+        <button onclick="showEditor('faq')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">الأسئلة</button>
+        <button onclick="showEditor('contact')" class="editor-tab px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs hover:bg-white/20">التواصل</button>
         </div>
 
         <!-- محتوى المحرر -->
@@ -388,15 +386,15 @@
         <div class="mb-8">
             <h3 class="text-lg font-bold mb-4">إدارة البيانات</h3>
             <div class="space-y-3">
-                <button type="button" onclick="exportData()" class="w-full magnetic-btn justify-center"><i class="fas fa-download"></i> تصدير البيانات (JSON)</button>
-                <button type="button" onclick="document.getElementById('importFile').click()" class="w-full magnetic-btn justify-center" style="background: transparent; border: 2px solid var(--primary);"><i class="fas fa-upload"></i> استيراد البيانات</button>
+                <button onclick="exportData()" class="w-full magnetic-btn justify-center"><i class="fas fa-download"></i> تصدير البيانات (JSON)</button>
+                <button onclick="document.getElementById('importFile').click()" class="w-full magnetic-btn justify-center" style="background: transparent; border: 2px solid var(--primary);"><i class="fas fa-upload"></i> استيراد البيانات</button>
                 <input type="file" id="importFile" class="hidden" accept=".json" onchange="importData(event)">
-                <button type="button" onclick="resetData()" class="w-full magnetic-btn justify-center" style="background: #ef4444;"><i class="fas fa-trash"></i> إعادة تعيين</button>
+                <button onclick="resetData()" class="w-full magnetic-btn justify-center" style="background: #ef4444;"><i class="fas fa-trash"></i> إعادة تعيين</button>
             </div>
         </div>
-        <div class="text-center text-gray-500 text-sm"><p>اضغط Ctrl + Shift + A أو ⚙️ لفتح/إغلاق</p></div>
+        <div class="text-center text-gray-500 text-sm"><p>اضغط Ctrl + Shift + ~ أو ⚙️ لفتح/إغلاق</p></div>
     </div>
-                <button type="button" class="admin-trigger" onclick="toggleAdmin()" title="لوحة التحكم"><i class="fas fa-cog"></i></button>
+                <button class="admin-trigger" onclick="toggleAdmin()" title="لوحة التحكم"><i class="fas fa-cog"></i></button>
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
@@ -409,13 +407,6 @@
             to: function() {}
         };
         window.ScrollTrigger = { create: function() {} };
-
-    // XSS Protection: Sanitize HTML before inserting
-    function sanitizeHTML(str) {
-        const temp = document.createElement('div');
-        temp.textContent = str;
-        return temp.innerHTML;
-    }
     }    
 
     // Data
@@ -565,7 +556,7 @@
         const content = document.getElementById('projectModalContent');
         content.innerHTML = `
             <div class="mb-8">
-                <img loading="lazy" alt="" src="${p.image}" class="w-full rounded-3xl mb-6">
+                <img src="${p.image}" class="w-full rounded-3xl mb-6">
                 <div class="flex flex-wrap gap-2 mb-4">
                     <span class="px-4 py-2 bg-indigo-500/20 rounded-full text-indigo-300 text-sm">${p.category}</span>
                     <span class="px-4 py-2 bg-purple-500/20 rounded-full text-purple-300 text-sm">${p.client}</span>
@@ -575,8 +566,8 @@
                 <div class="flex flex-wrap gap-2">${p.technologies.map(t => `<span class="px-4 py-2 bg-white/10 rounded-full">${t}</span>`).join('')}</div>
             </div>
             <div class="flex justify-between">
-                ${p.id > 1 ? `<button type="button" onclick="openProjectModal(${p.id - 1})" class="magnetic-btn"><i class="fas fa-arrow-right"></i> السابق</button>` : '<div></div>'}
-                ${p.id < siteData.projects.length ? `<button type="button" onclick="openProjectModal(${p.id + 1})" class="magnetic-btn">التالي <i class="fas fa-arrow-left"></i></button>` : '<div></div>'}
+                ${p.id > 1 ? `<button onclick="openProjectModal(${p.id - 1})" class="magnetic-btn"><i class="fas fa-arrow-right"></i> السابق</button>` : '<div></div>'}
+                ${p.id < siteData.projects.length ? `<button onclick="openProjectModal(${p.id + 1})" class="magnetic-btn">التالي <i class="fas fa-arrow-left"></i></button>` : '<div></div>'}
             </div>
         `;
         modal.classList.remove('hidden');
@@ -593,7 +584,7 @@
         if (!grid) return;
         grid.innerHTML = siteData.news.map(n => `
             <div class="news-card">
-                <img loading="lazy" src="${n.image}" alt="${currentLang === 'ar' ? n.titleAr : n.titleEn}" class="w-full h-48 object-cover">
+                <img src="${n.image}" alt="${currentLang === 'ar' ? n.titleAr : n.titleEn}" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <span class="text-indigo-400 text-sm">${n.date}</span>
                     <h3 class="text-xl font-bold mt-2 mb-3">${currentLang === 'ar' ? n.titleAr : n.titleEn}</h3>
@@ -609,7 +600,7 @@
         grid.innerHTML = siteData.testimonials.map(t => `
             <div class="testimonial-card">
                 <div class="flex items-center gap-4 mb-4">
-                    <img loading="lazy" src="${t.image}" alt="${currentLang === 'ar' ? t.nameAr : t.nameEn}" class="w-14 h-14 rounded-full object-cover">
+                    <img src="${t.image}" alt="${currentLang === 'ar' ? t.nameAr : t.nameEn}" class="w-14 h-14 rounded-full object-cover">
                     <div>
                         <h4 class="font-bold">${currentLang === 'ar' ? t.nameAr : t.nameEn}</h4>
                         <p class="text-gray-400 text-sm">${currentLang === 'ar' ? t.roleAr : t.roleEn} - ${t.company}</p>
@@ -626,7 +617,7 @@
         if (!grid) return;
         grid.innerHTML = siteData.partners.map(p => `
             <div class="flex items-center justify-center p-4">
-                <img loading="lazy" src="${p.logo}" alt="${p.name}" class="partner-logo max-h-16 object-contain" title="${p.name}">
+                <img src="${p.logo}" alt="${p.name}" class="partner-logo max-h-16 object-contain" title="${p.name}">
             </div>
         `).join('');
     }
@@ -747,7 +738,7 @@ function renderEditorContent() {
                 '<div class="p-4 bg-white/5 rounded-xl border border-white/10">' +
                 '<div class="flex justify-between items-center mb-2">' +
                 '<span class="font-bold text-sm">مشروع #' + (i+1) + '</span>' +
-                '<button type="button" onclick="deleteProject(' + i + ')" class="text-red-400 hover:text-red-300 text-sm"><i class="fas fa-trash"></i> حذف</button>' +
+                '<button onclick="deleteProject(' + i + ')" class="text-red-400 hover:text-red-300 text-sm"><i class="fas fa-trash"></i> حذف</button>' +
                 '</div>' +
                 '<input type="text" class="form-input mb-2" placeholder="العنوان (عربي)" value="' + p.titleAr + '" onchange="editProject(' + i + ', \'titleAr\', this.value)">' +
                 '<input type="text" class="form-input mb-2" placeholder="العنوان (إنجليزي)" value="' + p.titleEn + '" onchange="editProject(' + i + ', \'titleEn\', this.value)">' +
@@ -762,47 +753,47 @@ function renderEditorContent() {
                 '<textarea class="form-input mt-2" rows="2" placeholder="وصف (عربي)" onchange="editProject(' + i + ', \'descriptionAr\', this.value)">' + p.descriptionAr + '</textarea>' +
                 '</div>';
         });
-        html += '<button type="button" onclick="addProject()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة مشروع جديد</button></div>';
+        html += '<button onclick="addProject()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة مشروع جديد</button></div>';
     }
     else if (currentEditor === 'news') {
         html = '<div class="space-y-4">';
         siteData.news.forEach(function(n, i) {
             html += 
                 '<div class="p-4 bg-white/5 rounded-xl">' +
-                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">خبر #' + (i+1) + '</span><button type="button" onclick="deleteNews(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">خبر #' + (i+1) + '</span><button onclick="deleteNews(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
                 '<input type="text" class="form-input mb-2" value="' + n.titleAr + '" onchange="editNews(' + i + ', \'titleAr\', this.value)">' +
                 '<input type="text" class="form-input mb-2" value="' + n.titleEn + '" onchange="editNews(' + i + ', \'titleEn\', this.value)">' +
                 '<input type="date" class="form-input mb-2" value="' + n.date + '" onchange="editNews(' + i + ', \'date\', this.value)">' +
                 '<input type="text" class="form-input" placeholder="رابط الصورة" value="' + n.image + '" onchange="editNews(' + i + ', \'image\', this.value)">' +
                 '</div>';
         });
-        html += '<button type="button" onclick="addNews()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة خبر</button></div>';
+        html += '<button onclick="addNews()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة خبر</button></div>';
     }
     else if (currentEditor === 'testimonials') {
         html = '<div class="space-y-4">';
         siteData.testimonials.forEach(function(t, i) {
             html += 
                 '<div class="p-4 bg-white/5 rounded-xl">' +
-                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">شهادة #' + (i+1) + '</span><button type="button" onclick="deleteTestimonial(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">شهادة #' + (i+1) + '</span><button onclick="deleteTestimonial(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
                 '<input type="text" class="form-input mb-2" value="' + t.nameAr + '" onchange="editTestimonial(' + i + ', \'nameAr\', this.value)">' +
                 '<input type="text" class="form-input mb-2" value="' + t.nameEn + '" onchange="editTestimonial(' + i + ', \'nameEn\', this.value)">' +
                 '<input type="text" class="form-input mb-2" value="' + t.company + '" onchange="editTestimonial(' + i + ', \'company\', this.value)">' +
                 '<textarea class="form-input" rows="2" onchange="editTestimonial(' + i + ', \'textAr\', this.value)">' + t.textAr + '</textarea>' +
                 '</div>';
         });
-        html += '<button type="button" onclick="addTestimonial()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة شهادة</button></div>';
+        html += '<button onclick="addTestimonial()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة شهادة</button></div>';
     }
     else if (currentEditor === 'faq') {
         html = '<div class="space-y-4">';
         siteData.faq.forEach(function(f, i) {
             html += 
                 '<div class="p-4 bg-white/5 rounded-xl">' +
-                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">سؤال #' + (i+1) + '</span><button type="button" onclick="deleteFAQ(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
+                '<div class="flex justify-between mb-2"><span class="font-bold text-sm">سؤال #' + (i+1) + '</span><button onclick="deleteFAQ(' + i + ')" class="text-red-400 text-sm"><i class="fas fa-trash"></i></button></div>' +
                 '<input type="text" class="form-input mb-2" value="' + f.questionAr + '" onchange="editFAQ(' + i + ', \'questionAr\', this.value)">' +
                 '<textarea class="form-input" rows="2" onchange="editFAQ(' + i + ', \'answerAr\', this.value)">' + f.answerAr + '</textarea>' +
                 '</div>';
         });
-        html += '<button type="button" onclick="addFAQ()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة سؤال</button></div>';
+        html += '<button onclick="addFAQ()" class="w-full magnetic-btn justify-center mt-4"><i class="fas fa-plus"></i> إضافة سؤال</button></div>';
     }
     else if (currentEditor === 'contact') {
         html = 
@@ -1039,9 +1030,9 @@ function updateContactDisplay() {
             <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
                 <span>${t.nameAr}</span>
                 <div class="flex gap-2">
-                    <button type="button" onclick="moveTab(${i}, -1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-up"></i></button>
-                    <button type="button" onclick="moveTab(${i}, 1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-down"></i></button>
-                    <button type="button" onclick="toggleTab(${i})" class="w-8 h-8 rounded ${t.visible ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}"><i class="fas fa-eye${t.visible ? '' : '-slash'}"></i></button>
+                    <button onclick="moveTab(${i}, -1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-up"></i></button>
+                    <button onclick="moveTab(${i}, 1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20"><i class="fas fa-arrow-down"></i></button>
+                    <button onclick="toggleTab(${i})" class="w-8 h-8 rounded ${t.visible ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}"><i class="fas fa-eye${t.visible ? '' : '-slash'}"></i></button>
                 </div>
             </div>
         `).join('');
@@ -1143,13 +1134,302 @@ function updateContactDisplay() {
 
     function initKeyboardShortcuts() {
         document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.shiftKey && e.key == 'A') {
+            if (e.ctrlKey && e.shiftKey && e.key == 'S') {
                 e.preventDefault();
                 toggleAdmin();
             }
         });
     }
     </script>
+
+
+<script>
+/* ============================================================
+   BASHIER CMS ENHANCEMENT v2
+   - Persistent local editor for content, images and design
+   - Image upload/compression, add/delete for content collections
+   - Global background color/image controls
+   - Renders editable content instead of hard-coded HTML
+   NOTE: data is stored in this browser (localStorage). A central
+   database/API is required if changes must appear to every visitor.
+   ============================================================ */
+(function () {
+    const ENHANCED_DEFAULTS = {
+        hero: {
+            badgeAr: '✨ نحول الأفكار إلى واقع', badgeEn: '✨ Turning ideas into reality',
+            line1Ar: 'نبني', line1En: 'We Build',
+            line2Ar: 'المستقبل', line2En: 'The Future',
+            line3Ar: 'الرقمي', line3En: 'Digitally',
+            descAr: 'نقدم حلول رقمية متكاملة تشمل التصميم الابداعي، التطوير التقني، والتسويق الرقمي.',
+            descEn: 'We provide comprehensive digital solutions including creative design, technology development, and digital marketing.',
+            button1Ar: 'استكشف أعمالنا', button1En: 'Explore Our Work',
+            button2Ar: 'تواصل معنا', button2En: 'Contact Us',
+            stats: [
+                {value:150,labelAr:'مشروع منجز',labelEn:'Completed Projects'},
+                {value:50,labelAr:'عميل سعيد',labelEn:'Happy Clients'},
+                {value:8,labelAr:'سنوات خبرة',labelEn:'Years Experience'},
+                {value:25,labelAr:'جائزة',labelEn:'Awards'}
+            ]
+        },
+        about: {
+            labelAr:'من نحن', labelEn:'About Us', titleAr:'نحن نصنع الفرق', titleEn:'We Make a Difference',
+            textAr:'نحن فريق من المصممين والمطورين والمسوقين المحترفين الذين يشاركون شغفاً واحداً: إنشاء تجارب رقمية استثنائية.',
+            textEn:'We are a team of professional designers, developers and marketers who share one passion: creating exceptional digital experiences.',
+            image:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop',
+            features:[
+                {icon:'fa-lightbulb',titleAr:'الإبداع',titleEn:'Creativity',textAr:'حلول مبتكرة خارج الصندوق',textEn:'Innovative out-of-the-box solutions'},
+                {icon:'fa-rocket',titleAr:'السرعة',titleEn:'Speed',textAr:'تسليم سريع دون المساس بالجودة',textEn:'Fast delivery without compromising quality'},
+                {icon:'fa-shield-alt',titleAr:'الجودة',titleEn:'Quality',textAr:'معايير عالمية في كل مشروع',textEn:'World-class standards in every project'},
+                {icon:'fa-heart',titleAr:'الشغف',titleEn:'Passion',textAr:'نحب ما نفعله ويبدو ذلك في عملنا',textEn:'We love what we do and it shows'}
+            ]
+        },
+        services: [
+            {icon:'fa-paint-brush',color1:'#6366f1',color2:'#9333ea',titleAr:'التصميم الإبداعي',titleEn:'Creative Design',textAr:'تصميم هويات بصرية، واجهات مستخدم، وتجارب بصرية مذهلة.',textEn:'Visual identities, user interfaces, and stunning visual experiences.'},
+            {icon:'fa-code',color1:'#a855f7',color2:'#db2777',titleAr:'تطوير الويب',titleEn:'Web Development',textAr:'مواقع وتطبيقات ويب عالية الأداء باستخدام أحدث التقنيات.',textEn:'High-performance websites and web applications using modern technologies.'},
+            {icon:'fa-mobile-alt',color1:'#06b6d4',color2:'#2563eb',titleAr:'تطبيقات الجوال',titleEn:'Mobile Apps',textAr:'تطبيقات iOS وAndroid native وcross-platform سهلة الاستخدام.',textEn:'Easy-to-use native and cross-platform iOS and Android apps.'},
+            {icon:'fa-bullhorn',color1:'#ec4899',color2:'#e11d48',titleAr:'التسويق الرقمي',titleEn:'Digital Marketing',textAr:'استراتيجيات تسويقية متكاملة لزيادة الوعي بالعلامة التجارية.',textEn:'Integrated marketing strategies to grow brand awareness.'},
+            {icon:'fa-search',color1:'#f59e0b',color2:'#ea580c',titleAr:'تحسين محركات البحث',titleEn:'SEO',textAr:'تحسين ظهور موقعك في نتائج البحث لجذب المزيد من الزوار.',textEn:'Improve search visibility and attract more visitors.'},
+            {icon:'fa-video',color1:'#10b981',color2:'#0f766e',titleAr:'الموشن جرافيك',titleEn:'Motion Graphics',textAr:'فيديوهات موشن جرافيك ورسوم متحركة احترافية.',textEn:'Professional motion graphics and animated videos.'}
+        ],
+        contact: {email:'info@bashier.com',phone:'+966 50 000 0000',addressAr:'الرياض، المملكة العربية السعودية',addressEn:'Riyadh, Saudi Arabia',facebook:'https://facebook.com/bashier',instagram:'https://instagram.com/bashier',tiktok:'https://tiktok.com/@bashier',twitter:'https://twitter.com/bashier',linkedin:'https://linkedin.com/company/bashier'},
+        design: {primaryColor:'#6366f1',secondaryColor:'#8b5cf6',accentColor:'#06b6d4',backgroundColor:'#0f172a',backgroundImage:'',backgroundSize:'cover',backgroundOverlay:0.0},
+        footer: {descriptionAr:'نحن فريق من المحترفين الشغوفين بإنشاء تجارب رقمية استثنائية.',descriptionEn:'A passionate team creating exceptional digital experiences.',copyrightAr:'© 2026 Bashier. جميع الحقوق محفوظة.',copyrightEn:'© 2026 Bashier. All rights reserved.'}
+    };
+
+    function clone(x){ return JSON.parse(JSON.stringify(x)); }
+    function merge(base, extra){
+        if (!extra || typeof extra !== 'object') return clone(base);
+        const out = clone(base);
+        Object.keys(extra).forEach(k => {
+            if (extra[k] && typeof extra[k] === 'object' && !Array.isArray(extra[k]) && out[k] && typeof out[k] === 'object' && !Array.isArray(out[k])) out[k] = merge(out[k], extra[k]);
+            else out[k] = extra[k];
+        });
+        return out;
+    }
+
+    // Extend the existing data without destroying user data.
+    siteData = merge(ENHANCED_DEFAULTS, siteData || {});
+    if (!siteData.projects) siteData.projects=[];
+    if (!siteData.news) siteData.news=[];
+    if (!siteData.testimonials) siteData.testimonials=[];
+    if (!siteData.partners) siteData.partners=[];
+    if (!siteData.faq) siteData.faq=[];
+
+    function esc(v){
+        return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escAttr(v){ return esc(v).replace(/'/g,'&#39;'); }
+    function show(msg){ if (typeof showToast==='function') showToast(msg); }
+
+    // Replace the old save routine with quota/error feedback.
+    window.saveData = function(){
+        try {
+            localStorage.setItem('bashierData', JSON.stringify(siteData));
+            return true;
+        } catch(e){
+            show('تعذر الحفظ: مساحة التخزين ممتلئة. صغّر الصور أو صدّر البيانات.');
+            return false;
+        }
+    };
+
+    function compressImage(file, maxW=1400, maxH=1000, quality=.76){
+        return new Promise((resolve,reject)=>{
+            const reader=new FileReader();
+            reader.onerror=reject;
+            reader.onload=()=>{
+                const img=new Image();
+                img.onerror=reject;
+                img.onload=()=>{
+                    let w=img.width,h=img.height,ratio=Math.min(1,maxW/w,maxH/h);
+                    w=Math.max(1,Math.round(w*ratio)); h=Math.max(1,Math.round(h*ratio));
+                    const c=document.createElement('canvas'); c.width=w;c.height=h;
+                    const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,w,h);
+                    resolve(c.toDataURL('image/webp',quality));
+                };
+                img.src=reader.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    window.uploadManagedImage = async function(input, kind, index){
+        const file=input.files && input.files[0]; if(!file) return;
+        if(!file.type.startsWith('image/')) return show('اختر ملف صورة فقط.');
+        if(file.size > 12*1024*1024) return show('الصورة كبيرة جدًا. الحد قبل الضغط 12MB.');
+        try{
+            const data=await compressImage(file);
+            if(kind==='about') siteData.about.image=data;
+            else if(kind==='project') siteData.projects[index].image=data;
+            else if(kind==='news') siteData.news[index].image=data;
+            else if(kind==='testimonial') siteData.testimonials[index].image=data;
+            else if(kind==='partner') siteData.partners[index].logo=data;
+            else if(kind==='background') siteData.design.backgroundImage=data;
+            saveData(); applyDesign(); renderAllEditable(); renderEditorContent();
+            show('تم رفع الصورة وحفظها');
+        }catch(e){ show('تعذر قراءة الصورة.'); }
+        input.value='';
+    };
+
+    window.removeManagedImage = function(kind,index){
+        if(!confirm('هل تريد حذف الصورة؟')) return;
+        if(kind==='about') siteData.about.image='';
+        else if(kind==='project') siteData.projects[index].image='';
+        else if(kind==='news') siteData.news[index].image='';
+        else if(kind==='testimonial') siteData.testimonials[index].image='';
+        else if(kind==='partner') siteData.partners[index].logo='';
+        else if(kind==='background') siteData.design.backgroundImage='';
+        saveData(); applyDesign(); renderAllEditable(); renderEditorContent(); show('تم حذف الصورة');
+    };
+
+    function applyDesign(){
+        const d=siteData.design||ENHANCED_DEFAULTS.design;
+        document.documentElement.style.setProperty('--primary',d.primaryColor||'#6366f1');
+        document.documentElement.style.setProperty('--secondary',d.secondaryColor||'#8b5cf6');
+        document.documentElement.style.setProperty('--accent',d.accentColor||'#06b6d4');
+        document.documentElement.style.setProperty('--dark',d.backgroundColor||'#0f172a');
+        document.body.style.backgroundColor=d.backgroundColor||'#0f172a';
+        document.body.style.backgroundImage=d.backgroundImage ? `linear-gradient(rgba(15,23,42,${Number(d.backgroundOverlay||0)}),rgba(15,23,42,${Number(d.backgroundOverlay||0)})),url("${d.backgroundImage}")` : '';
+        document.body.style.backgroundSize=d.backgroundImage ? (d.backgroundSize||'cover') : '';
+        document.body.style.backgroundAttachment=d.backgroundImage ? 'fixed' : '';
+        const hero=document.querySelector('.hero-bg');
+        if(hero){ hero.style.background=d.backgroundImage ? `linear-gradient(rgba(15,23,42,.58),rgba(15,23,42,.58)),url("${d.backgroundImage}") center/cover no-repeat` : 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)'; }
+    }
+
+    function renderHero(){
+        const h=siteData.hero||ENHANCED_DEFAULTS.hero, ar=currentLang==='ar';
+        const sec=document.getElementById('home'); if(!sec) return;
+        const box=sec.querySelector('.relative.z-10'); if(!box) return;
+        box.innerHTML=`
+          <div class="mb-6"><span class="inline-block px-6 py-2 rounded-full text-sm font-bold bg-indigo-500/20 border border-indigo-500/40 text-indigo-300">${esc(ar?h.badgeAr:h.badgeEn)}</span></div>
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight"><span class="block">${esc(ar?h.line1Ar:h.line1En)}</span><span class="block" style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${esc(ar?h.line2Ar:h.line2En)}</span><span class="block">${esc(ar?h.line3Ar:h.line3En)}</span></h1>
+          <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">${esc(ar?h.descAr:h.descEn)}</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center"><a href="#projects" class="magnetic-btn">${esc(ar?h.button1Ar:h.button1En)} <i class="fas fa-arrow-left"></i></a><a href="#contact" class="magnetic-btn" style="background:transparent;border:2px solid var(--primary);">${esc(ar?h.button2Ar:h.button2En)}</a></div>
+          <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">${(h.stats||[]).map((x,i)=>`<div class="text-center"><div class="text-4xl md:text-5xl font-black ${['text-indigo-400','text-purple-400','text-cyan-400','text-pink-400'][i%4]} counter" data-target="${Number(x.value)||0}">0</div><div class="text-gray-400 mt-2 text-sm">${esc(ar?x.labelAr:x.labelEn)}</div></div>`).join('')}</div>`;
+    }
+
+    function renderAbout(){
+        const a=siteData.about||ENHANCED_DEFAULTS.about, ar=currentLang==='ar';
+        const sec=document.getElementById('about'); if(!sec) return;
+        const inner=sec.querySelector('.max-w-7xl'); if(!inner) return;
+        inner.innerHTML=`<div class="grid lg:grid-cols-2 gap-16 items-center"><div class="relative"><div class="relative z-10 rounded-3xl overflow-hidden"><img src="${escAttr(a.image||'https://placehold.co/800x600/1e293b/ffffff?text=About')}" alt="${escAttr(ar?a.titleAr:a.titleEn)}" class="w-full h-auto"></div><div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-indigo-500/30 rounded-3xl -z-0"></div></div><div><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${esc(ar?a.labelAr:a.labelEn)}</span><h2 class="section-title mb-8">${esc(ar?a.titleAr:a.titleEn)}</h2><p class="text-gray-400 text-lg leading-relaxed mb-6">${esc(ar?a.textAr:a.textEn)}</p><div class="grid grid-cols-2 gap-6">${(a.features||[]).map((f,i)=>`<div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4"><i class="fas ${escAttr(f.icon||'fa-star')} text-indigo-400 text-xl"></i></div><h3 class="font-bold text-lg mb-2">${esc(ar?f.titleAr:f.titleEn)}</h3><p class="text-gray-500 text-sm">${esc(ar?f.textAr:f.textEn)}</p></div>`).join('')}</div></div></div>`;
+    }
+
+    function renderServices(){
+        const sec=document.getElementById('services'); if(!sec) return;
+        const ar=currentLang==='ar'; const inner=sec.querySelector('.max-w-7xl'); if(!inner) return;
+        inner.innerHTML=`<div class="text-center mb-20"><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${ar?'خدماتنا':'Our Services'}</span><h2 class="section-title mb-6">${ar?'ما نقدمه لك':'What We Offer'}</h2><p class="text-gray-400 text-lg max-w-2xl mx-auto">${ar?'حلول متكاملة تغطي جميع احتياجاتك الرقمية':'Complete solutions for your digital needs'}</p></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">${siteData.services.map((x,i)=>`<div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:linear-gradient(135deg,${escAttr(x.color1||'#6366f1')},${escAttr(x.color2||'#9333ea')})"><i class="fas ${escAttr(x.icon||'fa-star')} text-white text-2xl"></i></div><h3 class="text-xl font-bold mb-4">${esc(ar?x.titleAr:x.titleEn)}</h3><p class="text-gray-400 leading-relaxed">${esc(ar?x.textAr:x.textEn)}</p></div>`).join('')}</div>`;
+    }
+
+    function renderContact(){
+        const c=siteData.contact||ENHANCED_DEFAULTS.contact, ar=currentLang==='ar';
+        const sec=document.getElementById('contact'); if(!sec) return;
+        const info=sec.querySelector('.grid.lg\\:grid-cols-2') || sec.querySelector('.grid'); if(!info) return;
+        const form=info.querySelector('form');
+        if(form) form.action=siteData.settings?.formspreeUrl || form.action;
+        const cards=info.querySelectorAll('.space-y-8');
+        if(cards[0]) cards[0].innerHTML=`<div class="p-8 rounded-3xl bg-white/5 border border-white/10"><h3 class="text-2xl font-bold mb-6">${ar?'بيانات التواصل':'Contact Information'}</h3><div class="space-y-6"><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center flex-shrink-0"><i class="fas fa-envelope text-indigo-400"></i></div><div><h4 class="font-semibold mb-1">${ar?'البريد الإلكتروني':'Email'}</h4><p class="text-gray-400">${esc(c.email)}</p></div></div><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0"><i class="fas fa-phone text-purple-400"></i></div><div><h4 class="font-semibold mb-1">${ar?'الهاتف':'Phone'}</h4><p class="text-gray-400">${esc(c.phone)}</p></div></div><div class="flex items-start gap-4"><div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marker-alt text-cyan-400"></i></div><div><h4 class="font-semibold mb-1">${ar?'الموقع':'Location'}</h4><p class="text-gray-400">${esc(ar?c.addressAr:c.addressEn)}</p></div></div></div></div>`;
+        if(cards[1]) cards[1].innerHTML=`<div class="p-8 rounded-3xl bg-white/5 border border-white/10"><h3 class="text-xl font-bold mb-6">${ar?'تابعنا':'Follow Us'}</h3><div class="flex gap-4">${[['facebook-f',c.facebook],['instagram',c.instagram],['tiktok',c.tiktok],['twitter',c.twitter],['linkedin-in',c.linkedin]].filter(x=>x[1]).map(x=>`<a href="${escAttr(x[1])}" target="_blank" rel="noopener" class="social-icon"><i class="fab fa-${x[0]}"></i></a>`).join('')}</div></div>`;
+    }
+
+    function renderFooter(){
+        const f=siteData.footer||ENHANCED_DEFAULTS.footer, ar=currentLang==='ar';
+        const footer=document.querySelector('footer'); if(!footer) return;
+        const p=footer.querySelector('p.text-gray-400'); if(p) p.textContent=ar?f.descriptionAr:f.descriptionEn;
+        const cp=footer.querySelector('.border-t p'); if(cp) cp.textContent=ar?f.copyrightAr:f.copyrightEn;
+    }
+
+    function renderAllEditable(){
+        renderHero(); renderAbout(); renderServices(); renderContact(); renderFooter();
+        if(typeof renderProjects==='function') renderProjects();
+        if(typeof renderNews==='function') renderNews();
+        if(typeof renderTestimonials==='function') renderTestimonials();
+        if(typeof renderPartners==='function') renderPartners();
+        if(typeof renderFAQ==='function') renderFAQ();
+        if(typeof initCounters==='function') setTimeout(initCounters,50);
+        initNavigation();
+        applyDesign();
+    }
+
+    // Override language toggle so all editable content is rerendered.
+    window.toggleLanguage=function(){
+        currentLang=currentLang==='ar'?'en':'ar'; localStorage.setItem('bashierLang',currentLang); initLanguage(); renderAllEditable();
+    };
+
+    function field(label,id,value,type='text',onchange=''){ return `<div><label class="block text-sm mb-2">${label}</label>${type==='textarea'?`<textarea id="${id}" rows="3" class="form-input" onchange="${onchange}">${esc(value)}</textarea>`:`<input type="${type}" id="${id}" class="form-input" value="${escAttr(value)}" onchange="${onchange}">`}</div>`; }
+    function imgControls(kind,index,img){
+        return `<div class="mt-2"><div class="flex gap-2 items-center"><input type="file" accept="image/*" onchange="uploadManagedImage(this,'${kind}',${index===undefined?'null':index})" class="text-xs flex-1"><button type="button" onclick="removeManagedImage('${kind}',${index===undefined?'null':index})" class="px-3 py-2 rounded-lg bg-red-500/20 text-red-300 text-xs">حذف الصورة</button></div>${img?`<img src="${escAttr(img)}" class="mt-2 w-full h-24 object-cover rounded-lg border border-white/10">`:''}</div>`;
+    }
+
+    window.showEditor=function(section, btn){
+        currentEditor=section;
+        document.querySelectorAll('.editor-tab').forEach(b=>{b.classList.remove('bg-indigo-500','text-white');b.classList.add('bg-white/10','text-gray-300');});
+        if(btn){btn.classList.remove('bg-white/10','text-gray-300');btn.classList.add('bg-indigo-500','text-white');}
+        renderEditorContent();
+    };
+
+    window.renderEditorContent=function(){
+        const c=document.getElementById('editorContent'); if(!c)return; let h=''; const ar=currentLang==='ar';
+        if(currentEditor==='hero'){
+            const x=siteData.hero;
+            h=`${field('شارة أعلى الصفحة - عربي','hba',x.badgeAr)}${field('Badge - English','hbe',x.badgeEn)}${field('السطر الأول - عربي','h1a',x.line1Ar)}${field('السطر الأول - English','h1e',x.line1En)}${field('السطر الثاني - عربي','h2a',x.line2Ar)}${field('السطر الثاني - English','h2e',x.line2En)}${field('السطر الثالث - عربي','h3a',x.line3Ar)}${field('السطر الثالث - English','h3e',x.line3En)}${field('الوصف - عربي','hda',x.descAr,'textarea')}${field('الوصف - English','hde',x.descEn,'textarea')}<div class="grid grid-cols-2 gap-2">${field('زر الأعمال - عربي','b1a',x.button1Ar)}${field('زر الأعمال - English','b1e',x.button1En)}${field('زر التواصل - عربي','b2a',x.button2Ar)}${field('زر التواصل - English','b2e',x.button2En)}</div><h4 class="font-bold mt-4">الإحصائيات</h4>${x.stats.map((s,i)=>`<div class="p-3 bg-white/5 rounded-lg"><div class="grid grid-cols-3 gap-2"><input class="form-input" type="number" value="${s.value}" onchange="siteData.hero.stats[${i}].value=this.value;saveData();renderAllEditable()"><input class="form-input" value="${escAttr(s.labelAr)}" onchange="siteData.hero.stats[${i}].labelAr=this.value;saveData();renderAllEditable()"><input class="form-input" value="${escAttr(s.labelEn)}" onchange="siteData.hero.stats[${i}].labelEn=this.value;saveData();renderAllEditable()"></div></div>`).join('')}<button class="w-full magnetic-btn justify-center mt-3" onclick="saveHeroEnhanced()">حفظ الرئيسية</button>`;
+        } else if(currentEditor==='about'){
+            const x=siteData.about;
+            h=`${field('اسم القسم عربي','aba',x.labelAr)}${field('اسم القسم English','abe',x.labelEn)}${field('العنوان عربي','ata',x.titleAr)}${field('العنوان English','ate',x.titleEn)}${field('النص عربي','axa',x.textAr,'textarea')}${field('النص English','axe',x.textEn,'textarea')}<label class="block text-sm mb-2">رابط الصورة</label><input id="abi" class="form-input" value="${escAttr(x.image)}" onchange="siteData.about.image=this.value;saveData();renderAllEditable()">${imgControls('about',undefined,x.image)}<h4 class="font-bold mt-4">بطاقات المميزات</h4>${x.features.map((f,i)=>`<div class="p-3 bg-white/5 rounded-lg space-y-2"><input class="form-input" value="${escAttr(f.icon)}" placeholder="Font Awesome icon" onchange="siteData.about.features[${i}].icon=this.value;saveData();renderAllEditable()"><input class="form-input" value="${escAttr(f.titleAr)}" onchange="siteData.about.features[${i}].titleAr=this.value;saveData();renderAllEditable()"><input class="form-input" value="${escAttr(f.titleEn)}" onchange="siteData.about.features[${i}].titleEn=this.value;saveData();renderAllEditable()"><textarea class="form-input" onchange="siteData.about.features[${i}].textAr=this.value;saveData();renderAllEditable()">${esc(f.textAr)}</textarea><textarea class="form-input" onchange="siteData.about.features[${i}].textEn=this.value;saveData();renderAllEditable()">${esc(f.textEn)}</textarea></div>`).join('')}<button class="w-full magnetic-btn justify-center" onclick="saveAboutEnhanced()">حفظ عن الشركة</button>`;
+        } else if(currentEditor==='services'){
+            h=`<div class="space-y-4">${siteData.services.map((x,i)=>`<div class="p-4 bg-white/5 rounded-xl border border-white/10"><div class="flex justify-between items-center mb-2"><b>خدمة #${i+1}</b><button onclick="deleteService(${i})" class="text-red-400">حذف</button></div><div class="grid grid-cols-2 gap-2"><input class="form-input" value="${escAttr(x.titleAr)}" placeholder="العنوان عربي" onchange="editService(${i},'titleAr',this.value)"><input class="form-input" value="${escAttr(x.titleEn)}" placeholder="Title English" onchange="editService(${i},'titleEn',this.value)"><input class="form-input" value="${escAttr(x.icon)}" placeholder="fa-code" onchange="editService(${i},'icon',this.value)"><input type="color" class="w-full h-10" value="${escAttr(x.color1)}" onchange="editService(${i},'color1',this.value)"><input type="color" class="w-full h-10" value="${escAttr(x.color2)}" onchange="editService(${i},'color2',this.value)"></div><textarea class="form-input mt-2" onchange="editService(${i},'textAr',this.value)">${esc(x.textAr)}</textarea><textarea class="form-input mt-2" onchange="editService(${i},'textEn',this.value)">${esc(x.textEn)}</textarea></div>`).join('')}<button onclick="addService()" class="w-full magnetic-btn justify-center"><i class="fas fa-plus"></i> إضافة خدمة</button></div>`;
+        } else if(currentEditor==='projects'){
+            h=`<div class="space-y-4">${siteData.projects.map((p,i)=>`<div class="p-4 bg-white/5 rounded-xl border border-white/10"><div class="flex justify-between items-center mb-2"><b>مشروع #${i+1}</b><button onclick="deleteProject(${i})" class="text-red-400">حذف</button></div><input class="form-input mb-2" value="${escAttr(p.titleAr)}" placeholder="العنوان عربي" onchange="editProject(${i},'titleAr',this.value)"><input class="form-input mb-2" value="${escAttr(p.titleEn)}" placeholder="Title English" onchange="editProject(${i},'titleEn',this.value)"><select class="form-input mb-2" onchange="editProject(${i},'category',this.value)"><option value="design" ${p.category==='design'?'selected':''}>تصميم</option><option value="web" ${p.category==='web'?'selected':''}>ويب</option><option value="app" ${p.category==='app'?'selected':''}>تطبيقات</option><option value="marketing" ${p.category==='marketing'?'selected':''}>تسويق</option></select><input class="form-input mb-2" value="${escAttr(p.image)}" placeholder="رابط الصورة" onchange="editProject(${i},'image',this.value)">${imgControls('project',i,p.image)}<textarea class="form-input mb-2" onchange="editProject(${i},'descriptionAr',this.value)">${esc(p.descriptionAr)}</textarea><textarea class="form-input" onchange="editProject(${i},'descriptionEn',this.value)">${esc(p.descriptionEn)}</textarea><div class="grid grid-cols-2 gap-2 mt-2"><input class="form-input" value="${escAttr(p.client||'')}" placeholder="العميل" onchange="editProject(${i},'client',this.value)"><input class="form-input" type="month" value="${escAttr(p.date||'')}" onchange="editProject(${i},'date',this.value)"></div></div>`).join('')}<button onclick="addProject()" class="w-full magnetic-btn justify-center">إضافة مشروع</button></div>`;
+        } else if(currentEditor==='news'){
+            h=`<div class="space-y-4">${siteData.news.map((n,i)=>`<div class="p-4 bg-white/5 rounded-xl"><div class="flex justify-between mb-2"><b>خبر #${i+1}</b><button onclick="deleteNews(${i})" class="text-red-400">حذف</button></div><input class="form-input mb-2" value="${escAttr(n.titleAr)}" onchange="editNews(${i},'titleAr',this.value)"><input class="form-input mb-2" value="${escAttr(n.titleEn)}" onchange="editNews(${i},'titleEn',this.value)"><input type="date" class="form-input mb-2" value="${escAttr(n.date)}" onchange="editNews(${i},'date',this.value)"><input class="form-input mb-2" value="${escAttr(n.image)}" placeholder="رابط الصورة" onchange="editNews(${i},'image',this.value)">${imgControls('news',i,n.image)}<textarea class="form-input mb-2" placeholder="ملخص عربي" onchange="editNews(${i},'excerptAr',this.value)">${esc(n.excerptAr)}</textarea><textarea class="form-input" placeholder="Summary English" onchange="editNews(${i},'excerptEn',this.value)">${esc(n.excerptEn)}</textarea></div>`).join('')}<button onclick="addNews()" class="w-full magnetic-btn justify-center">إضافة خبر</button></div>`;
+        } else if(currentEditor==='testimonials'){
+            h=`<div class="space-y-4">${siteData.testimonials.map((t,i)=>`<div class="p-4 bg-white/5 rounded-xl"><div class="flex justify-between mb-2"><b>شهادة #${i+1}</b><button onclick="deleteTestimonial(${i})" class="text-red-400">حذف</button></div><div class="grid grid-cols-2 gap-2"><input class="form-input" value="${escAttr(t.nameAr)}" onchange="editTestimonial(${i},'nameAr',this.value)"><input class="form-input" value="${escAttr(t.nameEn)}" onchange="editTestimonial(${i},'nameEn',this.value)"><input class="form-input" value="${escAttr(t.roleAr||'')}" onchange="editTestimonial(${i},'roleAr',this.value)"><input class="form-input" value="${escAttr(t.roleEn||'')}" onchange="editTestimonial(${i},'roleEn',this.value)"><input class="form-input" value="${escAttr(t.company||'')}" onchange="editTestimonial(${i},'company',this.value)"><input type="number" min="1" max="5" class="form-input" value="${Number(t.rating)||5}" onchange="editTestimonial(${i},'rating',Number(this.value))"></div><input class="form-input mt-2" value="${escAttr(t.image||'')}" placeholder="رابط الصورة" onchange="editTestimonial(${i},'image',this.value)">${imgControls('testimonial',i,t.image)}<textarea class="form-input mt-2" onchange="editTestimonial(${i},'textAr',this.value)">${esc(t.textAr)}</textarea><textarea class="form-input mt-2" onchange="editTestimonial(${i},'textEn',this.value)">${esc(t.textEn)}</textarea></div>`).join('')}<button onclick="addTestimonial()" class="w-full magnetic-btn justify-center">إضافة شهادة</button></div>`;
+        } else if(currentEditor==='partners'){
+            h=`<div class="space-y-4">${siteData.partners.map((p,i)=>`<div class="p-4 bg-white/5 rounded-xl"><div class="flex justify-between"><b>شريك #${i+1}</b><button onclick="deletePartner(${i})" class="text-red-400">حذف</button></div><input class="form-input mt-2" value="${escAttr(p.name)}" onchange="editPartner(${i},'name',this.value)"><input class="form-input mt-2" value="${escAttr(p.logo)}" onchange="editPartner(${i},'logo',this.value)">${imgControls('partner',i,p.logo)}</div>`).join('')}<button onclick="addPartner()" class="w-full magnetic-btn justify-center">إضافة شريك</button></div>`;
+        } else if(currentEditor==='faq'){
+            h=`<div class="space-y-4">${siteData.faq.map((f,i)=>`<div class="p-4 bg-white/5 rounded-xl"><div class="flex justify-between mb-2"><b>سؤال #${i+1}</b><button onclick="deleteFAQ(${i})" class="text-red-400">حذف</button></div><input class="form-input mb-2" value="${escAttr(f.questionAr)}" onchange="editFAQ(${i},'questionAr',this.value)"><input class="form-input mb-2" value="${escAttr(f.questionEn)}" onchange="editFAQ(${i},'questionEn',this.value)"><textarea class="form-input mb-2" onchange="editFAQ(${i},'answerAr',this.value)">${esc(f.answerAr)}</textarea><textarea class="form-input" onchange="editFAQ(${i},'answerEn',this.value)">${esc(f.answerEn)}</textarea></div>`).join('')}<button onclick="addFAQ()" class="w-full magnetic-btn justify-center">إضافة سؤال</button></div>`;
+        } else if(currentEditor==='contact'){
+            const x=siteData.contact;
+            h=`${field('البريد الإلكتروني','ce',x.email)}${field('الهاتف','cp',x.phone)}${field('العنوان عربي','ca',x.addressAr)}${field('العنوان English','cae',x.addressEn)}${field('Facebook','cf',x.facebook)}${field('Instagram','ci',x.instagram)}${field('TikTok','ct',x.tiktok)}${field('X / Twitter','cx',x.twitter)}${field('LinkedIn','cl',x.linkedin)}<div class="mt-2">${field('رابط Formspree (اختياري)','formspree',siteData.settings?.formspreeUrl||'')}</div><button class="w-full magnetic-btn justify-center mt-3" onclick="saveContactEnhanced()">حفظ التواصل</button>`;
+        } else if(currentEditor==='design'){
+            const d=siteData.design;
+            h=`<div class="grid grid-cols-2 gap-3">${field('اللون الرئيسي','dc1',d.primaryColor,'color')}${field('اللون الثانوي','dc2',d.secondaryColor,'color')}${field('لون التأكيد','dc3',d.accentColor,'color')}${field('لون خلفية الموقع','dbc',d.backgroundColor,'color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="https://..." onchange="siteData.design.backgroundImage=this.value;saveData();applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign();saveData()"></div><button class="w-full magnetic-btn justify-center mt-4" onclick="saveDesignEnhanced()">حفظ التصميم</button>`;
+        }
+        c.innerHTML=h;
+    };
+
+    window.saveHeroEnhanced=function(){ const x=siteData.hero; x.badgeAr=document.getElementById('hba').value;x.badgeEn=document.getElementById('hbe').value;x.line1Ar=document.getElementById('h1a').value;x.line1En=document.getElementById('h1e').value;x.line2Ar=document.getElementById('h2a').value;x.line2En=document.getElementById('h2e').value;x.line3Ar=document.getElementById('h3a').value;x.line3En=document.getElementById('h3e').value;x.descAr=document.getElementById('hda').value;x.descEn=document.getElementById('hde').value;x.button1Ar=document.getElementById('b1a').value;x.button1En=document.getElementById('b1e').value;x.button2Ar=document.getElementById('b2a').value;x.button2En=document.getElementById('b2e').value;saveData();renderAllEditable();renderEditorContent();show('تم حفظ الرئيسية'); };
+    window.saveAboutEnhanced=function(){const x=siteData.about;x.labelAr=document.getElementById('aba').value;x.labelEn=document.getElementById('abe').value;x.titleAr=document.getElementById('ata').value;x.titleEn=document.getElementById('ate').value;x.textAr=document.getElementById('axa').value;x.textEn=document.getElementById('axe').value;x.image=document.getElementById('abi').value;saveData();renderAllEditable();renderEditorContent();show('تم حفظ عن الشركة');};
+    window.saveContactEnhanced=function(){const x=siteData.contact;x.email=document.getElementById('ce').value;x.phone=document.getElementById('cp').value;x.addressAr=document.getElementById('ca').value;x.addressEn=document.getElementById('cae').value;x.facebook=document.getElementById('cf').value;x.instagram=document.getElementById('ci').value;x.tiktok=document.getElementById('ct').value;x.twitter=document.getElementById('cx').value;x.linkedin=document.getElementById('cl').value;siteData.settings=siteData.settings||{};siteData.settings.formspreeUrl=document.getElementById('formspree').value.trim();saveData();renderAllEditable();renderEditorContent();show('تم حفظ بيانات التواصل');};
+    window.saveDesignEnhanced=function(){const d=siteData.design;d.primaryColor=document.getElementById('dc1').value;d.secondaryColor=document.getElementById('dc2').value;d.accentColor=document.getElementById('dc3').value;d.backgroundColor=document.getElementById('dbc').value;d.backgroundImage=document.getElementById('dbi').value.trim();saveData();applyDesign();show('تم حفظ التصميم');};
+
+    window.editService=function(i,k,v){siteData.services[i][k]=v;saveData();renderServices();};
+    window.deleteService=function(i){if(!confirm('حذف الخدمة؟'))return;siteData.services.splice(i,1);saveData();renderEditorContent();renderServices();};
+    window.addService=function(){siteData.services.push({icon:'fa-star',color1:'#6366f1',color2:'#8b5cf6',titleAr:'خدمة جديدة',titleEn:'New Service',textAr:'وصف الخدمة...',textEn:'Service description...'});saveData();renderEditorContent();renderServices();};
+    window.editPartner=function(i,k,v){siteData.partners[i][k]=v;saveData();renderPartners();};
+    window.deletePartner=function(i){if(!confirm('حذف الشريك؟'))return;siteData.partners.splice(i,1);saveData();renderEditorContent();renderPartners();};
+    window.addPartner=function(){siteData.partners.push({name:'شريك جديد',logo:'https://placehold.co/200x100/1e293b/ffffff?text=Partner'});saveData();renderEditorContent();renderPartners();};
+
+    // Add the missing editor tabs.
+    function buildEditorTabs(){
+        const wrap=document.querySelector('#adminPanel .editor-tab')?.parentElement; if(!wrap)return;
+        const wanted=[['hero','الرئيسية'],['about','عن الشركة'],['services','الخدمات'],['projects','المشاريع'],['news','الأخبار'],['testimonials','الشهادات'],['partners','الشركاء'],['faq','الأسئلة'],['contact','التواصل'],['design','التصميم']];
+        wrap.innerHTML=wanted.map(([id,label],i)=>`<button type="button" onclick="showEditor('${id}',this)" class="editor-tab px-3 py-1 rounded-full ${i===0?'bg-indigo-500 text-white':'bg-white/10 text-gray-300'} text-xs whitespace-nowrap">${label}</button>`).join('');
+    }
+
+    window.initAdminPanel=function(){ buildEditorTabs(); renderAdminTabs(); renderEditorContent(); const d=siteData.design||ENHANCED_DEFAULTS.design; const pc=document.getElementById('primaryColor');const sc=document.getElementById('secondaryColor');if(pc)pc.value=d.primaryColor;if(sc)sc.value=d.secondaryColor; };
+
+    // Save image fields immediately and refresh public view.
+    window.editProject=function(i,k,v){siteData.projects[i][k]=v;saveData();renderProjects();};
+    window.editNews=function(i,k,v){siteData.news[i][k]=v;saveData();renderNews();};
+    window.editTestimonial=function(i,k,v){siteData.testimonials[i][k]=v;saveData();renderTestimonials();};
+    window.editFAQ=function(i,k,v){siteData.faq[i][k]=v;saveData();renderFAQ();};
+
+    // Initial render after DOM is ready. The original handler may also run; this is idempotent.
+    document.addEventListener('DOMContentLoaded',function(){
+        setTimeout(function(){ renderAllEditable(); buildEditorTabs(); renderEditorContent(); applyDesign(); },20);
+    });
+})();
+</script>
 
 </body>
 </html>
