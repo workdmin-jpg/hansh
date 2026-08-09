@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #17324d; --secondary: #b38a3e; --accent: #2f6f78; --dark: #0b1b2b; --light: #f5f7fa; 
@@ -226,6 +227,34 @@
             .lang-toggle { top:74px !important; left:14px !important; }
         }
 
+    
+        /* ===== إعدادات الخطوط القابلة للتحكم من لوحة الإدارة ===== */
+        :root {
+            --site-font-family: 'Tajawal', sans-serif;
+            --site-base-size: 16px;
+            --site-heading-size: 1.15em;
+            --site-nav-size: 1rem;
+            --site-button-size: 1rem;
+        }
+        body { font-family: var(--site-font-family); font-size: var(--site-base-size); }
+        body, body p, body li, body label, body input, body textarea, body select, body button { font-family: var(--site-font-family); }
+        h1, h2, h3, h4, h5, h6, .section-title, .hero-title {
+            font-family: var(--site-font-family);
+            font-size: var(--site-heading-size);
+        }
+        #navLinks a, #mobileNavLinks a, .lang-toggle { font-size: var(--site-nav-size) !important; }
+        .magnetic-btn { font-size: var(--site-button-size) !important; }
+        .brand-copy strong { font-family: var(--site-font-family); }
+        .brand-copy medium { font-family: var(--site-font-family); }
+        .font-control-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 14px; }
+        .font-control-row { display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; }
+        .font-size-number { width: 82px; text-align:center; }
+        .font-range { width:100%; accent-color: var(--primary); }
+        .font-preview { padding:12px; border-radius:10px; background:rgba(255,255,255,.06); margin-top:10px; line-height:1.7; }
+        @media (max-width:768px) {
+            .font-control-row { grid-template-columns: 1fr; }
+            .font-size-number { width:100%; }
+        }
     </style>
 <base target="_blank">
 </head>
@@ -547,6 +576,68 @@
                 <div><label class="block text-sm mb-2">لون النصوص الثانوية</label><input type="color" id="textMutedColor" class="w-full h-10 rounded-lg cursor-pointer" value="#94a3b8" onchange="updateColors()"></div>
                 <div><label class="block text-sm mb-2">لون روابط القائمة</label><input type="color" id="textNavColor" class="w-full h-10 rounded-lg cursor-pointer" value="#e2e8f0" onchange="updateColors()"></div>
             </div>
+
+            <div class="mt-6">
+                <h4 class="text-base font-bold mb-3 flex items-center gap-2"><i class="fas fa-font"></i> إعدادات الخطوط</h4>
+                <div class="space-y-3">
+                    <div class="font-control-card">
+                        <label class="block text-sm mb-2">نوع الخط</label>
+                        <select id="fontFamilySelect" class="form-input" onchange="previewFontSettings()">
+                            <option value="Tajawal, sans-serif">Tajawal — تجوال</option>
+                            <option value="Cairo, sans-serif">Cairo — القاهرة</option>
+                            <option value="Noto Kufi Arabic, sans-serif">Noto Kufi Arabic — نوتو كوفي</option>
+                            <option value="Almarai, sans-serif">Almarai — المراعي</option>
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="Tahoma, sans-serif">Tahoma</option>
+                            <option value="Georgia, serif">Georgia</option>
+                        </select>
+                    </div>
+                    <div class="font-control-card">
+                        <div class="font-control-row">
+                            <div>
+                                <label class="block text-sm mb-1">حجم النصوص الأساسية</label>
+                                <input id="baseFontSizeRange" class="font-range" type="range" min="12" max="24" step="1" value="16" oninput="syncFontNumber('baseFontSizeRange','baseFontSizeNumber'); previewFontSettings()">
+                            </div>
+                            <input id="baseFontSizeNumber" class="form-input font-size-number" type="number" min="12" max="24" step="1" value="16" oninput="syncFontRange('baseFontSizeNumber','baseFontSizeRange'); previewFontSettings()">
+                        </div>
+                    </div>
+                    <div class="font-control-card">
+                        <div class="font-control-row">
+                            <div>
+                                <label class="block text-sm mb-1">حجم العناوين</label>
+                                <input id="headingFontSizeRange" class="font-range" type="range" min="18" max="64" step="1" value="32" oninput="syncFontNumber('headingFontSizeRange','headingFontSizeNumber'); previewFontSettings()">
+                            </div>
+                            <input id="headingFontSizeNumber" class="form-input font-size-number" type="number" min="18" max="64" step="1" value="32" oninput="syncFontRange('headingFontSizeNumber','headingFontSizeRange'); previewFontSettings()">
+                        </div>
+                    </div>
+                    <div class="font-control-card">
+                        <div class="font-control-row">
+                            <div>
+                                <label class="block text-sm mb-1">حجم روابط القائمة</label>
+                                <input id="navFontSizeRange" class="font-range" type="range" min="12" max="24" step="1" value="16" oninput="syncFontNumber('navFontSizeRange','navFontSizeNumber'); previewFontSettings()">
+                            </div>
+                            <input id="navFontSizeNumber" class="form-input font-size-number" type="number" min="12" max="24" step="1" value="16" oninput="syncFontRange('navFontSizeNumber','navFontSizeRange'); previewFontSettings()">
+                        </div>
+                    </div>
+                    <div class="font-control-card">
+                        <div class="font-control-row">
+                            <div>
+                                <label class="block text-sm mb-1">حجم الأزرار</label>
+                                <input id="buttonFontSizeRange" class="font-range" type="range" min="12" max="24" step="1" value="16" oninput="syncFontNumber('buttonFontSizeRange','buttonFontSizeNumber'); previewFontSettings()">
+                            </div>
+                            <input id="buttonFontSizeNumber" class="form-input font-size-number" type="number" min="12" max="24" step="1" value="16" oninput="syncFontRange('buttonFontSizeNumber','buttonFontSizeRange'); previewFontSettings()">
+                        </div>
+                    </div>
+                    <div class="font-preview" id="fontPreview">
+                        <strong>معاينة الخط</strong><br>بشير حنش للتجارة والاستيراد — مقاولات • هندسة • استيراد • توريدات
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-2 mt-4">
+                <button type="button" onclick="saveFontSettings()" class="magnetic-btn justify-center flex-1"><i class="fas fa-save"></i> حفظ وتطبيق الخطوط</button>
+                <button type="button" onclick="resetFontSettings()" class="magnetic-btn justify-center" style="background:#475569"><i class="fas fa-undo"></i> افتراضي</button>
+            </div>
             <div class="flex gap-2 mt-5">
                 <button type="button" onclick="saveTextColors()" class="magnetic-btn justify-center flex-1"><i class="fas fa-save"></i> حفظ وتطبيق الألوان</button>
                 <button type="button" onclick="resetTextColors()" class="magnetic-btn justify-center" style="background:#475569"><i class="fas fa-undo"></i> افتراضي</button>
@@ -681,6 +772,7 @@
         initAdminPanel();
         initKeyboardShortcuts();
         applyColors();
+        applyFontSettings(siteData.settings?.font || FONT_DEFAULTS);
     });
 
     function updateBrandLanguage() {
@@ -990,7 +1082,8 @@
         if (th) th.value = siteData.settings && siteData.settings.textHeadingColor ? siteData.settings.textHeadingColor : '#ffffff';
         if (tmu) tmu.value = siteData.settings && siteData.settings.textMutedColor ? siteData.settings.textMutedColor : '#94a3b8';
         if (tn) tn.value = siteData.settings && siteData.settings.textNavColor ? siteData.settings.textNavColor : '#e2e8f0';
-        renderEditorContent(); // ← أضف هذا السطر 
+        initFontControls();
+        renderEditorContent();
     }
     // ====== محرر المحتوى ======
 var currentEditor = 'hero';
@@ -1361,6 +1454,104 @@ function updateContactDisplay() {
         saveData();
         renderAdminTabs();
         initNavigation();
+    }
+
+    // ====== إعدادات الخطوط ======
+    const FONT_DEFAULTS = {
+        fontFamily: 'Tajawal, sans-serif',
+        baseFontSize: 16,
+        headingFontSize: 32,
+        navFontSize: 16,
+        buttonFontSize: 16
+    };
+
+    function syncFontNumber(rangeId, numberId) {
+        const range = document.getElementById(rangeId);
+        const number = document.getElementById(numberId);
+        if (range && number) number.value = range.value;
+    }
+
+    function syncFontRange(numberId, rangeId) {
+        const number = document.getElementById(numberId);
+        const range = document.getElementById(rangeId);
+        if (number && range) {
+            const min = Number(range.min), max = Number(range.max);
+            let value = Number(number.value);
+            if (!Number.isFinite(value)) value = min;
+            value = Math.min(max, Math.max(min, value));
+            number.value = value;
+            range.value = value;
+        }
+    }
+
+    function getFontSettingsFromControls() {
+        const getNum = (id, fallback) => {
+            const el = document.getElementById(id);
+            const n = Number(el?.value);
+            return Number.isFinite(n) ? n : fallback;
+        };
+        return {
+            fontFamily: document.getElementById('fontFamilySelect')?.value || FONT_DEFAULTS.fontFamily,
+            baseFontSize: getNum('baseFontSizeNumber', FONT_DEFAULTS.baseFontSize),
+            headingFontSize: getNum('headingFontSizeNumber', FONT_DEFAULTS.headingFontSize),
+            navFontSize: getNum('navFontSizeNumber', FONT_DEFAULTS.navFontSize),
+            buttonFontSize: getNum('buttonFontSizeNumber', FONT_DEFAULTS.buttonFontSize)
+        };
+    }
+
+    function applyFontSettings(settings) {
+        settings = settings || siteData.settings?.font || FONT_DEFAULTS;
+        const root = document.documentElement;
+        root.style.setProperty('--site-font-family', settings.fontFamily || FONT_DEFAULTS.fontFamily);
+        root.style.setProperty('--site-base-size', (settings.baseFontSize || FONT_DEFAULTS.baseFontSize) + 'px');
+        root.style.setProperty('--site-heading-size', (settings.headingFontSize || FONT_DEFAULTS.headingFontSize) + 'px');
+        root.style.setProperty('--site-nav-size', (settings.navFontSize || FONT_DEFAULTS.navFontSize) + 'px');
+        root.style.setProperty('--site-button-size', (settings.buttonFontSize || FONT_DEFAULTS.buttonFontSize) + 'px');
+        const preview = document.getElementById('fontPreview');
+        if (preview) preview.style.fontFamily = settings.fontFamily || FONT_DEFAULTS.fontFamily;
+    }
+
+    function previewFontSettings() {
+        const settings = getFontSettingsFromControls();
+        applyFontSettings(settings);
+    }
+
+    function initFontControls() {
+        const settings = Object.assign({}, FONT_DEFAULTS, siteData.settings?.font || {});
+        const select = document.getElementById('fontFamilySelect');
+        if (select) select.value = settings.fontFamily;
+        const values = {
+            baseFontSizeRange: settings.baseFontSize,
+            baseFontSizeNumber: settings.baseFontSize,
+            headingFontSizeRange: settings.headingFontSize,
+            headingFontSizeNumber: settings.headingFontSize,
+            navFontSizeRange: settings.navFontSize,
+            navFontSizeNumber: settings.navFontSize,
+            buttonFontSizeRange: settings.buttonFontSize,
+            buttonFontSizeNumber: settings.buttonFontSize
+        };
+        Object.entries(values).forEach(([id, value]) => {
+            const el = document.getElementById(id);
+            if (el) el.value = value;
+        });
+        applyFontSettings(settings);
+    }
+
+    function saveFontSettings() {
+        if (!siteData.settings) siteData.settings = {};
+        siteData.settings.font = getFontSettingsFromControls();
+        saveData();
+        applyFontSettings(siteData.settings.font);
+        if (typeof showToast === 'function') showToast('تم حفظ وتطبيق إعدادات الخطوط');
+    }
+
+    function resetFontSettings() {
+        if (!siteData.settings) siteData.settings = {};
+        siteData.settings.font = Object.assign({}, FONT_DEFAULTS);
+        initFontControls();
+        saveData();
+        applyFontSettings(siteData.settings.font);
+        if (typeof showToast === 'function') showToast('تمت إعادة إعدادات الخطوط الافتراضية');
     }
 
     function updateColors() {
