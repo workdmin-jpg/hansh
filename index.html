@@ -19,7 +19,7 @@
     --text-main: #f8fafc;
     --text-heading: #ffffff;
     --text-muted: #94a3b8;
-    --text-nav: #f5f189;}
+    --text-nav: #e2e8f0;}
         body { font-family: 'Tajawal', sans-serif; background: var(--dark); color: var(--light); overflow-x: hidden; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
@@ -251,6 +251,69 @@
         .font-size-number { width: 82px; text-align:center; }
         .font-range { width:100%; accent-color: var(--primary); }
         .font-preview { padding:12px; border-radius:10px; background:rgba(255,255,255,.06); margin-top:10px; line-height:1.7; }
+
+        /* ===== التحكم المستقل بخطوط كل تبويب ===== */
+        .tab-font-control-card {
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px;
+            padding: 14px;
+        }
+        .tab-font-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .tab-font-range {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+        .tab-font-number {
+            width: 78px;
+            text-align: center;
+        }
+        .tab-font-value-row {
+            display: grid;
+            grid-template-columns: 1fr 78px;
+            gap: 10px;
+            align-items: center;
+        }
+        @media (max-width: 520px) {
+            .tab-font-grid { grid-template-columns: 1fr; }
+        }
+
+        /* تطبق إعدادات الخط على محتوى كل تبويب بصورة مستقلة */
+        #home, #about, #services, #projects, #news, #testimonials, #partners, #faq, #contact {
+            font-family: var(--tab-font-family, var(--site-font-family)) !important;
+        }
+        #home p, #home li, #home h1, #home h2, #home h3, #home h4, #home h5, #home h6,
+        #about p, #about li, #about h1, #about h2, #about h3, #about h4, #about h5, #about h6,
+        #services p, #services li, #services h1, #services h2, #services h3, #services h4, #services h5, #services h6,
+        #projects p, #projects li, #projects h1, #projects h2, #projects h3, #projects h4, #projects h5, #projects h6,
+        #news p, #news li, #news h1, #news h2, #news h3, #news h4, #news h5, #news h6,
+        #testimonials p, #testimonials li, #testimonials h1, #testimonials h2, #testimonials h3, #testimonials h4, #testimonials h5, #testimonials h6,
+        #partners p, #partners li, #partners h1, #partners h2, #partners h3, #partners h4, #partners h5, #partners h6,
+        #faq p, #faq li, #faq h1, #faq h2, #faq h3, #faq h4, #faq h5, #faq h6,
+        #contact p, #contact li, #contact h1, #contact h2, #contact h3, #contact h4, #contact h5, #contact h6 {
+            font-family: var(--tab-font-family, var(--site-font-family)) !important;
+        }
+
+        #home p, #about p, #services p, #projects p, #news p, #testimonials p, #partners p, #faq p, #contact p {
+            font-size: var(--tab-body-size, var(--site-base-size)) !important;
+            line-height: var(--tab-line-height, 1.7) !important;
+        }
+        #home li, #about li, #services li, #projects li, #news li, #testimonials li, #partners li, #faq li, #contact li {
+            line-height: var(--tab-line-height, 1.7) !important;
+        }
+        #home h1, #about h1, #services h1, #projects h1, #news h1, #testimonials h1, #partners h1, #faq h1, #contact h1,
+        #home h2, #about h2, #services h2, #projects h2, #news h2, #testimonials h2, #partners h2, #faq h2, #contact h2,
+        #home h3, #about h3, #services h3, #projects h3, #news h3, #testimonials h3, #partners h3, #faq h3, #contact h3,
+        #home h4, #about h4, #services h4, #projects h4, #news h4, #testimonials h4, #partners h4, #faq h4, #contact h4,
+        #home h5, #about h5, #services h5, #projects h5, #news h5, #testimonials h5, #partners h5, #faq h5, #contact h5,
+        #home h6, #about h6, #services h6, #projects h6, #news h6, #testimonials h6, #partners h6, #faq h6, #contact h6 {
+            font-size: var(--tab-heading-size, var(--site-heading-size)) !important;
+            line-height: var(--tab-line-height, 1.25) !important;
+        }
         @media (max-width:768px) {
             .font-control-row { grid-template-columns: 1fr; }
             .font-size-number { width:100%; }
@@ -634,6 +697,88 @@
                 </div>
             </div>
 
+
+            <!-- ===== إعدادات الخطوط لكل تبويب ===== -->
+            <div class="mt-6 tab-font-control-card">
+                <h4 class="text-base font-bold mb-2 flex items-center gap-2">
+                    <i class="fas fa-sliders-h"></i> إعدادات الخطوط لكل تبويب
+                </h4>
+                <p class="text-xs text-gray-400 mb-4">
+                    اختر التبويب ثم اضبط نوع الخط وحجم النص وحجم العناوين والمسافة بين الأسطر لذلك التبويب فقط.
+                </p>
+
+                <div class="mb-4">
+                    <label class="block text-sm mb-2">التبويب</label>
+                    <select id="tabFontSectionSelect" class="form-input" onchange="loadSelectedTabFontSettings()">
+                        <option value="home">الرئيسية</option>
+                        <option value="about">عن الشركة</option>
+                        <option value="services">خدماتنا</option>
+                        <option value="projects">أعمالنا</option>
+                        <option value="news">الأخبار</option>
+                        <option value="testimonials">شهادات العملاء</option>
+                        <option value="partners">شركاؤنا</option>
+                        <option value="faq">الأسئلة الشائعة</option>
+                        <option value="contact">تواصل معنا</option>
+                    </select>
+                </div>
+
+                <div class="tab-font-control-card mb-3">
+                    <label class="block text-sm mb-2">نوع الخط لهذا التبويب</label>
+                    <select id="tabFontFamilySelect" class="form-input" onchange="previewSelectedTabFontSettings()">
+                        <option value="Tajawal, sans-serif">Tajawal — تجوال</option>
+                        <option value="Cairo, sans-serif">Cairo — القاهرة</option>
+                        <option value="Noto Kufi Arabic, sans-serif">Noto Kufi Arabic — نوتو كوفي</option>
+                        <option value="Almarai, sans-serif">Almarai — المراعي</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Tahoma, sans-serif">Tahoma</option>
+                        <option value="Georgia, serif">Georgia</option>
+                    </select>
+                </div>
+
+                <div class="tab-font-grid">
+                    <div class="tab-font-control-card">
+                        <label class="block text-sm mb-2">حجم النصوص</label>
+                        <div class="tab-font-value-row">
+                            <input id="tabBodySizeRange" class="tab-font-range" type="range" min="12" max="30" step="1" value="16" oninput="syncTabFontNumber('tabBodySizeRange','tabBodySizeNumber'); previewSelectedTabFontSettings()">
+                            <input id="tabBodySizeNumber" class="form-input tab-font-number" type="number" min="12" max="30" step="1" value="16" oninput="syncTabFontRange('tabBodySizeNumber','tabBodySizeRange'); previewSelectedTabFontSettings()">
+                        </div>
+                    </div>
+
+                    <div class="tab-font-control-card">
+                        <label class="block text-sm mb-2">حجم العناوين</label>
+                        <div class="tab-font-value-row">
+                            <input id="tabHeadingSizeRange" class="tab-font-range" type="range" min="18" max="72" step="1" value="32" oninput="syncTabFontNumber('tabHeadingSizeRange','tabHeadingSizeNumber'); previewSelectedTabFontSettings()">
+                            <input id="tabHeadingSizeNumber" class="form-input tab-font-number" type="number" min="18" max="72" step="1" value="32" oninput="syncTabFontRange('tabHeadingSizeNumber','tabHeadingSizeRange'); previewSelectedTabFontSettings()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-font-control-card mt-3">
+                    <label class="block text-sm mb-2">المسافة بين الأسطر</label>
+                    <div class="tab-font-value-row">
+                        <input id="tabLineHeightRange" class="tab-font-range" type="range" min="1" max="2.5" step="0.05" value="1.7" oninput="syncTabFontNumber('tabLineHeightRange','tabLineHeightNumber'); previewSelectedTabFontSettings()">
+                        <input id="tabLineHeightNumber" class="form-input tab-font-number" type="number" min="1" max="2.5" step="0.05" value="1.7" oninput="syncTabFontRange('tabLineHeightNumber','tabLineHeightRange'); previewSelectedTabFontSettings()">
+                    </div>
+                </div>
+
+                <div id="tabFontPreview" class="font-preview mt-3">
+                    <strong>معاينة</strong><br>
+                    بشير حنش للتجارة والاستيراد — هذا مثال لمعاينة النص وحجم العناوين والمسافة بين الأسطر.
+                </div>
+
+                <div class="flex gap-2 mt-4">
+                    <button type="button" onclick="saveSelectedTabFontSettings()" class="magnetic-btn justify-center flex-1">
+                        <i class="fas fa-save"></i> حفظ إعدادات هذا التبويب
+                    </button>
+                    <button type="button" onclick="resetSelectedTabFontSettings()" class="magnetic-btn justify-center" style="background:#475569">
+                        <i class="fas fa-undo"></i> افتراضي
+                    </button>
+                </div>
+                <button type="button" onclick="resetAllTabFontSettings()" class="w-full magnetic-btn justify-center mt-2" style="background:#64748b">
+                    <i class="fas fa-sync-alt"></i> إعادة جميع التبويبات للوضع الافتراضي
+                </button>
+            </div>
+
             <div class="flex gap-2 mt-4">
                 <button type="button" onclick="saveFontSettings()" class="magnetic-btn justify-center flex-1"><i class="fas fa-save"></i> حفظ وتطبيق الخطوط</button>
                 <button type="button" onclick="resetFontSettings()" class="magnetic-btn justify-center" style="background:#475569"><i class="fas fa-undo"></i> افتراضي</button>
@@ -773,6 +918,7 @@
         initKeyboardShortcuts();
         applyColors();
         applyFontSettings(siteData.settings?.font || FONT_DEFAULTS);
+        initTabFontControls();
     });
 
     function updateBrandLanguage() {
@@ -1465,6 +1611,151 @@ function updateContactDisplay() {
         buttonFontSize: 16
     };
 
+    // ===== إعدادات الخطوط المستقلة لكل تبويب =====
+    const TAB_FONT_DEFAULTS = {
+        fontFamily: 'Tajawal, sans-serif',
+        bodySize: 16,
+        headingSize: 32,
+        lineHeight: 1.7
+    };
+
+    const TAB_FONT_SECTIONS = ['home','about','services','projects','news','testimonials','partners','faq','contact'];
+
+    function getTabFontSettings(sectionId) {
+        const saved = siteData.settings?.tabFonts?.[sectionId] || {};
+        return Object.assign({}, TAB_FONT_DEFAULTS, saved);
+    }
+
+    function getSelectedTabFontId() {
+        return document.getElementById('tabFontSectionSelect')?.value || 'home';
+    }
+
+    function syncTabFontNumber(rangeId, numberId) {
+        const range = document.getElementById(rangeId);
+        const number = document.getElementById(numberId);
+        if (range && number) number.value = range.value;
+    }
+
+    function syncTabFontRange(numberId, rangeId) {
+        const number = document.getElementById(numberId);
+        const range = document.getElementById(rangeId);
+        if (!number || !range) return;
+        const min = Number(range.min), max = Number(range.max), step = Number(range.step || 1);
+        let value = Number(number.value);
+        if (!Number.isFinite(value)) value = min;
+        value = Math.min(max, Math.max(min, value));
+        if (step < 1) value = Math.round(value / step) * step;
+        number.value = Number(value.toFixed(2));
+        range.value = number.value;
+    }
+
+    function readSelectedTabFontControls() {
+        const getNum = (id, fallback) => {
+            const n = Number(document.getElementById(id)?.value);
+            return Number.isFinite(n) ? n : fallback;
+        };
+        return {
+            fontFamily: document.getElementById('tabFontFamilySelect')?.value || TAB_FONT_DEFAULTS.fontFamily,
+            bodySize: getNum('tabBodySizeNumber', TAB_FONT_DEFAULTS.bodySize),
+            headingSize: getNum('tabHeadingSizeNumber', TAB_FONT_DEFAULTS.headingSize),
+            lineHeight: getNum('tabLineHeightNumber', TAB_FONT_DEFAULTS.lineHeight)
+        };
+    }
+
+    function applyTabFontSettings(sectionId, settings) {
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+        settings = Object.assign({}, TAB_FONT_DEFAULTS, settings || {});
+        section.style.setProperty('--tab-font-family', settings.fontFamily);
+        section.style.setProperty('--tab-body-size', settings.bodySize + 'px');
+        section.style.setProperty('--tab-heading-size', settings.headingSize + 'px');
+        section.style.setProperty('--tab-line-height', settings.lineHeight);
+    }
+
+    function applyAllTabFontSettings() {
+        TAB_FONT_SECTIONS.forEach(sectionId => {
+            applyTabFontSettings(sectionId, getTabFontSettings(sectionId));
+        });
+    }
+
+    function loadSelectedTabFontSettings() {
+        const sectionId = getSelectedTabFontId();
+        const settings = getTabFontSettings(sectionId);
+
+        const values = {
+            tabFontFamilySelect: settings.fontFamily,
+            tabBodySizeRange: settings.bodySize,
+            tabBodySizeNumber: settings.bodySize,
+            tabHeadingSizeRange: settings.headingSize,
+            tabHeadingSizeNumber: settings.headingSize,
+            tabLineHeightRange: settings.lineHeight,
+            tabLineHeightNumber: settings.lineHeight
+        };
+
+        Object.entries(values).forEach(([id, value]) => {
+            const el = document.getElementById(id);
+            if (el) el.value = value;
+        });
+
+        applyTabFontSettings(sectionId, settings);
+        const preview = document.getElementById('tabFontPreview');
+        if (preview) {
+            preview.style.fontFamily = settings.fontFamily;
+            preview.style.fontSize = settings.bodySize + 'px';
+            preview.style.lineHeight = settings.lineHeight;
+        }
+    }
+
+    function previewSelectedTabFontSettings() {
+        const sectionId = getSelectedTabFontId();
+        const settings = readSelectedTabFontControls();
+        applyTabFontSettings(sectionId, settings);
+
+        const preview = document.getElementById('tabFontPreview');
+        if (preview) {
+            preview.style.fontFamily = settings.fontFamily;
+            preview.style.fontSize = settings.bodySize + 'px';
+            preview.style.lineHeight = settings.lineHeight;
+        }
+    }
+
+    function saveSelectedTabFontSettings() {
+        const sectionId = getSelectedTabFontId();
+        if (!siteData.settings) siteData.settings = {};
+        if (!siteData.settings.tabFonts) siteData.settings.tabFonts = {};
+        siteData.settings.tabFonts[sectionId] = readSelectedTabFontControls();
+        saveData();
+        applyTabFontSettings(sectionId, siteData.settings.tabFonts[sectionId]);
+        showToast('تم حفظ إعدادات الخطوط لهذا التبويب');
+    }
+
+    function resetSelectedTabFontSettings() {
+        const sectionId = getSelectedTabFontId();
+        if (!siteData.settings) siteData.settings = {};
+        if (!siteData.settings.tabFonts) siteData.settings.tabFonts = {};
+        siteData.settings.tabFonts[sectionId] = Object.assign({}, TAB_FONT_DEFAULTS);
+        saveData();
+        loadSelectedTabFontSettings();
+        applyTabFontSettings(sectionId, TAB_FONT_DEFAULTS);
+        showToast('تمت إعادة إعدادات هذا التبويب إلى الافتراضي');
+    }
+
+    function resetAllTabFontSettings() {
+        if (!confirm('هل تريد إعادة إعدادات الخطوط والمسافة بين الأسطر لجميع التبويبات إلى الوضع الافتراضي؟')) return;
+        if (!siteData.settings) siteData.settings = {};
+        siteData.settings.tabFonts = {};
+        saveData();
+        applyAllTabFontSettings();
+        loadSelectedTabFontSettings();
+        showToast('تمت إعادة جميع التبويبات إلى الإعدادات الافتراضية');
+    }
+
+    function initTabFontControls() {
+        if (!document.getElementById('tabFontSectionSelect')) return;
+        loadSelectedTabFontSettings();
+        applyAllTabFontSettings();
+    }
+
     function syncFontNumber(rangeId, numberId) {
         const range = document.getElementById(rangeId);
         const number = document.getElementById(numberId);
@@ -1542,6 +1833,7 @@ function updateContactDisplay() {
         siteData.settings.font = getFontSettingsFromControls();
         saveData();
         applyFontSettings(siteData.settings.font);
+        applyAllTabFontSettings();
         if (typeof showToast === 'function') showToast('تم حفظ وتطبيق إعدادات الخطوط');
     }
 
