@@ -547,6 +547,11 @@
                 <div><label class="block text-sm mb-2">لون النصوص الثانوية</label><input type="color" id="textMutedColor" class="w-full h-10 rounded-lg cursor-pointer" value="#94a3b8" onchange="updateColors()"></div>
                 <div><label class="block text-sm mb-2">لون روابط القائمة</label><input type="color" id="textNavColor" class="w-full h-10 rounded-lg cursor-pointer" value="#e2e8f0" onchange="updateColors()"></div>
             </div>
+            <div class="flex gap-2 mt-5">
+                <button type="button" onclick="saveTextColors()" class="magnetic-btn justify-center flex-1"><i class="fas fa-save"></i> حفظ وتطبيق الألوان</button>
+                <button type="button" onclick="resetTextColors()" class="magnetic-btn justify-center" style="background:#475569"><i class="fas fa-undo"></i> افتراضي</button>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">اختر الألوان ثم اضغط «حفظ وتطبيق الألوان» لتثبيتها.</p>
         </div>
       <!-- ====== محرر المحتوى الكامل ====== -->
         <div class="mb-8">
@@ -1381,6 +1386,21 @@ function updateContactDisplay() {
         saveData();
     }
 
+    function saveTextColors() {
+        updateColors();
+        applyColors();
+        if (typeof showToast === 'function') showToast('تم حفظ وتطبيق ألوان النصوص');
+    }
+
+    function resetTextColors() {
+        const defaults = {primary:'#d89b2b', secondary:'#1f4e79', textMain:'#334155', textHeading:'#1f2937', textMuted:'#64748b', textNav:'#1f2937'};
+        const ids = {primaryColor:defaults.primary, secondaryColor:defaults.secondary, textMainColor:defaults.textMain, textHeadingColor:defaults.textHeading, textMutedColor:defaults.textMuted, textNavColor:defaults.textNav};
+        Object.entries(ids).forEach(([id,val]) => { const el=document.getElementById(id); if(el) el.value=val; });
+        updateColors();
+        applyColors();
+        if (typeof showToast === 'function') showToast('تمت إعادة ألوان النصوص إلى الإعدادات الافتراضية');
+    }
+
     function applyColors() {
         if (siteData.settings?.primaryColor) document.documentElement.style.setProperty('--primary', siteData.settings.primaryColor);
         if (siteData.settings?.secondaryColor) document.documentElement.style.setProperty('--secondary', siteData.settings.secondaryColor);
@@ -1648,6 +1668,10 @@ function updateContactDisplay() {
         const d=siteData.design||ENHANCED_DEFAULTS.design;
         document.documentElement.style.setProperty('--primary',d.primaryColor||'#6366f1');
         document.documentElement.style.setProperty('--secondary',d.secondaryColor||'#8b5cf6');
+        document.documentElement.style.setProperty('--text-main',d.textMainColor||'#334155');
+        document.documentElement.style.setProperty('--text-heading',d.textHeadingColor||'#1f2937');
+        document.documentElement.style.setProperty('--text-muted',d.textMutedColor||'#64748b');
+        document.documentElement.style.setProperty('--text-nav',d.textNavColor||'#1f2937');
         document.documentElement.style.setProperty('--accent',d.accentColor||'#06b6d4');
         document.documentElement.style.setProperty('--dark',d.backgroundColor||'#0f172a');
         document.body.style.backgroundColor=d.backgroundColor||'#0f172a';
@@ -1759,7 +1783,8 @@ function updateContactDisplay() {
             h=`${field('البريد الإلكتروني','ce',x.email)}${field('الهاتف','cp',x.phone)}${field('العنوان عربي','ca',x.addressAr)}${field('العنوان English','cae',x.addressEn)}${field('Facebook','cf',x.facebook)}${field('Instagram','ci',x.instagram)}${field('TikTok','ct',x.tiktok)}${field('X / Twitter','cx',x.twitter)}${field('LinkedIn','cl',x.linkedin)}<div class="mt-2">${field('رابط Formspree (اختياري)','formspree',siteData.settings?.formspreeUrl||'')}</div><button class="w-full magnetic-btn justify-center mt-3" onclick="saveContactEnhanced()">حفظ التواصل</button>`;
         } else if(currentEditor==='design'){
             const d=siteData.design;
-            h=`<div class="grid grid-cols-2 gap-3">${field('اللون الرئيسي','dc1',d.primaryColor,'color')}${field('اللون الثانوي','dc2',d.secondaryColor,'color')}${field('لون التأكيد','dc3',d.accentColor,'color')}${field('لون خلفية الموقع','dbc',d.backgroundColor,'color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="https://..." onchange="siteData.design.backgroundImage=this.value;saveData();applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign();saveData()"></div><button class="w-full magnetic-btn justify-center mt-4" onclick="saveDesignEnhanced()">حفظ المقاولات</button>`;
+            h=`<div class="grid grid-cols-2 gap-3">${field('اللون الرئيسي','dc1',d.primaryColor,'color')}${field('اللون الثانوي','dc2',d.secondaryColor,'color')}${field('لون التأكيد','dc3',d.accentColor,'color')}${field('لون خلفية الموقع','dbc',d.backgroundColor,'color')}
+${field('لون النصوص الرئيسية','dtm',d.textMainColor||'#334155','color')}${field('لون العناوين','dth',d.textHeadingColor||'#1f2937','color')}${field('لون النصوص الثانوية','dtmuted',d.textMutedColor||'#64748b','color')}${field('لون روابط القائمة','dtnav',d.textNavColor||'#1f2937','color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="https://..." onchange="siteData.design.backgroundImage=this.value;applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign()"></div><div class="flex gap-2 mt-4"><button class="w-full magnetic-btn justify-center" onclick="saveDesignEnhanced()"><i class="fas fa-save"></i> حفظ وتطبيق إعدادات التصميم</button></div>`;
         }
         c.innerHTML=h;
     };
@@ -1767,7 +1792,7 @@ function updateContactDisplay() {
     window.saveHeroEnhanced=function(){ const x=siteData.hero; x.badgeAr=document.getElementById('hba').value;x.badgeEn=document.getElementById('hbe').value;x.line1Ar=document.getElementById('h1a').value;x.line1En=document.getElementById('h1e').value;x.line2Ar=document.getElementById('h2a').value;x.line2En=document.getElementById('h2e').value;x.line3Ar=document.getElementById('h3a').value;x.line3En=document.getElementById('h3e').value;x.descAr=document.getElementById('hda').value;x.descEn=document.getElementById('hde').value;x.button1Ar=document.getElementById('b1a').value;x.button1En=document.getElementById('b1e').value;x.button2Ar=document.getElementById('b2a').value;x.button2En=document.getElementById('b2e').value;saveData();renderAllEditable();renderEditorContent();show('تم حفظ الرئيسية'); };
     window.saveAboutEnhanced=function(){const x=siteData.about;x.labelAr=document.getElementById('aba').value;x.labelEn=document.getElementById('abe').value;x.titleAr=document.getElementById('ata').value;x.titleEn=document.getElementById('ate').value;x.textAr=document.getElementById('axa').value;x.textEn=document.getElementById('axe').value;x.image=document.getElementById('abi').value;saveData();renderAllEditable();renderEditorContent();show('تم حفظ عن الشركة');};
     window.saveContactEnhanced=function(){const x=siteData.contact;x.email=document.getElementById('ce').value;x.phone=document.getElementById('cp').value;x.addressAr=document.getElementById('ca').value;x.addressEn=document.getElementById('cae').value;x.facebook=document.getElementById('cf').value;x.instagram=document.getElementById('ci').value;x.tiktok=document.getElementById('ct').value;x.twitter=document.getElementById('cx').value;x.linkedin=document.getElementById('cl').value;siteData.settings=siteData.settings||{};siteData.settings.formspreeUrl=document.getElementById('formspree').value.trim();saveData();renderAllEditable();renderEditorContent();show('تم حفظ بيانات التواصل');};
-    window.saveDesignEnhanced=function(){const d=siteData.design;d.primaryColor=document.getElementById('dc1').value;d.secondaryColor=document.getElementById('dc2').value;d.accentColor=document.getElementById('dc3').value;d.backgroundColor=document.getElementById('dbc').value;d.backgroundImage=document.getElementById('dbi').value.trim();saveData();applyDesign();show('تم حفظ التصميم');};
+    window.saveDesignEnhanced=function(){const d=siteData.design;d.primaryColor=document.getElementById('dc1').value;d.secondaryColor=document.getElementById('dc2').value;d.accentColor=document.getElementById('dc3').value;d.backgroundColor=document.getElementById('dbc').value;d.textMainColor=document.getElementById('dtm')?.value||'#334155';d.textHeadingColor=document.getElementById('dth')?.value||'#1f2937';d.textMutedColor=document.getElementById('dtmuted')?.value||'#64748b';d.textNavColor=document.getElementById('dtnav')?.value||'#1f2937';d.backgroundImage=document.getElementById('dbi').value.trim();saveData();applyDesign();applyColors();show('تم حفظ وتطبيق إعدادات التصميم');};
 
     window.editService=function(i,k,v){siteData.services[i][k]=v;saveData();renderServices();};
     window.deleteService=function(i){if(!confirm('حذف الخدمة؟'))return;siteData.services.splice(i,1);saveData();renderEditorContent();renderServices();};
