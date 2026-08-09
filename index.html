@@ -205,6 +205,15 @@
         #about .absolute.-bottom-6 { border-color:rgba(179,138,62,.45) !important; border-radius:6px !important; }
         #services .w-16 { border-radius:5px; background:var(--primary) !important; }
         #services .w-16 i { color:#e4c27b !important; }
+        /* هرمية عناوين قسم الخدمات: المستوى 1، 2، 3، ثم المحتوى */
+        #services .services-eyebrow { font-size: .9rem; font-weight: 800; letter-spacing: .04em; }
+        #services .services-main-title { font-weight: 900; }
+        #services .service-card { padding: 1.5rem; }
+        #services .service-heading-row { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+        #services .service-heading-row .service-icon { width:3.5rem; height:3.5rem; min-width:3.5rem; margin:0; border-radius:.65rem; display:flex; align-items:center; justify-content:center; }
+        #services .service-heading-row .service-title { margin:0; font-size:1.15rem; line-height:1.35; font-weight:800; }
+        #services .service-content { margin:0; font-size:1rem; line-height:1.8; }
+        @media (max-width: 640px) { #services .service-heading-row { gap:.75rem; } #services .service-heading-row .service-icon { width:3rem; height:3rem; min-width:3rem; } }
         #newsGrid > *, #projectsGrid > *, #testimonialsGrid > * { border-radius:6px !important; overflow:hidden; }
         #faqContainer > * { border-radius:5px !important; border-color:#dfe5e9 !important; background:#fff !important; }
         #contact { background:#eef2f5 !important; }
@@ -2187,7 +2196,25 @@ function updateContactDisplay() {
     function renderServices(){
         const sec=document.getElementById('services'); if(!sec) return;
         const ar=currentLang==='ar'; const inner=sec.querySelector('.max-w-7xl'); if(!inner) return;
-        inner.innerHTML=`<div class="text-center mb-20"><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${ar?'خدماتنا':'Our Services'}</span><h2 class="section-title mb-6">${ar?'ما نقدمه لك':'What We Offer'}</h2><p class="text-gray-400 text-lg max-w-2xl mx-auto">${ar?'حلول متكاملة للمقاولات والإنشاءات والتوريدات والخدمات المساندة':'Complete solutions for your digital needs'}</p></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">${siteData.services.map((x,i)=>`<div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:linear-gradient(135deg,${escAttr(x.color1||'#6366f1')},${escAttr(x.color2||'#9333ea')})"><i class="fas ${escAttr(x.icon||'fa-star')} text-white text-2xl"></i></div><h3 class="text-xl font-bold mb-4">${esc(ar?x.titleAr:x.titleEn)}</h3><p class="text-gray-400 leading-relaxed">${esc(ar?x.textAr:x.textEn)}</p></div>`).join('')}</div>`;
+        inner.innerHTML=`
+            <div class="text-center mb-20">
+                <span class="services-eyebrow text-indigo-400 font-bold tracking-wider uppercase mb-4 block">${ar?'خدماتنا':'Our Services'}</span>
+                <h2 class="section-title services-main-title mb-6">${ar?'ما نقدمه لك':'What We Offer'}</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">${ar?'حلول متكاملة للتجارة العامة والمقاولات والإنشاءات والهندسة والاستيراد والتوريدات والخدمات المساندة':'Integrated solutions for general trading, contracting, engineering, import, supplies, and supporting services'}</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                ${siteData.services.map((x,i)=>`
+                    <div class="service-card rounded-3xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all">
+                        <div class="service-heading-row">
+                            <div class="service-icon" style="background:linear-gradient(135deg,${escAttr(x.color1||'#6366f1')},${escAttr(x.color2||'#9333ea')})" aria-hidden="true">
+                                <i class="fas ${escAttr(x.icon||'fa-star')} text-white text-xl"></i>
+                            </div>
+                            <h3 class="service-title">${esc(ar?x.titleAr:x.titleEn)}</h3>
+                        </div>
+                        <p class="service-content text-gray-400">${esc(ar?x.textAr:x.textEn)}</p>
+                    </div>`).join('')}
+            </div>`;
+        applyAllTabFontSettings();
     }
 
     function renderContact(){
