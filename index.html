@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bashier - حلول رقمية مبتكرة</title>
-    <meta name="description" content="Bashier - نقدم حلول رقمية متكاملة">
-    <meta property="og:title" content="Bashier - حلول رقمية مبتكرة">
+    <title>Bashier | المقاولات والإنشاءات الهندسية والتوريدات</title>
+    <meta name="description" content="Bashier - شركة تعمل في المقاولات والإنشاءات الهندسية والتوريدات والاستيراد والتصدير والخدمات والمشاريع الإنسانية.">
+    <meta property="og:title" content="Bashier | المقاولات والإنشاءات الهندسية والتوريدات">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
@@ -79,6 +79,42 @@
         }
         [dir="ltr"] .admin-trigger { right: auto; left: 30px;
         }
+    
+        /* ===== حماية لوحة التحكم ===== */
+        .admin-login-overlay {
+            position: fixed; inset: 0; z-index: 200000;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(2, 6, 23, .88);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+        .admin-login-overlay.open { display: flex; }
+        .admin-login-card {
+            width: min(420px, 100%);
+            background: linear-gradient(145deg, rgba(15,23,42,.98), rgba(30,41,59,.98));
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 30px 80px rgba(0,0,0,.55);
+        }
+        .admin-login-card input {
+            width: 100%; margin-top: 8px; padding: 13px 14px;
+            border-radius: 12px; border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.06); color: white; outline: none;
+        }
+        .admin-login-card input:focus { border-color: var(--primary); }
+        .admin-login-error {
+            display:none; margin-top:12px; padding:10px 12px;
+            border-radius:10px; background:rgba(239,68,68,.12);
+            color:#fca5a5; font-size:13px;
+        }
+        .admin-login-error.show { display:block; }
+        .admin-logout {
+            border:1px solid rgba(239,68,68,.25);
+            color:#fca5a5; background:rgba(239,68,68,.08);
+            padding:8px 12px; border-radius:10px; font-size:12px;
+        }
+
     </style>
 <base target="_blank">
 </head>
@@ -115,7 +151,7 @@
                 <span class="block" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">المستقبل</span>
                 <span class="block">الرقمي</span>
             </h1>
-            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">نقدم حلول رقمية متكاملة تشمل التصميم الابداعي، التطوير التقني، والتسويق الرقمي.</p>
+            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">شركة متخصصة في المقاولات والإنشاءات الهندسية والتوريدات، مع أنشطة في الاستيراد والتصدير ودعم الأعمال والمشاريع الإنسانية.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#projects" class="magnetic-btn">استكشف أعمالنا <i class="fas fa-arrow-left"></i></a>
                 <a href="#contact" class="magnetic-btn" style="background: transparent; border: 2px solid var(--primary);">تواصل معنا</a>
@@ -147,22 +183,22 @@
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all">
                             <div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4"><i class="fas fa-lightbulb text-indigo-400 text-xl"></i></div>
                             <h3 class="font-bold text-lg mb-2">الإبداع</h3>
-                            <p class="text-gray-500 text-sm">حلول مبتكرة خارج الصندوق</p>
+                            <p class="text-gray-500 text-sm">حلول عملية تناسب متطلبات المشروع</p>
                         </div>
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all">
                             <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4"><i class="fas fa-rocket text-purple-400 text-xl"></i></div>
                             <h3 class="font-bold text-lg mb-2">السرعة</h3>
-                            <p class="text-gray-500 text-sm">تسليم سريع دون المساس بالجودة</p>
+                            <p class="text-gray-500 text-sm">التزام بالجدول والمواصفات</p>
                         </div>
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-all">
                             <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4"><i class="fas fa-shield-alt text-cyan-400 text-xl"></i></div>
                             <h3 class="font-bold text-lg mb-2">الجودة</h3>
-                            <p class="text-gray-500 text-sm">معايير عالمية في كل مشروع</p>
+                            <p class="text-gray-500 text-sm">جودة وسلامة في التنفيذ</p>
                         </div>
                         <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-500/50 transition-all">
                             <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center mb-4"><i class="fas fa-heart text-pink-400 text-xl"></i></div>
                             <h3 class="font-bold text-lg mb-2">الشغف</h3>
-                            <p class="text-gray-500 text-sm">نحب ما نفعله ويبدو ذلك في عملنا</p>
+                            <p class="text-gray-500 text-sm">شراكة مهنية طويلة الأمد</p>
                         </div>
                     </div>
                 </div>
@@ -176,37 +212,37 @@
             <div class="text-center mb-20">
                 <span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">خدماتنا</span>
                 <h2 class="section-title mb-6">ما نقدمه لك</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">حلول متكاملة تغطي جميع احتياجاتك الرقمية</p>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">حلول متكاملة للمقاولات والإنشاءات والتوريدات والخدمات المساندة</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6"><i class="fas fa-paint-brush text-white text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">التصميم الإبداعي</h3>
+                    <h3 class="text-xl font-bold mb-4">المقاولات والإنشاءات</h3>
                     <p class="text-gray-400 leading-relaxed">تصميم هويات بصرية، واجهات مستخدم، وتجارب بصرية مذهلة.</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-6"><i class="fas fa-code text-white text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">تطوير الويب</h3>
+                    <h3 class="text-xl font-bold mb-4">الأعمال الهندسية</h3>
                     <p class="text-gray-400 leading-relaxed">مواقع وتطبيقات ويب عالية الأداء باستخدام أحدث التقنيات.</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-all">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-6"><i class="fas fa-mobile-alt text-white text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">تطبيقات الجوال</h3>
+                    <h3 class="text-xl font-bold mb-4">التوريدات والمشتريات</h3>
                     <p class="text-gray-400 leading-relaxed">تطبيقات iOS وAndroid native وcross-platform سهلة الاستخدام.</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-pink-500/50 transition-all">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-6"><i class="fas fa-bullhorn text-white text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">التسويق الرقمي</h3>
+                    <h3 class="text-xl font-bold mb-4">الاستيراد والتصدير</h3>
                     <p class="text-gray-400 leading-relaxed">استراتيجيات تسويقية متكاملة لزيادة الوعي بالعلامة التجارية.</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-amber-500/50 transition-all">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6"><i class="fas fa-search text-white text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">تحسين محركات البحث</h3>
+                    <h3 class="text-xl font-bold mb-4">المشاريع الإنسانية</h3>
                     <p class="text-gray-400 leading-relaxed">تحسين ظهور موقعك في نتائج البحث لجذب المزيد من الزوار.</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-500/50 transition-all">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6"><i class="fas fa-video text-white text-2xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">الموشن جرافيك</h3>
+                    <h3 class="text-xl font-bold mb-4">الخدمات اللوجستية</h3>
                     <p class="text-gray-400 leading-relaxed">فيديوهات موشن جرافيك ورسوم متحركة احترافية.</p>
                 </div>
             </div>
@@ -218,15 +254,15 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
                 <span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">أعمالنا</span>
-                <h2 class="section-title mb-6">مشاريعنا المميزة</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">نفخر بأعمالنا ونسعى دائماً للتميز في كل مشروع</p>
+                <h2 class="section-title mb-6">مشاريعنا وأعمالنا</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">نستعرض هنا نماذج الأعمال والمشاريع التي يمكن إضافتها من لوحة التحكم.</p>
             </div>
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 <button class="filter-btn active" onclick="filterProjects('all', this)">الكل</button>
-                <button class="filter-btn" onclick="filterProjects('design', this)">تصميم</button>
-                <button class="filter-btn" onclick="filterProjects('web', this)">ويب</button>
-                <button class="filter-btn" onclick="filterProjects('app', this)">تطبيقات</button>
-                <button class="filter-btn" onclick="filterProjects('marketing', this)">تسويق</button>
+                <button class="filter-btn" onclick="filterProjects('construction', this)">مقاولات</button>
+                <button class="filter-btn" onclick="filterProjects('engineering', this)">هندسة</button>
+                <button class="filter-btn" onclick="filterProjects('supplies', this)">توريدات</button>
+                <button class="filter-btn" onclick="filterProjects('humanitarian', this)">إنساني</button>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
         </div>
@@ -335,19 +371,52 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                 <div><h3 class="text-2xl font-black mb-6" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Bashier</h3><p class="text-gray-400 leading-relaxed">نحن فريق من المحترفين الشغوفين بإنشاء تجارب رقمية استثنائية.</p></div>
                 <div><h4 class="font-bold text-lg mb-6">روابط سريعة</h4><ul class="space-y-3" id="footerLinks"></ul></div>
-                <div><h4 class="font-bold text-lg mb-6">خدماتنا</h4><ul class="space-y-3"><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">التصميم الإبداعي</a></li><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">تطوير الويب</a></li><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">تطبيقات الجوال</a></li><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">التسويق الرقمي</a></li></ul></div>
+                <div><h4 class="font-bold text-lg mb-6">خدماتنا</h4><ul class="space-y-3"><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">المقاولات والإنشاءات</a></li><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">الأعمال الهندسية</a></li><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">التوريدات والمشتريات</a></li><li><a href="#services" class="text-gray-400 hover:text-indigo-400 transition-colors">الاستيراد والتصدير</a></li></ul></div>
                 <div><h4 class="font-bold text-lg mb-6">النشرة البريدية</h4><p class="text-gray-400 mb-4">اشترك للحصول على آخر الأخبار</p><div class="flex gap-2"><input type="email" class="form-input flex-1" placeholder="بريدك الإلكتروني"><button class="magnetic-btn px-6"><i class="fas fa-arrow-left"></i></button></div></div>
             </div>
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-gray-500 text-sm">© 2026 Bashier. جميع الحقوق محفوظة.</p><div class="flex gap-6"><a href="#" class="text-gray-500 hover:text-indigo-400 text-sm transition-colors">سياسة الخصوصية</a><a href="#" class="text-gray-500 hover:text-indigo-400 text-sm transition-colors">الشروط والأحكام</a></div></div>
         </div>
     </footer>
 
+
+    <!-- Admin Login -->
+    <div class="admin-login-overlay" id="adminLoginOverlay" aria-hidden="true">
+        <div class="admin-login-card" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <div class="text-3xl mb-2">🔐</div>
+                    <h2 id="adminLoginTitle" class="text-2xl font-black">دخول لوحة التحكم</h2>
+                    <p class="text-gray-400 text-sm mt-1">هذه المنطقة مخصصة لإدارة محتوى الموقع</p>
+                </div>
+                <button type="button" onclick="closeAdminLogin()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <label class="block text-sm text-gray-300">اسم المستخدم</label>
+                <input id="adminUsername" autocomplete="username" required placeholder="اسم المستخدم">
+
+                <label class="block text-sm text-gray-300 mt-4">كلمة المرور</label>
+                <input id="adminPassword" type="password" autocomplete="current-password" required placeholder="كلمة المرور">
+
+                <div id="adminLoginError" class="admin-login-error">اسم المستخدم أو كلمة المرور غير صحيحة.</div>
+
+                <button type="submit" class="magnetic-btn w-full justify-center mt-5">
+                    <i class="fas fa-sign-in-alt"></i> دخول
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Admin Panel -->
-    <div class="admin-overlay" id="adminOverlay" onclick="toggleAdmin()"></div>
+    <div class="admin-overlay" id="adminOverlay" onclick="closeAdminPanel()"></div>
     <div class="admin-panel" id="adminPanel">
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-2xl font-black" style="background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚙️ لوحة التحكم</h2>
-            <button onclick="toggleAdmin()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"><i class="fas fa-times"></i></button>
+            <div class="flex items-center gap-2">
+                <button onclick="adminLogout()" class="admin-logout"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+                <button onclick="closeAdminPanel()" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"><i class="fas fa-times"></i></button>
+            </div>
         </div>
         <div class="mb-8">
             <h3 class="text-lg font-bold mb-4">إدارة التبويبات</h3>
@@ -469,7 +538,7 @@
         ]
     };
 
-    let siteData = JSON.parse(localStorage.getItem('bashierData')) || JSON.parse(JSON.stringify(defaultData));
+    let siteData = JSON.parse(localStorage.getItem('bashierConstructionDataV1')) || JSON.parse(JSON.stringify(defaultData));
     let currentLang = localStorage.getItem('bashierLang') || 'ar';
     let currentFilter = 'all';
 
@@ -679,9 +748,82 @@
     }
 
     // Admin Panel
+    // ===== حماية لوحة التحكم =====
+    const ADMIN_USERNAME = 'Hanashtecno';
+    // SHA-256 لكلمة المرور بدلاً من تخزينها كنص صريح داخل الصفحة.
+    const ADMIN_PASSWORD_HASH = '43bbb665a2aad117b3914822eb9da51790719c927f0af8c607df39459225d846';
+    const ADMIN_SESSION_KEY = 'bashier_admin_authenticated';
+
+    function isAdminAuthenticated() {
+        return sessionStorage.getItem(ADMIN_SESSION_KEY) === '1';
+    }
+
+    function openAdminLogin() {
+        const overlay = document.getElementById('adminLoginOverlay');
+        if (!overlay) return;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        setTimeout(() => document.getElementById('adminUsername')?.focus(), 50);
+    }
+
+    function closeAdminLogin() {
+        const overlay = document.getElementById('adminLoginOverlay');
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        const form = document.getElementById('adminLoginForm');
+        if (form) form.reset();
+        document.getElementById('adminLoginError')?.classList.remove('show');
+    }
+
+    async function sha256(text) {
+        const data = new TextEncoder().encode(text);
+        const hash = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function handleAdminLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('adminUsername').value.trim();
+        const password = document.getElementById('adminPassword').value;
+        const error = document.getElementById('adminLoginError');
+
+        const passwordHash = await sha256(password);
+        if (username === ADMIN_USERNAME && passwordHash === ADMIN_PASSWORD_HASH) {
+            sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
+            closeAdminLogin();
+            document.getElementById('adminPanel').classList.add('open');
+            document.getElementById('adminOverlay').classList.add('open');
+            if (typeof initAdminPanel === 'function') initAdminPanel();
+            show('تم تسجيل الدخول بنجاح');
+        } else {
+            error.classList.add('show');
+            document.getElementById('adminPassword').select();
+        }
+    }
+
+    function closeAdminPanel() {
+        document.getElementById('adminPanel')?.classList.remove('open');
+        document.getElementById('adminOverlay')?.classList.remove('open');
+    }
+
     function toggleAdmin() {
+        if (!isAdminAuthenticated()) {
+            openAdminLogin();
+            return;
+        }
         document.getElementById('adminPanel').classList.toggle('open');
         document.getElementById('adminOverlay').classList.toggle('open');
+        if (document.getElementById('adminPanel').classList.contains('open') && typeof initAdminPanel === 'function') {
+            initAdminPanel();
+        }
+    }
+
+    function adminLogout() {
+        sessionStorage.removeItem(ADMIN_SESSION_KEY);
+        document.getElementById('adminPanel').classList.remove('open');
+        document.getElementById('adminOverlay').classList.remove('open');
+        show('تم تسجيل الخروج من لوحة التحكم');
     }
 
     function initAdminPanel() {
@@ -1117,12 +1259,12 @@ function updateContactDisplay() {
 
     function resetData() {
         if (!confirm('هل أنت متأكد؟ سيتم حذف جميع التعديلات.')) return;
-        localStorage.removeItem('bashierData');
+        localStorage.removeItem('bashierConstructionDataV1');
         location.reload();
     }
 
     function saveData() {
-        localStorage.setItem('bashierData', JSON.stringify(siteData));
+        localStorage.setItem('bashierConstructionDataV1', JSON.stringify(siteData));
     }
 
     function showToast(msg) {
@@ -1155,45 +1297,99 @@ function updateContactDisplay() {
    ============================================================ */
 (function () {
     const ENHANCED_DEFAULTS = {
+        tabs: [
+            { id: 'home', nameAr: 'الرئيسية', nameEn: 'Home', visible: true },
+            { id: 'about', nameAr: 'من نحن', nameEn: 'About Us', visible: true },
+            { id: 'services', nameAr: 'خدماتنا', nameEn: 'Our Services', visible: true },
+            { id: 'projects', nameAr: 'مشاريعنا', nameEn: 'Our Projects', visible: true },
+            { id: 'news', nameAr: 'أخبار الشركة', nameEn: 'Company News', visible: true },
+            { id: 'testimonials', nameAr: 'شهادات العملاء', nameEn: 'Client Testimonials', visible: false },
+            { id: 'partners', nameAr: 'شركاؤنا', nameEn: 'Our Partners', visible: false },
+            { id: 'faq', nameAr: 'الأسئلة الشائعة', nameEn: 'FAQ', visible: true },
+            { id: 'contact', nameAr: 'تواصل معنا', nameEn: 'Contact Us', visible: true }
+        ],
         hero: {
-            badgeAr: '✨ نحول الأفكار إلى واقع', badgeEn: '✨ Turning ideas into reality',
-            line1Ar: 'نبني', line1En: 'We Build',
-            line2Ar: 'المستقبل', line2En: 'The Future',
-            line3Ar: 'الرقمي', line3En: 'Digitally',
-            descAr: 'نقدم حلول رقمية متكاملة تشمل التصميم الابداعي، التطوير التقني، والتسويق الرقمي.',
-            descEn: 'We provide comprehensive digital solutions including creative design, technology development, and digital marketing.',
-            button1Ar: 'استكشف أعمالنا', button1En: 'Explore Our Work',
-            button2Ar: 'تواصل معنا', button2En: 'Contact Us',
+            badgeAr: '🏗️ مقاولات وإنشاءات هندسية • توريدات • استيراد وتصدير • عمل إنساني',
+            badgeEn: '🏗️ Contracting • Engineering Construction • Supplies • Import & Export • Humanitarian Work',
+            line1Ar: 'نبني',
+            line1En: 'We Build',
+            line2Ar: 'المشاريع',
+            line2En: 'Projects',
+            line3Ar: 'ونصنع الأثر',
+            line3En: 'and Create Impact',
+            descAr: 'شركة متخصصة في المقاولات والإنشاءات الهندسية والتوريدات، مع خبرة في تنفيذ الأعمال والخدمات المساندة للمشاريع، ودعم المبادرات والبرامج الإنسانية، إلى جانب أنشطة الاستيراد والتصدير.',
+            descEn: 'A company specialized in contracting, engineering construction and supplies, supporting project delivery and humanitarian programs, alongside import and export activities.',
+            button1Ar: 'استكشف خدماتنا',
+            button1En: 'Explore Our Services',
+            button2Ar: 'اطلب عرضاً',
+            button2En: 'Request a Quote',
             stats: [
-                {value:150,labelAr:'مشروع منجز',labelEn:'Completed Projects'},
-                {value:50,labelAr:'عميل سعيد',labelEn:'Happy Clients'},
-                {value:8,labelAr:'سنوات خبرة',labelEn:'Years Experience'},
-                {value:25,labelAr:'جائزة',labelEn:'Awards'}
+                {value: '—', labelAr:'مشاريع منفذة', labelEn:'Completed Projects'},
+                {value: '—', labelAr:'سنوات خبرة', labelEn:'Years of Experience'},
+                {value: '—', labelAr:'شركاء وعملاء', labelEn:'Partners & Clients'},
+                {value: '4', labelAr:'مجالات رئيسية', labelEn:'Core Business Areas'}
             ]
         },
         about: {
-            labelAr:'من نحن', labelEn:'About Us', titleAr:'نحن نصنع الفرق', titleEn:'We Make a Difference',
-            textAr:'نحن فريق من المصممين والمطورين والمسوقين المحترفين الذين يشاركون شغفاً واحداً: إنشاء تجارب رقمية استثنائية.',
-            textEn:'We are a team of professional designers, developers and marketers who share one passion: creating exceptional digital experiences.',
-            image:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop',
+            labelAr:'من نحن',
+            labelEn:'About Us',
+            titleAr:'شريك موثوق لتنفيذ المشاريع وتوفير الحلول',
+            titleEn:'A Trusted Partner for Projects and Supply Solutions',
+            textAr:'نعمل في مجالات المقاولات والإنشاءات الهندسية والتوريدات، ونوفر حلولاً متكاملة لدعم المشاريع والجهات والمؤسسات وفق متطلبات العمل ونطاق كل مشروع. كما نشارك في دعم الأعمال والمبادرات الإنسانية، ونمارس أنشطة الاستيراد والتصدير وتوفير الاحتياجات من الأسواق المحلية والدولية.',
+            textEn:'We operate in contracting, engineering construction and supplies, providing integrated solutions that support projects, institutions and organizations according to each project’s requirements and scope. We also support humanitarian activities and undertake import and export operations and sourcing from local and international markets.',
+            image:'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1000&h=700&fit=crop',
             features:[
-                {icon:'fa-lightbulb',titleAr:'الإبداع',titleEn:'Creativity',textAr:'حلول مبتكرة خارج الصندوق',textEn:'Innovative out-of-the-box solutions'},
-                {icon:'fa-rocket',titleAr:'السرعة',titleEn:'Speed',textAr:'تسليم سريع دون المساس بالجودة',textEn:'Fast delivery without compromising quality'},
-                {icon:'fa-shield-alt',titleAr:'الجودة',titleEn:'Quality',textAr:'معايير عالمية في كل مشروع',textEn:'World-class standards in every project'},
-                {icon:'fa-heart',titleAr:'الشغف',titleEn:'Passion',textAr:'نحب ما نفعله ويبدو ذلك في عملنا',textEn:'We love what we do and it shows'}
+                {icon:'fa-hard-hat',titleAr:'السلامة والجودة',titleEn:'Safety & Quality',textAr:'نضع السلامة وجودة التنفيذ في مقدمة أولوياتنا.',textEn:'Safety and quality are central to our delivery approach.'},
+                {icon:'fa-drafting-compass',titleAr:'حلول هندسية',titleEn:'Engineering Solutions',textAr:'تنفيذ وتنسيق الأعمال الهندسية والإنشائية وفق متطلبات المشروع.',textEn:'Engineering and construction solutions aligned with project requirements.'},
+                {icon:'fa-truck-loading',titleAr:'توريدات متكاملة',titleEn:'Integrated Supplies',textAr:'توفير المواد والمعدات والاحتياجات التشغيلية للمشاريع.',textEn:'Sourcing materials, equipment and operational requirements for projects.'},
+                {icon:'fa-hands-helping',titleAr:'أثر إنساني',titleEn:'Humanitarian Impact',textAr:'دعم البرامج والأعمال الإنسانية وتوفير الاحتياجات ذات الصلة.',textEn:'Supporting humanitarian programs and relevant supply needs.'}
             ]
         },
         services: [
-            {icon:'fa-paint-brush',color1:'#6366f1',color2:'#9333ea',titleAr:'التصميم الإبداعي',titleEn:'Creative Design',textAr:'تصميم هويات بصرية، واجهات مستخدم، وتجارب بصرية مذهلة.',textEn:'Visual identities, user interfaces, and stunning visual experiences.'},
-            {icon:'fa-code',color1:'#a855f7',color2:'#db2777',titleAr:'تطوير الويب',titleEn:'Web Development',textAr:'مواقع وتطبيقات ويب عالية الأداء باستخدام أحدث التقنيات.',textEn:'High-performance websites and web applications using modern technologies.'},
-            {icon:'fa-mobile-alt',color1:'#06b6d4',color2:'#2563eb',titleAr:'تطبيقات الجوال',titleEn:'Mobile Apps',textAr:'تطبيقات iOS وAndroid native وcross-platform سهلة الاستخدام.',textEn:'Easy-to-use native and cross-platform iOS and Android apps.'},
-            {icon:'fa-bullhorn',color1:'#ec4899',color2:'#e11d48',titleAr:'التسويق الرقمي',titleEn:'Digital Marketing',textAr:'استراتيجيات تسويقية متكاملة لزيادة الوعي بالعلامة التجارية.',textEn:'Integrated marketing strategies to grow brand awareness.'},
-            {icon:'fa-search',color1:'#f59e0b',color2:'#ea580c',titleAr:'تحسين محركات البحث',titleEn:'SEO',textAr:'تحسين ظهور موقعك في نتائج البحث لجذب المزيد من الزوار.',textEn:'Improve search visibility and attract more visitors.'},
-            {icon:'fa-video',color1:'#10b981',color2:'#0f766e',titleAr:'الموشن جرافيك',titleEn:'Motion Graphics',textAr:'فيديوهات موشن جرافيك ورسوم متحركة احترافية.',textEn:'Professional motion graphics and animated videos.'}
+            {icon:'fa-building',color1:'#1f4e79',color2:'#2f75b5',titleAr:'المقاولات والإنشاءات',titleEn:'Contracting & Construction',textAr:'تنفيذ أعمال المقاولات والإنشاءات المدنية والمباني والأعمال المرتبطة بالمشاريع وفق نطاق العمل والمواصفات المعتمدة.',textEn:'Contracting and civil construction works for buildings and related project activities according to approved scopes and specifications.'},
+            {icon:'fa-drafting-compass',color1:'#d89b2b',color2:'#b7791f',titleAr:'الأعمال الهندسية',titleEn:'Engineering Works',textAr:'تنسيق وتنفيذ الأعمال الهندسية والإنشائية، ودعم المشاريع بالحلول الفنية والتشغيلية المناسبة.',textEn:'Engineering and construction coordination supported by practical technical and operational solutions.'},
+            {icon:'fa-boxes-stacked',color1:'#0f766e',color2:'#0d9488',titleAr:'التوريدات والمشتريات',titleEn:'Supplies & Procurement',textAr:'توفير المواد والمعدات والأدوات واحتياجات المشاريع من مصادر محلية ودولية حسب المواصفات والكميات المطلوبة.',textEn:'Supplying materials, equipment, tools and project requirements from local and international sources.'},
+            {icon:'fa-globe-africa',color1:'#2563eb',color2:'#0ea5e9',titleAr:'الاستيراد والتصدير',titleEn:'Import & Export',textAr:'تنظيم وتوفير عمليات الاستيراد والتصدير والتوريد عبر الأسواق الإقليمية والدولية وفق متطلبات النشاط.',textEn:'Import, export and sourcing activities across regional and international markets according to business requirements.'},
+            {icon:'fa-hands-helping',color1:'#059669',color2:'#047857',titleAr:'الخدمات والمشاريع الإنسانية',titleEn:'Humanitarian Services & Projects',textAr:'دعم وتنفيذ أعمال التوريد والخدمات المساندة للبرامج والمشاريع الإنسانية والتنموية.',textEn:'Supporting supplies and related services for humanitarian and development programs and projects.'},
+            {icon:'fa-truck',color1:'#7c3aed',color2:'#4f46e5',titleAr:'النقل والخدمات اللوجستية',titleEn:'Logistics & Transportation',textAr:'تنسيق نقل المواد والمعدات والاحتياجات إلى مواقع المشاريع والجهات المستفيدة حسب متطلبات العمل.',textEn:'Coordinating the transportation of materials, equipment and supplies to project sites and beneficiaries.'}
         ],
-        contact: {email:'info@bashier.com',phone:'+966 50 000 0000',addressAr:'الرياض، المملكة العربية السعودية',addressEn:'Riyadh, Saudi Arabia',facebook:'https://facebook.com/bashier',instagram:'https://instagram.com/bashier',tiktok:'https://tiktok.com/@bashier',twitter:'https://twitter.com/bashier',linkedin:'https://linkedin.com/company/bashier'},
-        design: {primaryColor:'#6366f1',secondaryColor:'#8b5cf6',accentColor:'#06b6d4',backgroundColor:'#0f172a',backgroundImage:'',backgroundSize:'cover',backgroundOverlay:0.0},
-        footer: {descriptionAr:'نحن فريق من المحترفين الشغوفين بإنشاء تجارب رقمية استثنائية.',descriptionEn:'A passionate team creating exceptional digital experiences.',copyrightAr:'© 2026 Bashier. جميع الحقوق محفوظة.',copyrightEn:'© 2026 Bashier. All rights reserved.'}
+        contact: {
+            email:'info@bashier.com',
+            phone:'+967 000 000 000',
+            addressAr:'اليمن — نعمل وفق نطاق المشاريع والفرص المتاحة',
+            addressEn:'Yemen — Serving projects and opportunities within our operating scope',
+            facebook:'',
+            instagram:'',
+            tiktok:'',
+            twitter:'',
+            linkedin:''
+        },
+        design: {
+            primaryColor:'#d89b2b',
+            secondaryColor:'#1f4e79',
+            accentColor:'#0ea5a8',
+            backgroundColor:'#0b1220',
+            backgroundImage:'',
+            backgroundSize:'cover',
+            backgroundOverlay:0.35
+        },
+        projects: [],
+        news: [],
+        testimonials: [],
+        partners: [],
+        faq: [
+            { id:1, questionAr:'ما المجالات التي تعمل فيها الشركة؟', questionEn:'What sectors does the company operate in?', answerAr:'نعمل في المقاولات والإنشاءات الهندسية والتوريدات، إضافة إلى الاستيراد والتصدير والخدمات والأعمال المرتبطة بالمجال الإنساني.', answerEn:'We operate in contracting, engineering construction, supplies, import and export, and related humanitarian services.' },
+            { id:2, questionAr:'هل توفرون المواد والمعدات للمشاريع؟', questionEn:'Do you supply materials and equipment for projects?', answerAr:'نعم، نوفر المواد والمعدات والاحتياجات التشغيلية حسب مواصفات المشروع والكميات المطلوبة ومصادر التوريد المتاحة.', answerEn:'Yes. We source materials, equipment and operational requirements according to project specifications, quantities and available supply sources.' },
+            { id:3, questionAr:'هل يمكن طلب عرض سعر لمشروع أو توريد؟', questionEn:'Can we request a quotation for a project or supply?', answerAr:'نعم. يمكن التواصل معنا وإرسال نطاق العمل أو قائمة المواد والكميات، وسنقوم بدراسة الطلب والرد حسب الإمكانات والمتطلبات.', answerEn:'Yes. Contact us with the scope of work or a bill of materials and quantities, and we will review the request and respond according to requirements and availability.' },
+            { id:4, questionAr:'هل تعملون مع المنظمات والجهات الإنسانية؟', questionEn:'Do you work with humanitarian organizations and agencies?', answerAr:'نعم، نعمل في مجال توفير الخدمات والتوريدات والدعم اللوجستي المرتبط بالمشاريع والبرامج الإنسانية والتنموية ضمن نطاق الأعمال المتفق عليه.', answerEn:'Yes. We support services, supplies and logistics related to humanitarian and development programs within agreed scopes of work.' },
+            { id:5, questionAr:'هل تقدمون خدمات الاستيراد والتصدير؟', questionEn:'Do you provide import and export services?', answerAr:'نعم، تشمل أنشطتنا الاستيراد والتصدير وتوفير المنتجات والمواد من الأسواق المناسبة وفق الأنظمة والمتطلبات المعمول بها.', answerEn:'Yes. Our activities include import, export and sourcing from suitable markets in accordance with applicable requirements.' }
+        ],
+        footer: {
+            descriptionAr:'شركة تعمل في المقاولات والإنشاءات الهندسية والتوريدات والاستيراد والتصدير، مع اهتمام بدعم الأعمال والمشاريع الإنسانية والتنموية.',
+            descriptionEn:'A company operating in contracting, engineering construction, supplies, import and export, with a focus on supporting humanitarian and development projects.',
+            copyrightAr:'© 2026 Bashier. جميع الحقوق محفوظة.',
+            copyrightEn:'© 2026 Bashier. All rights reserved.'
+        }
     };
 
     function clone(x){ return JSON.parse(JSON.stringify(x)); }
@@ -1224,7 +1420,7 @@ function updateContactDisplay() {
     // Replace the old save routine with quota/error feedback.
     window.saveData = function(){
         try {
-            localStorage.setItem('bashierData', JSON.stringify(siteData));
+            localStorage.setItem('bashierConstructionDataV1', JSON.stringify(siteData));
             return true;
         } catch(e){
             show('تعذر الحفظ: مساحة التخزين ممتلئة. صغّر الصور أو صدّر البيانات.');
@@ -1304,7 +1500,7 @@ function updateContactDisplay() {
           <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight"><span class="block">${esc(ar?h.line1Ar:h.line1En)}</span><span class="block" style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${esc(ar?h.line2Ar:h.line2En)}</span><span class="block">${esc(ar?h.line3Ar:h.line3En)}</span></h1>
           <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">${esc(ar?h.descAr:h.descEn)}</p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center"><a href="#projects" class="magnetic-btn">${esc(ar?h.button1Ar:h.button1En)} <i class="fas fa-arrow-left"></i></a><a href="#contact" class="magnetic-btn" style="background:transparent;border:2px solid var(--primary);">${esc(ar?h.button2Ar:h.button2En)}</a></div>
-          <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">${(h.stats||[]).map((x,i)=>`<div class="text-center"><div class="text-4xl md:text-5xl font-black ${['text-indigo-400','text-purple-400','text-cyan-400','text-pink-400'][i%4]} counter" data-target="${Number(x.value)||0}">0</div><div class="text-gray-400 mt-2 text-sm">${esc(ar?x.labelAr:x.labelEn)}</div></div>`).join('')}</div>`;
+          <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">${(h.stats||[]).map((x,i)=>`<div class="text-center"><div class="text-4xl md:text-5xl font-black ${['text-indigo-400','text-purple-400','text-cyan-400','text-pink-400'][i%4]} ${isNaN(Number(x.value))?'':'counter'}" data-target="${isNaN(Number(x.value))?'':Number(x.value)}">${isNaN(Number(x.value))?esc(x.value):'0'}</div><div class="text-gray-400 mt-2 text-sm">${esc(ar?x.labelAr:x.labelEn)}</div></div>`).join('')}</div>`;
     }
 
     function renderAbout(){
@@ -1317,7 +1513,7 @@ function updateContactDisplay() {
     function renderServices(){
         const sec=document.getElementById('services'); if(!sec) return;
         const ar=currentLang==='ar'; const inner=sec.querySelector('.max-w-7xl'); if(!inner) return;
-        inner.innerHTML=`<div class="text-center mb-20"><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${ar?'خدماتنا':'Our Services'}</span><h2 class="section-title mb-6">${ar?'ما نقدمه لك':'What We Offer'}</h2><p class="text-gray-400 text-lg max-w-2xl mx-auto">${ar?'حلول متكاملة تغطي جميع احتياجاتك الرقمية':'Complete solutions for your digital needs'}</p></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">${siteData.services.map((x,i)=>`<div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:linear-gradient(135deg,${escAttr(x.color1||'#6366f1')},${escAttr(x.color2||'#9333ea')})"><i class="fas ${escAttr(x.icon||'fa-star')} text-white text-2xl"></i></div><h3 class="text-xl font-bold mb-4">${esc(ar?x.titleAr:x.titleEn)}</h3><p class="text-gray-400 leading-relaxed">${esc(ar?x.textAr:x.textEn)}</p></div>`).join('')}</div>`;
+        inner.innerHTML=`<div class="text-center mb-20"><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${ar?'خدماتنا':'Our Services'}</span><h2 class="section-title mb-6">${ar?'ما نقدمه لك':'What We Offer'}</h2><p class="text-gray-400 text-lg max-w-2xl mx-auto">${ar?'حلول متكاملة للمقاولات والإنشاءات والتوريدات والخدمات المساندة':'Complete solutions for your digital needs'}</p></div><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">${siteData.services.map((x,i)=>`<div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:linear-gradient(135deg,${escAttr(x.color1||'#6366f1')},${escAttr(x.color2||'#9333ea')})"><i class="fas ${escAttr(x.icon||'fa-star')} text-white text-2xl"></i></div><h3 class="text-xl font-bold mb-4">${esc(ar?x.titleAr:x.titleEn)}</h3><p class="text-gray-400 leading-relaxed">${esc(ar?x.textAr:x.textEn)}</p></div>`).join('')}</div>`;
     }
 
     function renderContact(){
@@ -1392,7 +1588,7 @@ function updateContactDisplay() {
             h=`${field('البريد الإلكتروني','ce',x.email)}${field('الهاتف','cp',x.phone)}${field('العنوان عربي','ca',x.addressAr)}${field('العنوان English','cae',x.addressEn)}${field('Facebook','cf',x.facebook)}${field('Instagram','ci',x.instagram)}${field('TikTok','ct',x.tiktok)}${field('X / Twitter','cx',x.twitter)}${field('LinkedIn','cl',x.linkedin)}<div class="mt-2">${field('رابط Formspree (اختياري)','formspree',siteData.settings?.formspreeUrl||'')}</div><button class="w-full magnetic-btn justify-center mt-3" onclick="saveContactEnhanced()">حفظ التواصل</button>`;
         } else if(currentEditor==='design'){
             const d=siteData.design;
-            h=`<div class="grid grid-cols-2 gap-3">${field('اللون الرئيسي','dc1',d.primaryColor,'color')}${field('اللون الثانوي','dc2',d.secondaryColor,'color')}${field('لون التأكيد','dc3',d.accentColor,'color')}${field('لون خلفية الموقع','dbc',d.backgroundColor,'color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="https://..." onchange="siteData.design.backgroundImage=this.value;saveData();applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign();saveData()"></div><button class="w-full magnetic-btn justify-center mt-4" onclick="saveDesignEnhanced()">حفظ التصميم</button>`;
+            h=`<div class="grid grid-cols-2 gap-3">${field('اللون الرئيسي','dc1',d.primaryColor,'color')}${field('اللون الثانوي','dc2',d.secondaryColor,'color')}${field('لون التأكيد','dc3',d.accentColor,'color')}${field('لون خلفية الموقع','dbc',d.backgroundColor,'color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="https://..." onchange="siteData.design.backgroundImage=this.value;saveData();applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign();saveData()"></div><button class="w-full magnetic-btn justify-center mt-4" onclick="saveDesignEnhanced()">حفظ المقاولات</button>`;
         }
         c.innerHTML=h;
     };
