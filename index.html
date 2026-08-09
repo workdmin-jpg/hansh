@@ -154,6 +154,8 @@
         .brand-copy strong { font-size:20px; letter-spacing:0; font-weight:900; white-space:nowrap; }
         .brand-copy small { font-size:7px; letter-spacing:1.4px; color:#6b7885; margin-top:5px; font-weight:700; }
         .brand-copy medium { display:block; font-size:10px; font-weight:700; white-space:nowrap; letter-spacing:.02em; color:var(--secondary); margin-top:3px; }
+        @media (max-width: 640px) { .brand-copy strong { font-size:15px; } .brand-copy medium { font-size:8px; } .brand-mark { gap:8px; } .brand-monogram { width:40px; height:40px; font-size:21px; } }
+        @media (max-width: 640px) { .brand-copy strong { font-size:15px; } .brand-copy medium { font-size:8px; } .brand-mark { gap:8px; } .brand-monogram { width:40px; height:40px; font-size:21px; } }
         .brand-copy strong { color:#17324d !important; }
         body { color:var(--text-main); }
         .text-gray-400, .text-slate-400 { color:var(--text-muted) !important; }
@@ -239,7 +241,7 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="brand-mark" aria-label="بشير حنش للتجارة والاستيراد">
                 <span class="brand-monogram">B</span>
-                <span class="brand-copy"><strong>بشير حنش للتجارة والاستيراد</strong><medium>مقاولات • هندسة • استيراد • توريدات</medium></span>
+                <span class="brand-copy"><strong id="brandName">بشير حنش للتجارة والاستيراد</strong><medium id="brandSubline">مقاولات • هندسة • استيراد • توريدات</medium></span>
             </a>
         <div class="hidden md:flex items-center gap-8" id="navLinks"></div>
             <button class="md:hidden text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
@@ -676,10 +678,35 @@
         applyColors();
     });
 
+    function updateBrandLanguage() {
+        const brandName = document.getElementById('brandName');
+        const brandSubline = document.getElementById('brandSubline');
+        const isArabic = currentLang === 'ar';
+        if (brandName) {
+            brandName.textContent = isArabic
+                ? 'بشير حنش للتجارة والاستيراد'
+                : 'Bashir Hanash for Trading and Import';
+        }
+        if (brandSubline) {
+            brandSubline.textContent = isArabic
+                ? 'مقاولات • هندسة • استيراد • توريدات'
+                : 'Contracting • Engineering • Import • Supplies';
+        }
+    }
+
+    function updateBrandLanguage() {
+        const brandName = document.getElementById('brandName');
+        const brandSubline = document.getElementById('brandSubline');
+        const isArabic = currentLang === 'ar';
+        if (brandName) brandName.textContent = isArabic ? 'بشير حنش للتجارة والاستيراد' : 'Bashir Hanash for Trading and Import';
+        if (brandSubline) brandSubline.textContent = isArabic ? 'مقاولات • هندسة • استيراد • توريدات' : 'Contracting • Engineering • Import • Supplies';
+    }
+
     function initLanguage() {
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
         document.getElementById('langToggle').textContent = currentLang === 'ar' ? 'EN' : 'AR';
+        updateBrandLanguage();
     }
 
     function toggleLanguage() {
@@ -1688,7 +1715,11 @@ function updateContactDisplay() {
 
     // Override language toggle so all editable content is rerendered.
     window.toggleLanguage=function(){
-        currentLang=currentLang==='ar'?'en':'ar'; localStorage.setItem('bashierLang',currentLang); initLanguage(); renderAllEditable();
+        currentLang=currentLang==='ar'?'en':'ar';
+        localStorage.setItem('bashierLang',currentLang);
+        initLanguage();
+        renderAllEditable();
+        updateBrandLanguage();
     };
 
     function field(label,id,value,type='text',onchange=''){ return `<div><label class="block text-sm mb-2">${label}</label>${type==='textarea'?`<textarea id="${id}" rows="3" class="form-input" onchange="${onchange}">${esc(value)}</textarea>`:`<input type="${type}" id="${id}" class="form-input" value="${escAttr(value)}" onchange="${onchange}">`}</div>`; }
