@@ -7,12 +7,12 @@
     <meta name="description" content="Bashier - شركة تعمل في المقاولات والإنشاءات الهندسية والتوريدات والاستيراد والتصدير والخدمات والمشاريع الإنسانية.">
     <meta property="og:title" content="Bashier | المقاولات والإنشاءات الهندسية والتوريدات">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link href="https://fonts.bunny.net/css?family=tajawal:200,300,400,500,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.bunny.net/css?family=cairo:200,300,400,500,600,700,800,900|noto-kufi-arabic:400,500,600,700,800,900|almarai:300,400,700,800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #17324d; --secondary: #b38a3e; --accent: #2f6f78; --dark: #0b1b2b; --light: #f5f7fa; 
@@ -287,11 +287,6 @@
             gap: 10px;
             align-items: center;
         }
-
-        .tab-preview-level1 { font-weight: 800; font-size: var(--preview-l1, 40px); color: var(--preview-c1, #0f2747); line-height: 1.25; margin-bottom: 8px; }
-        .tab-preview-level2 { font-weight: 750; font-size: var(--preview-l2, 32px); color: var(--preview-c2, #163b67); line-height: 1.3; margin-bottom: 8px; }
-        .tab-preview-level3 { font-weight: 700; font-size: var(--preview-l3, 22px); color: var(--preview-c3, #1f4f7a); line-height: 1.4; margin-bottom: 8px; }
-        .tab-preview-body { font-size: var(--preview-l4, 16px); color: var(--preview-body, #334155); line-height: var(--preview-line, 1.7); }
         @media (max-width: 520px) {
             .tab-font-grid { grid-template-columns: 1fr; }
         }
@@ -312,44 +307,21 @@
             font-family: var(--tab-font-family, var(--site-font-family)) !important;
         }
 
-        #home, #about, #services, #projects, #news, #testimonials, #partners, #faq, #contact {
-            letter-spacing: var(--tab-letter-spacing, 0px);
-        }
-        #home p, #about p, #services p, #projects p, #news p, #testimonials p, #partners p, #faq p, #contact p,
-        #home li, #about li, #services li, #projects li, #news li, #testimonials li, #partners li, #faq li, #contact li {
-            font-size: var(--tab-level4-size, var(--site-base-size)) !important;
+        #home p, #about p, #services p, #projects p, #news p, #testimonials p, #partners p, #faq p, #contact p {
+            font-size: var(--tab-body-size, var(--site-base-size)) !important;
             line-height: var(--tab-line-height, 1.7) !important;
-            color: var(--tab-color-body, inherit) !important;
         }
-        #home h1, #about h1, #services h1, #projects h1, #news h1, #testimonials h1, #partners h1, #faq h1, #contact h1 {
-            font-size: var(--tab-level1-size, var(--site-heading-size)) !important;
-            color: var(--tab-color-level1, inherit) !important;
-            line-height: 1.2 !important;
+        #home li, #about li, #services li, #projects li, #news li, #testimonials li, #partners li, #faq li, #contact li {
+            line-height: var(--tab-line-height, 1.7) !important;
         }
-        #home h2, #about h2, #services h2, #projects h2, #news h2, #testimonials h2, #partners h2, #faq h2, #contact h2 {
-            font-size: var(--tab-level2-size, 32px) !important;
-            color: var(--tab-color-level2, inherit) !important;
-            line-height: 1.3 !important;
-        }
-        #home h3, #about h3, #services h3, #projects h3, #news h3, #testimonials h3, #partners h3, #faq h3, #contact h3 {
-            font-size: var(--tab-level3-size, 22px) !important;
-            color: var(--tab-color-level3, inherit) !important;
-            line-height: 1.4 !important;
-        }
+        #home h1, #about h1, #services h1, #projects h1, #news h1, #testimonials h1, #partners h1, #faq h1, #contact h1,
+        #home h2, #about h2, #services h2, #projects h2, #news h2, #testimonials h2, #partners h2, #faq h2, #contact h2,
+        #home h3, #about h3, #services h3, #projects h3, #news h3, #testimonials h3, #partners h3, #faq h3, #contact h3,
         #home h4, #about h4, #services h4, #projects h4, #news h4, #testimonials h4, #partners h4, #faq h4, #contact h4,
         #home h5, #about h5, #services h5, #projects h5, #news h5, #testimonials h5, #partners h5, #faq h5, #contact h5,
         #home h6, #about h6, #services h6, #projects h6, #news h6, #testimonials h6, #partners h6, #faq h6, #contact h6 {
-            color: var(--tab-color-level3, inherit) !important;
-            line-height: 1.4 !important;
-        }
-        #home a, #about a, #services a, #projects a, #news a, #testimonials a, #partners a, #faq a, #contact a {
-            color: var(--tab-color-links, inherit);
-        }
-        #home .text-gray-500, #about .text-gray-500, #services .text-gray-500, #projects .text-gray-500,
-        #news .text-gray-500, #testimonials .text-gray-500, #partners .text-gray-500, #faq .text-gray-500, #contact .text-gray-500,
-        #home .text-gray-400, #about .text-gray-400, #services .text-gray-400, #projects .text-gray-400,
-        #news .text-gray-400, #testimonials .text-gray-400, #partners .text-gray-400, #faq .text-gray-400, #contact .text-gray-400 {
-            color: var(--tab-color-muted, inherit) !important;
+            font-size: var(--tab-heading-size, var(--site-heading-size)) !important;
+            line-height: var(--tab-line-height, 1.25) !important;
         }
         @media (max-width:768px) {
             .font-control-row { grid-template-columns: 1fr; }
@@ -357,8 +329,33 @@
         }
     </style>
 <base target="_blank">
+
+    <style>
+        /* Fallback: إذا فشلت الشبكة، استخدم خطوط النظام العربية */
+        @font-face {
+            font-family: 'Tajawal';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Tajawal'), local('Tahoma'), local('Arial');
+        }
+        @font-face {
+            font-family: 'Cairo';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Cairo'), local('Segoe UI'), local('Tahoma');
+        }
+    </style>
+<base target="_blank">
 </head>
 <body>
+    <noscript>
+        <div style="position:fixed;top:0;left:0;right:0;background:#b91c1c;color:#fff;padding:12px;text-align:center;z-index:99999;font-family:Tahoma,Arial;">
+            ⚠️ يتطلب الموقع تشغيل JavaScript. إذا كنت تستخدم مانع إعلانات أو VPN، قد تحتاج لتعطيله مؤقتاً.
+        </div>
+    </noscript>
+
     <!-- Loading Screen -->
     <div class="loader" id="loader"><div class="loader-spinner"></div></div>
     
@@ -414,7 +411,7 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="relative">
                     <div class="relative z-10 rounded-3xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل" class="w-full h-auto">
+                        <img src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27600%27%3E%3Crect fill=%27%2317324d%27 width=%27800%27 height=%27600%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23b38a3e%27 font-family=%27Arial%27 font-size=%2748%27 font-weight=%27bold%27%3Eفريق+العمل%3C/text%3E%3C/svg%3E" alt="فريق العمل" class="w-full h-auto">
                     </div>
                     <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-indigo-500/30 rounded-3xl -z-0"></div>
                 </div>
@@ -735,245 +732,86 @@
             </div>
 
 
-            <!-- ===== محرر مستقل لكل صفحات الموقع ===== -->
-<div class="mt-6 tab-font-control-card" id="allPagesEditor">
-  <h4 class="text-base font-bold mb-2 flex items-center gap-2">
-    <i class="fas fa-layer-group"></i> محرر جميع صفحات الموقع
-  </h4>
-  <p class="text-xs text-gray-400 mb-4">
-    اختر الصفحة، ثم عدّل محتواها وخطوطها وأحجام العناوين وألوانها. المعاينة تحدث مباشرة.
-  </p>
+            <!-- ===== إعدادات الخطوط لكل تبويب ===== -->
+            <div class="mt-6 tab-font-control-card">
+                <h4 class="text-base font-bold mb-2 flex items-center gap-2">
+                    <i class="fas fa-sliders-h"></i> إعدادات الخطوط لكل تبويب
+                </h4>
+                <p class="text-xs text-gray-400 mb-4">
+                    اختر التبويب ثم اضبط نوع الخط وحجم النص وحجم العناوين والمسافة بين الأسطر لذلك التبويب فقط.
+                </p>
 
-  <div class="mb-4">
-    <label class="block text-sm mb-2">الصفحة</label>
-    <select id="pageEditorSelect" class="form-input" onchange="loadPageEditor()">
-      <option value="home">الرئيسية</option>
-      <option value="about">عن الشركة</option>
-      <option value="services">خدماتنا</option>
-      <option value="projects">أعمالنا</option>
-      <option value="news">الأخبار</option>
-      <option value="testimonials">شهادات العملاء</option>
-      <option value="partners">شركاؤنا</option>
-      <option value="faq">الأسئلة الشائعة</option>
-      <option value="contact">تواصل معنا</option>
-    </select>
-  </div>
-
-  <div class="tab-font-control-card mb-3">
-    <h5 class="font-bold mb-3"><i class="fas fa-align-left"></i> محتوى الصفحة</h5>
-    <div class="mb-3">
-      <label class="block text-sm mb-1">عنوان الصفحة</label>
-      <input id="pageEditTitle" class="form-input" type="text" oninput="previewPageEditor()">
-    </div>
-    <div class="mb-3">
-      <label class="block text-sm mb-1">العنوان الرئيسي الثاني</label>
-      <input id="pageEditSubtitle" class="form-input" type="text" oninput="previewPageEditor()">
-    </div>
-    <div>
-      <label class="block text-sm mb-1">النص الرئيسي</label>
-      <textarea id="pageEditDescription" class="form-input" rows="5" oninput="previewPageEditor()"></textarea>
-    </div>
-  </div>
-
-  <div class="tab-font-control-card mb-3">
-    <h5 class="font-bold mb-3"><i class="fas fa-heading"></i> أحجام مستويات العناوين</h5>
-    <div class="tab-font-grid">
-      <div><label class="block text-sm mb-1">المستوى الأول</label><input id="pageLevel1Size" type="range" min="20" max="80" step="1" class="tab-font-range" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">المستوى الثاني</label><input id="pageLevel2Size" type="range" min="18" max="64" step="1" class="tab-font-range" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">المستوى الثالث</label><input id="pageLevel3Size" type="range" min="16" max="50" step="1" class="tab-font-range" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">المستوى الرابع / المحتوى</label><input id="pageLevel4Size" type="range" min="12" max="30" step="1" class="tab-font-range" oninput="previewPageEditor()"></div>
-    </div>
-  </div>
-
-  <div class="tab-font-control-card mb-3">
-    <h5 class="font-bold mb-3"><i class="fas fa-font"></i> الخط والمسافات</h5>
-    <div class="mb-3">
-      <label class="block text-sm mb-2">نوع الخط</label>
-      <select id="pageFontFamily" class="form-input" onchange="previewPageEditor()">
-        <option value="Tajawal, sans-serif">Tajawal</option>
-        <option value="Cairo, sans-serif">Cairo</option>
-        <option value="Noto Kufi Arabic, sans-serif">Noto Kufi Arabic</option>
-        <option value="Almarai, sans-serif">Almarai</option>
-        <option value="Arial, sans-serif">Arial</option>
-        <option value="Tahoma, sans-serif">Tahoma</option>
-        <option value="Georgia, serif">Georgia</option>
-      </select>
-    </div>
-    <div class="tab-font-grid">
-      <div><label class="block text-sm mb-1">المسافة بين الأسطر</label><input id="pageLineHeight" type="range" min="1" max="2.5" step="0.05" class="tab-font-range" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">تباعد الحروف</label><input id="pageLetterSpacing" type="range" min="-1" max="3" step="0.1" class="tab-font-range" oninput="previewPageEditor()"></div>
-    </div>
-  </div>
-
-  <div class="tab-font-control-card mb-3">
-    <h5 class="font-bold mb-3"><i class="fas fa-palette"></i> ألوان الصفحة</h5>
-    <div class="tab-font-grid">
-      <div><label class="block text-sm mb-1">لون المستوى الأول</label><input id="pageColor1" class="w-full h-11 rounded" type="color" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">لون المستوى الثاني</label><input id="pageColor2" class="w-full h-11 rounded" type="color" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">لون المستوى الثالث</label><input id="pageColor3" class="w-full h-11 rounded" type="color" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">لون المحتوى</label><input id="pageColorBody" class="w-full h-11 rounded" type="color" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">لون الروابط</label><input id="pageColorLinks" class="w-full h-11 rounded" type="color" oninput="previewPageEditor()"></div>
-      <div><label class="block text-sm mb-1">لون الخلفية</label><input id="pageColorBg" class="w-full h-11 rounded" type="color" oninput="previewPageEditor()"></div>
-    </div>
-  </div>
-
-  <div class="font-preview mt-3" id="pageEditorPreview">
-    <div class="tab-preview-level1">عنوان الصفحة</div>
-    <div class="tab-preview-level2">العنوان الرئيسي الثاني</div>
-    <div class="tab-preview-level3">عنوان عنصر</div>
-    <div class="tab-preview-body">هذا نص المعاينة، ويتغير مباشرة مع إعدادات الخط والحجم والألوان والمسافة بين الأسطر.</div>
-  </div>
-
-  <div class="flex gap-2 mt-4">
-    <button type="button" onclick="savePageEditor()" class="magnetic-btn justify-center flex-1"><i class="fas fa-save"></i> حفظ وتطبيق الصفحة</button>
-    <button type="button" onclick="resetPageEditor()" class="magnetic-btn justify-center" style="background:#475569"><i class="fas fa-undo"></i> افتراضي</button>
-  </div>
-</div>
-
-<!-- ===== إعدادات الخطوط والعناوين والألوان لكل تبويب ===== -->
-<div class="mt-6 tab-font-control-card">
-    <h4 class="text-base font-bold mb-2 flex items-center gap-2">
-        <i class="fas fa-sliders-h"></i> التحكم المتقدم في الخطوط والعناوين والألوان
-    </h4>
-    <p class="text-xs text-gray-400 mb-4">
-        اختر التبويب ثم تحكم بشكل مستقل في مستويات العناوين، النصوص، نوع الخط، المسافة بين الأسطر، وألوان هذا التبويب.
-    </p>
-
-    <div class="mb-4">
-        <label class="block text-sm mb-2">التبويب</label>
-        <select id="tabFontSectionSelect" class="form-input" onchange="loadSelectedTabFontSettings()">
-            <option value="home">الرئيسية</option>
-            <option value="about">عن الشركة</option>
-            <option value="services">خدماتنا</option>
-            <option value="projects">أعمالنا</option>
-            <option value="news">الأخبار</option>
-            <option value="testimonials">شهادات العملاء</option>
-            <option value="partners">شركاؤنا</option>
-            <option value="faq">الأسئلة الشائعة</option>
-            <option value="contact">تواصل معنا</option>
-        </select>
-    </div>
-
-    <div class="tab-font-control-card mb-3">
-        <h5 class="font-bold mb-3"><i class="fas fa-heading"></i> مستويات العناوين</h5>
-        <div class="tab-font-grid">
-            <div>
-                <label class="block text-sm mb-2">المستوى الأول — اسم القسم</label>
-                <div class="tab-font-value-row">
-                    <input id="tabLevel1Range" class="tab-font-range" type="range" min="20" max="72" step="1" value="40" oninput="syncTabFontNumber('tabLevel1Range','tabLevel1Number'); previewSelectedTabFontSettings()">
-                    <input id="tabLevel1Number" class="form-input tab-font-number" type="number" min="20" max="72" step="1" value="40" oninput="syncTabFontRange('tabLevel1Number','tabLevel1Range'); previewSelectedTabFontSettings()">
+                <div class="mb-4">
+                    <label class="block text-sm mb-2">التبويب</label>
+                    <select id="tabFontSectionSelect" class="form-input" onchange="loadSelectedTabFontSettings()">
+                        <option value="home">الرئيسية</option>
+                        <option value="about">عن الشركة</option>
+                        <option value="services">خدماتنا</option>
+                        <option value="projects">أعمالنا</option>
+                        <option value="news">الأخبار</option>
+                        <option value="testimonials">شهادات العملاء</option>
+                        <option value="partners">شركاؤنا</option>
+                        <option value="faq">الأسئلة الشائعة</option>
+                        <option value="contact">تواصل معنا</option>
+                    </select>
                 </div>
-            </div>
 
-            <div>
-                <label class="block text-sm mb-2">المستوى الثاني — العنوان الرئيسي</label>
-                <div class="tab-font-value-row">
-                    <input id="tabLevel2Range" class="tab-font-range" type="range" min="18" max="60" step="1" value="32" oninput="syncTabFontNumber('tabLevel2Range','tabLevel2Number'); previewSelectedTabFontSettings()">
-                    <input id="tabLevel2Number" class="form-input tab-font-number" type="number" min="18" max="60" step="1" value="32" oninput="syncTabFontRange('tabLevel2Number','tabLevel2Range'); previewSelectedTabFontSettings()">
+                <div class="tab-font-control-card mb-3">
+                    <label class="block text-sm mb-2">نوع الخط لهذا التبويب</label>
+                    <select id="tabFontFamilySelect" class="form-input" onchange="previewSelectedTabFontSettings()">
+                        <option value="Tajawal, sans-serif">Tajawal — تجوال</option>
+                        <option value="Cairo, sans-serif">Cairo — القاهرة</option>
+                        <option value="Noto Kufi Arabic, sans-serif">Noto Kufi Arabic — نوتو كوفي</option>
+                        <option value="Almarai, sans-serif">Almarai — المراعي</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Tahoma, sans-serif">Tahoma</option>
+                        <option value="Georgia, serif">Georgia</option>
+                    </select>
                 </div>
-            </div>
 
-            <div>
-                <label class="block text-sm mb-2">المستوى الثالث — عناوين العناصر</label>
-                <div class="tab-font-value-row">
-                    <input id="tabLevel3Range" class="tab-font-range" type="range" min="16" max="48" step="1" value="22" oninput="syncTabFontNumber('tabLevel3Range','tabLevel3Number'); previewSelectedTabFontSettings()">
-                    <input id="tabLevel3Number" class="form-input tab-font-number" type="number" min="16" max="48" step="1" value="22" oninput="syncTabFontRange('tabLevel3Number','tabLevel3Range'); previewSelectedTabFontSettings()">
+                <div class="tab-font-grid">
+                    <div class="tab-font-control-card">
+                        <label class="block text-sm mb-2">حجم النصوص</label>
+                        <div class="tab-font-value-row">
+                            <input id="tabBodySizeRange" class="tab-font-range" type="range" min="12" max="30" step="1" value="16" oninput="syncTabFontNumber('tabBodySizeRange','tabBodySizeNumber'); previewSelectedTabFontSettings()">
+                            <input id="tabBodySizeNumber" class="form-input tab-font-number" type="number" min="12" max="30" step="1" value="16" oninput="syncTabFontRange('tabBodySizeNumber','tabBodySizeRange'); previewSelectedTabFontSettings()">
+                        </div>
+                    </div>
+
+                    <div class="tab-font-control-card">
+                        <label class="block text-sm mb-2">حجم العناوين</label>
+                        <div class="tab-font-value-row">
+                            <input id="tabHeadingSizeRange" class="tab-font-range" type="range" min="18" max="72" step="1" value="32" oninput="syncTabFontNumber('tabHeadingSizeRange','tabHeadingSizeNumber'); previewSelectedTabFontSettings()">
+                            <input id="tabHeadingSizeNumber" class="form-input tab-font-number" type="number" min="18" max="72" step="1" value="32" oninput="syncTabFontRange('tabHeadingSizeNumber','tabHeadingSizeRange'); previewSelectedTabFontSettings()">
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label class="block text-sm mb-2">المستوى الرابع — المحتوى</label>
-                <div class="tab-font-value-row">
-                    <input id="tabLevel4Range" class="tab-font-range" type="range" min="12" max="30" step="1" value="16" oninput="syncTabFontNumber('tabLevel4Range','tabLevel4Number'); previewSelectedTabFontSettings()">
-                    <input id="tabLevel4Number" class="form-input tab-font-number" type="number" min="12" max="30" step="1" value="16" oninput="syncTabFontRange('tabLevel4Number','tabLevel4Range'); previewSelectedTabFontSettings()">
+                <div class="tab-font-control-card mt-3">
+                    <label class="block text-sm mb-2">المسافة بين الأسطر</label>
+                    <div class="tab-font-value-row">
+                        <input id="tabLineHeightRange" class="tab-font-range" type="range" min="1" max="2.5" step="0.05" value="1.7" oninput="syncTabFontNumber('tabLineHeightRange','tabLineHeightNumber'); previewSelectedTabFontSettings()">
+                        <input id="tabLineHeightNumber" class="form-input tab-font-number" type="number" min="1" max="2.5" step="0.05" value="1.7" oninput="syncTabFontRange('tabLineHeightNumber','tabLineHeightRange'); previewSelectedTabFontSettings()">
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="tab-font-control-card mb-3">
-        <h5 class="font-bold mb-3"><i class="fas fa-font"></i> نوع الخط والمسافات</h5>
-        <div class="mb-3">
-            <label class="block text-sm mb-2">نوع الخط</label>
-            <select id="tabFontFamilySelect" class="form-input" onchange="previewSelectedTabFontSettings()">
-                <option value="Tajawal, sans-serif">Tajawal — تجوال</option>
-                <option value="Cairo, sans-serif">Cairo — القاهرة</option>
-                <option value="Noto Kufi Arabic, sans-serif">Noto Kufi Arabic — نوتو كوفي</option>
-                <option value="Almarai, sans-serif">Almarai — المراعي</option>
-                <option value="Arial, sans-serif">Arial</option>
-                <option value="Tahoma, sans-serif">Tahoma</option>
-                <option value="Georgia, serif">Georgia</option>
-            </select>
-        </div>
-
-        <div class="tab-font-grid">
-            <div>
-                <label class="block text-sm mb-2">المسافة بين الأسطر</label>
-                <div class="tab-font-value-row">
-                    <input id="tabLineHeightRange" class="tab-font-range" type="range" min="1" max="2.5" step="0.05" value="1.7" oninput="syncTabFontNumber('tabLineHeightRange','tabLineHeightNumber'); previewSelectedTabFontSettings()">
-                    <input id="tabLineHeightNumber" class="form-input tab-font-number" type="number" min="1" max="2.5" step="0.05" value="1.7" oninput="syncTabFontRange('tabLineHeightNumber','tabLineHeightRange'); previewSelectedTabFontSettings()">
+                <div id="tabFontPreview" class="font-preview mt-3">
+                    <strong>معاينة</strong><br>
+                    بشير حنش للتجارة والاستيراد — هذا مثال لمعاينة النص وحجم العناوين والمسافة بين الأسطر.
                 </div>
-            </div>
-            <div>
-                <label class="block text-sm mb-2">تباعد الحروف</label>
-                <div class="tab-font-value-row">
-                    <input id="tabLetterSpacingRange" class="tab-font-range" type="range" min="-1" max="3" step="0.1" value="0" oninput="syncTabFontNumber('tabLetterSpacingRange','tabLetterSpacingNumber'); previewSelectedTabFontSettings()">
-                    <input id="tabLetterSpacingNumber" class="form-input tab-font-number" type="number" min="-1" max="3" step="0.1" value="0" oninput="syncTabFontRange('tabLetterSpacingNumber','tabLetterSpacingRange'); previewSelectedTabFontSettings()">
+
+                <div class="flex gap-2 mt-4">
+                    <button type="button" onclick="saveSelectedTabFontSettings()" class="magnetic-btn justify-center flex-1">
+                        <i class="fas fa-save"></i> حفظ إعدادات هذا التبويب
+                    </button>
+                    <button type="button" onclick="resetSelectedTabFontSettings()" class="magnetic-btn justify-center" style="background:#475569">
+                        <i class="fas fa-undo"></i> افتراضي
+                    </button>
                 </div>
+                <button type="button" onclick="resetAllTabFontSettings()" class="w-full magnetic-btn justify-center mt-2" style="background:#64748b">
+                    <i class="fas fa-sync-alt"></i> إعادة جميع التبويبات للوضع الافتراضي
+                </button>
             </div>
-        </div>
-    </div>
-
-    <div class="tab-font-control-card mb-3">
-        <h5 class="font-bold mb-3"><i class="fas fa-palette"></i> ألوان هذا التبويب</h5>
-        <div class="tab-font-grid">
-            <div>
-                <label class="block text-sm mb-2">لون المستوى الأول</label>
-                <input id="tabColorLevel1" class="w-full h-11 rounded cursor-pointer" type="color" value="#0f2747" oninput="previewSelectedTabFontSettings()">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">لون المستوى الثاني</label>
-                <input id="tabColorLevel2" class="w-full h-11 rounded cursor-pointer" type="color" value="#163b67" oninput="previewSelectedTabFontSettings()">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">لون المستوى الثالث</label>
-                <input id="tabColorLevel3" class="w-full h-11 rounded cursor-pointer" type="color" value="#1f4f7a" oninput="previewSelectedTabFontSettings()">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">لون المحتوى</label>
-                <input id="tabColorBody" class="w-full h-11 rounded cursor-pointer" type="color" value="#334155" oninput="previewSelectedTabFontSettings()">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">لون الروابط</label>
-                <input id="tabColorLinks" class="w-full h-11 rounded cursor-pointer" type="color" value="#0f766e" oninput="previewSelectedTabFontSettings()">
-            </div>
-            <div>
-                <label class="block text-sm mb-2">لون النص الثانوي</label>
-                <input id="tabColorMuted" class="w-full h-11 rounded cursor-pointer" type="color" value="#64748b" oninput="previewSelectedTabFontSettings()">
-            </div>
-        </div>
-    </div>
-
-    <div id="tabFontPreview" class="font-preview mt-3">
-        <div class="tab-preview-level1">خدماتنا</div>
-        <div class="tab-preview-level2">ما نقدمه لك</div>
-        <div class="tab-preview-level3">المقاولات والإنشاءات</div>
-        <div class="tab-preview-body">نقدم حلولًا متكاملة في المقاولات والإنشاءات والتوريدات والاستيراد والتصدير والعمل الإنساني.</div>
-    </div>
-
-    <div class="flex gap-2 mt-4">
-        <button type="button" onclick="saveSelectedTabFontSettings()" class="magnetic-btn justify-center flex-1">
-            <i class="fas fa-save"></i> حفظ وتطبيق إعدادات التبويب
-        </button>
-        <button type="button" onclick="resetSelectedTabFontSettings()" class="magnetic-btn justify-center" style="background:#475569">
-            <i class="fas fa-undo"></i> افتراضي
-        </button>
-    </div>
-    <button type="button" onclick="resetAllTabFontSettings()" class="w-full magnetic-btn justify-center mt-2" style="background:#64748b">
-        <i class="fas fa-sync-alt"></i> إعادة جميع التبويبات للوضع الافتراضي
-    </button>
-</div>
-<!-- ===== نهاية إعدادات الخطوط لكل تبويب ===== --></div>
 
             <div class="flex gap-2 mt-4">
                 <button type="button" onclick="saveFontSettings()" class="magnetic-btn justify-center flex-1"><i class="fas fa-save"></i> حفظ وتطبيق الخطوط</button>
@@ -1047,42 +885,42 @@
             { id: 'contact', nameAr: 'تواصل معنا', nameEn: 'Contact', visible: true }
         ],
         projects: [
-            { id: 1, titleAr: 'تصميم هوية بصرية', titleEn: 'Brand Identity', category: 'design', image: 'https://placehold.co/800x600/6366f1/ffffff?text=Project', descriptionAr: 'تصميم هوية بصرية كاملة', descriptionEn: 'Complete brand identity design', client: 'TechStart', date: '2026-01', technologies: ['Illustrator', 'Figma'] },
-            { id: 2, titleAr: 'موقع تجارة إلكترونية', titleEn: 'E-commerce Website', category: 'web', image: 'https://picsum.photos/seed/ecom1/800/600', descriptionAr: 'متجر إلكتروني متكامل', descriptionEn: 'Full e-commerce store', client: 'ShopMax', date: '2026-02', technologies: ['React', 'Node.js'] },
-            { id: 3, titleAr: 'تطبيق توصيل', titleEn: 'Delivery App', category: 'app', image: 'https://picsum.photos/seed/food1/800/600', descriptionAr: 'تطبيق توصيل طلبات', descriptionEn: 'Food delivery app', client: 'FoodExpress', date: '2026-02', technologies: ['Flutter', 'Firebase'] },
-            { id: 4, titleAr: 'حملة تسويقية', titleEn: 'Marketing Campaign', category: 'marketing', image: 'https://picsum.photos/seed/market1/800/600', descriptionAr: 'حملة على وسائل التواصل', descriptionEn: 'Social media campaign', client: 'FashionHub', date: '2026-03', technologies: ['Meta Ads', 'Google Ads'] },
-            { id: 5, titleAr: 'موقع عقاري', titleEn: 'Real Estate Website', category: 'web', image: 'https://picsum.photos/seed/real1/800/600', descriptionAr: 'موقع عقاري تفاعلي', descriptionEn: 'Interactive real estate site', client: 'DreamHome', date: '2026-03', technologies: ['Vue.js', 'Laravel'] },
-            { id: 6, titleAr: 'تصميم واجهة تطبيق', titleEn: 'App UI Design', category: 'design', image: 'https://picsum.photos/seed/ui1/800/600', descriptionAr: 'واجهة مستخدم لتطبيق', descriptionEn: 'UI design for fitness app', client: 'FitLife', date: '2026-04', technologies: ['Figma', 'Adobe XD'] },
-            { id: 7, titleAr: 'منصة تعليمية', titleEn: 'Educational Platform', category: 'web', image: 'https://picsum.photos/seed/edu1/800/600', descriptionAr: 'منصة تعليمية متكاملة', descriptionEn: 'Educational platform', client: 'EduLearn', date: '2026-04', technologies: ['Next.js', 'Prisma'] },
-            { id: 8, titleAr: 'تطبيق صحة', titleEn: 'Health App', category: 'app', image: 'https://picsum.photos/seed/health1/800/600', descriptionAr: 'تطبيق للصحة النفسية', descriptionEn: 'Mental health app', client: 'MindCare', date: '2026-05', technologies: ['React Native', 'Redux'] },
-            { id: 9, titleAr: 'هوية مطعم', titleEn: 'Restaurant Branding', category: 'design', image: 'https://picsum.photos/seed/rest1/800/600', descriptionAr: 'هوية لمطعم فاخر', descriptionEn: 'Branding for luxury restaurant', client: 'Gourmet', date: '2026-05', technologies: ['Illustrator', 'After Effects'] },
-            { id: 10, titleAr: 'حملة إعلانية', titleEn: 'Ad Campaign', category: 'marketing', image: 'https://picsum.photos/seed/ad1/800/600', descriptionAr: 'حملة متعددة المنصات', descriptionEn: 'Multi-platform campaign', client: 'ProductX', date: '2026-06', technologies: ['TikTok Ads', 'Snapchat'] },
-            { id: 11, titleAr: 'موقع حجز فنادق', titleEn: 'Hotel Booking', category: 'web', image: 'https://picsum.photos/seed/hotel1/800/600', descriptionAr: 'موقع حجز فنادق', descriptionEn: 'Hotel booking site', client: 'StayHere', date: '2026-06', technologies: ['Angular', 'Django'] },
-            { id: 12, titleAr: 'تطبيق مالية', titleEn: 'Finance App', category: 'app', image: 'https://picsum.photos/seed/fin1/800/600', descriptionAr: 'تطبيق إدارة مالية', descriptionEn: 'Personal finance app', client: 'MoneySmart', date: '2026-07', technologies: ['Swift', 'CoreData'] },
-            { id: 13, titleAr: 'تصميم packaging', titleEn: 'Packaging Design', category: 'design', image: 'https://picsum.photos/seed/pack1/800/600', descriptionAr: 'عبوات عناية شخصية', descriptionEn: 'Personal care packaging', client: 'PureCare', date: '2026-07', technologies: ['Illustrator', 'Blender'] },
-            { id: 14, titleAr: 'SEO طبي', titleEn: 'Medical SEO', category: 'marketing', image: 'https://picsum.photos/seed/seo1/800/600', descriptionAr: 'تحسين لموقع مستشفى', descriptionEn: 'SEO for hospital website', client: 'MedCare', date: '2026-08', technologies: ['Ahrefs', 'Schema'] },
-            { id: 15, titleAr: 'بوابة أخبار', titleEn: 'News Portal', category: 'web', image: 'https://picsum.photos/seed/news1/800/600', descriptionAr: 'موقع أخبار مع CMS', descriptionEn: 'News portal with CMS', client: 'DailyNews', date: '2026-08', technologies: ['WordPress', 'PHP'] }
+            { id: 1, titleAr: 'تصميم هوية بصرية', titleEn: 'Brand Identity', category: 'design', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%236366f1' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='60' font-weight='bold'%3EProject%3C/text%3E%3C/svg%3E', descriptionAr: 'تصميم هوية بصرية كاملة', descriptionEn: 'Complete brand identity design', client: 'TechStart', date: '2026-01', technologies: ['Illustrator', 'Figma'] },
+            { id: 2, titleAr: 'موقع تجارة إلكترونية', titleEn: 'E-commerce Website', category: 'web', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EECOM1%3C/text%3E%3C/svg%3E', descriptionAr: 'متجر إلكتروني متكامل', descriptionEn: 'Full e-commerce store', client: 'ShopMax', date: '2026-02', technologies: ['React', 'Node.js'] },
+            { id: 3, titleAr: 'تطبيق توصيل', titleEn: 'Delivery App', category: 'app', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EFOOD1%3C/text%3E%3C/svg%3E', descriptionAr: 'تطبيق توصيل طلبات', descriptionEn: 'Food delivery app', client: 'FoodExpress', date: '2026-02', technologies: ['Flutter', 'Firebase'] },
+            { id: 4, titleAr: 'حملة تسويقية', titleEn: 'Marketing Campaign', category: 'marketing', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EMARKET1%3C/text%3E%3C/svg%3E', descriptionAr: 'حملة على وسائل التواصل', descriptionEn: 'Social media campaign', client: 'FashionHub', date: '2026-03', technologies: ['Meta Ads', 'Google Ads'] },
+            { id: 5, titleAr: 'موقع عقاري', titleEn: 'Real Estate Website', category: 'web', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EREAL1%3C/text%3E%3C/svg%3E', descriptionAr: 'موقع عقاري تفاعلي', descriptionEn: 'Interactive real estate site', client: 'DreamHome', date: '2026-03', technologies: ['Vue.js', 'Laravel'] },
+            { id: 6, titleAr: 'تصميم واجهة تطبيق', titleEn: 'App UI Design', category: 'design', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EUI1%3C/text%3E%3C/svg%3E', descriptionAr: 'واجهة مستخدم لتطبيق', descriptionEn: 'UI design for fitness app', client: 'FitLife', date: '2026-04', technologies: ['Figma', 'Adobe XD'] },
+            { id: 7, titleAr: 'منصة تعليمية', titleEn: 'Educational Platform', category: 'web', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EEDU1%3C/text%3E%3C/svg%3E', descriptionAr: 'منصة تعليمية متكاملة', descriptionEn: 'Educational platform', client: 'EduLearn', date: '2026-04', technologies: ['Next.js', 'Prisma'] },
+            { id: 8, titleAr: 'تطبيق صحة', titleEn: 'Health App', category: 'app', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EHEALTH1%3C/text%3E%3C/svg%3E', descriptionAr: 'تطبيق للصحة النفسية', descriptionEn: 'Mental health app', client: 'MindCare', date: '2026-05', technologies: ['React Native', 'Redux'] },
+            { id: 9, titleAr: 'هوية مطعم', titleEn: 'Restaurant Branding', category: 'design', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EREST1%3C/text%3E%3C/svg%3E', descriptionAr: 'هوية لمطعم فاخر', descriptionEn: 'Branding for luxury restaurant', client: 'Gourmet', date: '2026-05', technologies: ['Illustrator', 'After Effects'] },
+            { id: 10, titleAr: 'حملة إعلانية', titleEn: 'Ad Campaign', category: 'marketing', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EAD1%3C/text%3E%3C/svg%3E', descriptionAr: 'حملة متعددة المنصات', descriptionEn: 'Multi-platform campaign', client: 'ProductX', date: '2026-06', technologies: ['TikTok Ads', 'Snapchat'] },
+            { id: 11, titleAr: 'موقع حجز فنادق', titleEn: 'Hotel Booking', category: 'web', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EHOTEL1%3C/text%3E%3C/svg%3E', descriptionAr: 'موقع حجز فنادق', descriptionEn: 'Hotel booking site', client: 'StayHere', date: '2026-06', technologies: ['Angular', 'Django'] },
+            { id: 12, titleAr: 'تطبيق مالية', titleEn: 'Finance App', category: 'app', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EFIN1%3C/text%3E%3C/svg%3E', descriptionAr: 'تطبيق إدارة مالية', descriptionEn: 'Personal finance app', client: 'MoneySmart', date: '2026-07', technologies: ['Swift', 'CoreData'] },
+            { id: 13, titleAr: 'تصميم packaging', titleEn: 'Packaging Design', category: 'design', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3EPACK1%3C/text%3E%3C/svg%3E', descriptionAr: 'عبوات عناية شخصية', descriptionEn: 'Personal care packaging', client: 'PureCare', date: '2026-07', technologies: ['Illustrator', 'Blender'] },
+            { id: 14, titleAr: 'SEO طبي', titleEn: 'Medical SEO', category: 'marketing', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3ESEO1%3C/text%3E%3C/svg%3E', descriptionAr: 'تحسين لموقع مستشفى', descriptionEn: 'SEO for hospital website', client: 'MedCare', date: '2026-08', technologies: ['Ahrefs', 'Schema'] },
+            { id: 15, titleAr: 'بوابة أخبار', titleEn: 'News Portal', category: 'web', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%2317324d' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='60' font-weight='bold'%3ENEWS1%3C/text%3E%3C/svg%3E', descriptionAr: 'موقع أخبار مع CMS', descriptionEn: 'News portal with CMS', client: 'DailyNews', date: '2026-08', technologies: ['WordPress', 'PHP'] }
         ],
         news: [
-            { id: 1, titleAr: 'Bashier تحصل على جائزة أفضل شركة ناشئة', titleEn: 'Bashier Wins Best Startup Award', date: '2026-08-01', image: 'https://picsum.photos/seed/news1/800/400', excerptAr: 'تم تكريمنا في مؤتمر التقنية السنوي', excerptEn: 'We were honored at the annual tech conference' },
-            { id: 2, titleAr: 'إطلاق خدمة الذكاء الاصطناعي', titleEn: 'Launch of AI Service', date: '2026-07-15', image: 'https://picsum.photos/seed/news2/800/400', excerptAr: 'أطلقنا خدمة جديدة تعتمد على الذكاء الاصطناعي', excerptEn: 'We launched a new AI-powered service' },
-            { id: 3, titleAr: 'تعاون استراتيجي مع Microsoft', titleEn: 'Partnership with Microsoft', date: '2026-06-20', image: 'https://picsum.photos/seed/news3/800/400', excerptAr: 'وقعنا اتفاقية تعاون مع Microsoft', excerptEn: 'We signed a partnership with Microsoft' }
+            { id: 1, titleAr: 'Bashier تحصل على جائزة أفضل شركة ناشئة', titleEn: 'Bashier Wins Best Startup Award', date: '2026-08-01', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect fill='%2317324d' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='40' font-weight='bold'%3ENEWS1%3C/text%3E%3C/svg%3E', excerptAr: 'تم تكريمنا في مؤتمر التقنية السنوي', excerptEn: 'We were honored at the annual tech conference' },
+            { id: 2, titleAr: 'إطلاق خدمة الذكاء الاصطناعي', titleEn: 'Launch of AI Service', date: '2026-07-15', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect fill='%2317324d' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='40' font-weight='bold'%3ENEWS2%3C/text%3E%3C/svg%3E', excerptAr: 'أطلقنا خدمة جديدة تعتمد على الذكاء الاصطناعي', excerptEn: 'We launched a new AI-powered service' },
+            { id: 3, titleAr: 'تعاون استراتيجي مع Microsoft', titleEn: 'Partnership with Microsoft', date: '2026-06-20', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect fill='%2317324d' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='40' font-weight='bold'%3ENEWS3%3C/text%3E%3C/svg%3E', excerptAr: 'وقعنا اتفاقية تعاون مع Microsoft', excerptEn: 'We signed a partnership with Microsoft' }
         ],
         testimonials: [
-            { id: 1, nameAr: 'أحمد محمد', nameEn: 'Ahmed Mohammed', roleAr: 'مدير عام', roleEn: 'CEO', company: 'TechStart', image: 'https://picsum.photos/seed/person1/200/200', textAr: 'تعاملنا مع Bashier كان تجربة استثنائية', textEn: 'Working with Bashier was exceptional', rating: 5 },
-            { id: 2, nameAr: 'سارة عبدالله', nameEn: 'Sarah Abdullah', roleAr: 'مديرة تسويق', roleEn: 'Marketing Director', company: 'FashionHub', image: 'https://picsum.photos/seed/person2/200/200', textAr: 'الحملة التسويقية حققت نتائج مذهلة', textEn: 'The campaign achieved amazing results', rating: 5 },
-            { id: 3, nameAr: 'خالد العلي', nameEn: 'Khaled Al-Ali', roleAr: 'مؤسس', roleEn: 'Founder', company: 'FoodExpress', image: 'https://picsum.photos/seed/person3/200/200', textAr: 'التطبيق سهل الاستخدام وأداءه ممتاز', textEn: 'The app is user-friendly and excellent', rating: 5 },
-            { id: 4, nameAr: 'نورة السالم', nameEn: 'Noura Al-Salem', roleAr: 'مديرة مشاريع', roleEn: 'Project Manager', company: 'EduLearn', image: 'https://picsum.photos/seed/person4/200/200', textAr: 'شريك موثوق لأي مشروع', textEn: 'A reliable partner for any project', rating: 5 },
-            { id: 5, nameAr: 'فهد الراشد', nameEn: 'Fahad Al-Rashid', roleAr: 'مالك', roleEn: 'Owner', company: 'DreamHome', image: 'https://picsum.photos/seed/person5/200/200', textAr: 'موقع احترافي وسهل الاستخدام', textEn: 'Professional and easy to use website', rating: 4 },
-            { id: 6, nameAr: 'ليلى الكعبي', nameEn: 'Laila Al-Kaabi', roleAr: 'مديرة تقنية', roleEn: 'CTO', company: 'MedCare', image: 'https://picsum.photos/seed/person6/200/200', textAr: 'خدمة SEO رفعت ترتيب موقعنا', textEn: 'SEO service improved our ranking', rating: 5 }
+            { id: 1, nameAr: 'أحمد محمد', nameEn: 'Ahmed Mohammed', roleAr: 'مدير عام', roleEn: 'CEO', company: 'TechStart', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2317324d' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='20' font-weight='bold'%3EPERSON1%3C/text%3E%3C/svg%3E', textAr: 'تعاملنا مع Bashier كان تجربة استثنائية', textEn: 'Working with Bashier was exceptional', rating: 5 },
+            { id: 2, nameAr: 'سارة عبدالله', nameEn: 'Sarah Abdullah', roleAr: 'مديرة تسويق', roleEn: 'Marketing Director', company: 'FashionHub', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2317324d' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='20' font-weight='bold'%3EPERSON2%3C/text%3E%3C/svg%3E', textAr: 'الحملة التسويقية حققت نتائج مذهلة', textEn: 'The campaign achieved amazing results', rating: 5 },
+            { id: 3, nameAr: 'خالد العلي', nameEn: 'Khaled Al-Ali', roleAr: 'مؤسس', roleEn: 'Founder', company: 'FoodExpress', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2317324d' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='20' font-weight='bold'%3EPERSON3%3C/text%3E%3C/svg%3E', textAr: 'التطبيق سهل الاستخدام وأداءه ممتاز', textEn: 'The app is user-friendly and excellent', rating: 5 },
+            { id: 4, nameAr: 'نورة السالم', nameEn: 'Noura Al-Salem', roleAr: 'مديرة مشاريع', roleEn: 'Project Manager', company: 'EduLearn', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2317324d' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='20' font-weight='bold'%3EPERSON4%3C/text%3E%3C/svg%3E', textAr: 'شريك موثوق لأي مشروع', textEn: 'A reliable partner for any project', rating: 5 },
+            { id: 5, nameAr: 'فهد الراشد', nameEn: 'Fahad Al-Rashid', roleAr: 'مالك', roleEn: 'Owner', company: 'DreamHome', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2317324d' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='20' font-weight='bold'%3EPERSON5%3C/text%3E%3C/svg%3E', textAr: 'موقع احترافي وسهل الاستخدام', textEn: 'Professional and easy to use website', rating: 4 },
+            { id: 6, nameAr: 'ليلى الكعبي', nameEn: 'Laila Al-Kaabi', roleAr: 'مديرة تقنية', roleEn: 'CTO', company: 'MedCare', image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%2317324d' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='20' font-weight='bold'%3EPERSON6%3C/text%3E%3C/svg%3E', textAr: 'خدمة SEO رفعت ترتيب موقعنا', textEn: 'SEO service improved our ranking', rating: 5 }
         ],
         partners: [
-            { name: 'Microsoft', logo: 'https://picsum.photos/seed/ms/200/100' },
-            { name: 'Google', logo: 'https://picsum.photos/seed/google/200/100' },
-            { name: 'Amazon', logo: 'https://picsum.photos/seed/amazon/200/100' },
-            { name: 'Meta', logo: 'https://picsum.photos/seed/meta/200/100' },
-            { name: 'Apple', logo: 'https://picsum.photos/seed/apple/200/100' },
-            { name: 'Samsung', logo: 'https://picsum.photos/seed/samsung/200/100' }
+            { name: 'Microsoft', logo: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2317324d' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='10' font-weight='bold'%3EMS%3C/text%3E%3C/svg%3E' },
+            { name: 'Google', logo: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2317324d' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='10' font-weight='bold'%3EGOOGLE%3C/text%3E%3C/svg%3E' },
+            { name: 'Amazon', logo: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2317324d' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='10' font-weight='bold'%3EAMAZON%3C/text%3E%3C/svg%3E' },
+            { name: 'Meta', logo: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2317324d' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='10' font-weight='bold'%3EMETA%3C/text%3E%3C/svg%3E' },
+            { name: 'Apple', logo: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2317324d' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='10' font-weight='bold'%3EAPPLE%3C/text%3E%3C/svg%3E' },
+            { name: 'Samsung', logo: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%2317324d' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b38a3e' font-family='Arial' font-size='10' font-weight='bold'%3ESAMSUNG%3C/text%3E%3C/svg%3E' }
         ],
         faq: [
             { id: 1, questionAr: 'كم تستغرق مدة تنفيذ المشروع؟', questionEn: 'How long does a project take?', answerAr: 'تختلف المدة حسب حجم المشروع. المشاريع الصغيرة 2-4 أسابيع.', answerEn: 'Duration varies. Small projects take 2-4 weeks.' },
@@ -1115,8 +953,6 @@
         applyColors();
         applyFontSettings(siteData.settings?.font || FONT_DEFAULTS);
         initTabFontControls();
-        loadHomePageSettings();
-        initAllPagesEditor();
     });
 
     function updateBrandLanguage() {
@@ -1463,7 +1299,7 @@ function renderEditorContent() {
             '<div><label class="block text-sm mb-2">عنوان القسم (عربي)</label><input type="text" id="editAboutTitleAr" class="form-input" value="' + (siteData.about?.titleAr || 'نحن نصنع الفرق') + '" onchange="saveAbout()"></div>' +
             '<div><label class="block text-sm mb-2">النص (عربي)</label><textarea id="editAboutTextAr" rows="4" class="form-input" onchange="saveAbout()">' + (siteData.about?.textAr || 'نحن فريق من المحترفين...') + '</textarea></div>' +
             '<div><label class="block text-sm mb-2">النص (إنجليزي)</label><textarea id="editAboutTextEn" rows="4" class="form-input" onchange="saveAbout()">' + (siteData.about?.textEn || 'We are a team of professionals...') + '</textarea></div>' +
-            '<div><label class="block text-sm mb-2">رابط صورة About</label><input type="text" id="editAboutImage" class="form-input" value="' + (siteData.about?.image || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800') + '" onchange="saveAbout()"></div>' +
+            '<div><label class="block text-sm mb-2">رابط صورة About</label><input type="text" id="editAboutImage" class="form-input" value="' + (siteData.about?.image || 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%27600%27%3E%3Crect fill=%27%2317324d%27 width=%27800%27 height=%27600%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23b38a3e%27 font-family=%27Arial%27 font-size=%2748%27 font-weight=%27bold%27%3EImage%3C/text%3E%3C/svg%3E') + '" onchange="saveAbout()"></div>' +
             '<div class="mt-2"><p class="text-xs text-gray-500 mb-1">أو ارفع صورة:</p><input type="file" accept="image/*" onchange="uploadImage(this, \'about\')" class="text-sm"></div>';
     }
     else if (currentEditor === 'projects') {
@@ -1605,7 +1441,7 @@ function addProject() {
         titleAr: 'مشروع جديد',
         titleEn: 'New Project',
         category: 'design',
-        image: 'https://placehold.co/800x600/6366f1/ffffff?text=New+Project',
+        image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%236366f1' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='60' font-weight='bold'%3ENew+Project%3C/text%3E%3C/svg%3E',
         descriptionAr: 'وصف المشروع الجديد',
         descriptionEn: 'New project description',
         client: 'Client',
@@ -1640,7 +1476,7 @@ function addNews() {
         titleAr: 'خبر جديد',
         titleEn: 'New News',
         date: new Date().toISOString().split('T')[0],
-        image: 'https://placehold.co/800x400/6366f1/ffffff?text=News',
+        image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect fill='%236366f1' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='40' font-weight='bold'%3ENews%3C/text%3E%3C/svg%3E',
         excerptAr: 'نص الخبر الجديد...',
         excerptEn: 'New news text...'
     });
@@ -1673,7 +1509,7 @@ function addTestimonial() {
         roleAr: 'مدير',
         roleEn: 'Manager',
         company: 'Company',
-        image: 'https://placehold.co/200x200/6366f1/ffffff?text=User',
+        image: 'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%236366f1' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='20' font-weight='bold'%3EUser%3C/text%3E%3C/svg%3E',
         textAr: 'نص الشهادة...',
         textEn: 'Testimonial text...',
         rating: 5
@@ -1812,18 +1648,9 @@ function updateContactDisplay() {
     // ===== إعدادات الخطوط المستقلة لكل تبويب =====
     const TAB_FONT_DEFAULTS = {
         fontFamily: 'Tajawal, sans-serif',
-        level1Size: 40,
-        level2Size: 32,
-        level3Size: 22,
-        level4Size: 16,
-        lineHeight: 1.7,
-        letterSpacing: 0,
-        colorLevel1: '#0f2747',
-        colorLevel2: '#163b67',
-        colorLevel3: '#1f4f7a',
-        colorBody: '#334155',
-        colorLinks: '#0f766e',
-        colorMuted: '#64748b'
+        bodySize: 16,
+        headingSize: 32,
+        lineHeight: 1.7
     };
 
     const TAB_FONT_SECTIONS = ['home','about','services','projects','news','testimonials','partners','faq','contact'];
@@ -1861,209 +1688,15 @@ function updateContactDisplay() {
             const n = Number(document.getElementById(id)?.value);
             return Number.isFinite(n) ? n : fallback;
         };
-        const getVal = (id, fallback) => document.getElementById(id)?.value || fallback;
-
         return {
-            fontFamily: getVal('tabFontFamilySelect', TAB_FONT_DEFAULTS.fontFamily),
-            level1Size: getNum('tabLevel1Number', TAB_FONT_DEFAULTS.level1Size),
-            level2Size: getNum('tabLevel2Number', TAB_FONT_DEFAULTS.level2Size),
-            level3Size: getNum('tabLevel3Number', TAB_FONT_DEFAULTS.level3Size),
-            level4Size: getNum('tabLevel4Number', TAB_FONT_DEFAULTS.level4Size),
-            lineHeight: getNum('tabLineHeightNumber', TAB_FONT_DEFAULTS.lineHeight),
-            letterSpacing: getNum('tabLetterSpacingNumber', TAB_FONT_DEFAULTS.letterSpacing),
-            colorLevel1: getVal('tabColorLevel1', TAB_FONT_DEFAULTS.colorLevel1),
-            colorLevel2: getVal('tabColorLevel2', TAB_FONT_DEFAULTS.colorLevel2),
-            colorLevel3: getVal('tabColorLevel3', TAB_FONT_DEFAULTS.colorLevel3),
-            colorBody: getVal('tabColorBody', TAB_FONT_DEFAULTS.colorBody),
-            colorLinks: getVal('tabColorLinks', TAB_FONT_DEFAULTS.colorLinks),
-            colorMuted: getVal('tabColorMuted', TAB_FONT_DEFAULTS.colorMuted)
+            fontFamily: document.getElementById('tabFontFamilySelect')?.value || TAB_FONT_DEFAULTS.fontFamily,
+            bodySize: getNum('tabBodySizeNumber', TAB_FONT_DEFAULTS.bodySize),
+            headingSize: getNum('tabHeadingSizeNumber', TAB_FONT_DEFAULTS.headingSize),
+            lineHeight: getNum('tabLineHeightNumber', TAB_FONT_DEFAULTS.lineHeight)
         };
     }
 
     function applyTabFontSettings(sectionId, settings) {
-        const section = document.getElementById(sectionId);
-        if (!section) return;
-        settings = Object.assign({}, TAB_FONT_DEFAULTS, settings || {});
-
-        section.style.setProperty('--tab-font-family', settings.fontFamily);
-        section.style.setProperty('--tab-level1-size', settings.level1Size + 'px');
-        section.style.setProperty('--tab-level2-size', settings.level2Size + 'px');
-        section.style.setProperty('--tab-level3-size', settings.level3Size + 'px');
-        section.style.setProperty('--tab-level4-size', settings.level4Size + 'px');
-        section.style.setProperty('--tab-line-height', settings.lineHeight);
-        section.style.setProperty('--tab-letter-spacing', settings.letterSpacing + 'px');
-        section.style.setProperty('--tab-color-level1', settings.colorLevel1);
-        section.style.setProperty('--tab-color-level2', settings.colorLevel2);
-        section.style.setProperty('--tab-color-level3', settings.colorLevel3);
-        section.style.setProperty('--tab-color-body', settings.colorBody);
-        section.style.setProperty('--tab-color-links', settings.colorLinks);
-        section.style.setProperty('--tab-color-muted', settings.colorMuted);
-    }
-
-    function applyAllTabFontSettings() {
-        TAB_FONT_SECTIONS.forEach(sectionId => {
-            applyTabFontSettings(sectionId, getTabFontSettings(sectionId));
-        });
-    }
-
-    function loadSelectedTabFontSettings() {
-        const sectionId = getSelectedTabFontId();
-        const settings = getTabFontSettings(sectionId);
-
-        const values = {
-            tabFontFamilySelect: settings.fontFamily,
-            tabLevel1Range: settings.level1Size,
-            tabLevel1Number: settings.level1Size,
-            tabLevel2Range: settings.level2Size,
-            tabLevel2Number: settings.level2Size,
-            tabLevel3Range: settings.level3Size,
-            tabLevel3Number: settings.level3Size,
-            tabLevel4Range: settings.level4Size,
-            tabLevel4Number: settings.level4Size,
-            tabLineHeightRange: settings.lineHeight,
-            tabLineHeightNumber: settings.lineHeight,
-            tabLetterSpacingRange: settings.letterSpacing,
-            tabLetterSpacingNumber: settings.letterSpacing,
-            tabColorLevel1: settings.colorLevel1,
-            tabColorLevel2: settings.colorLevel2,
-            tabColorLevel3: settings.colorLevel3,
-            tabColorBody: settings.colorBody,
-            tabColorLinks: settings.colorLinks,
-            tabColorMuted: settings.colorMuted
-        };
-
-        Object.entries(values).forEach(([id, value]) => {
-            const el = document.getElementById(id);
-            if (el) el.value = value;
-        });
-
-        applyTabFontSettings(sectionId, settings);
-        updateTabFontPreview(settings);
-    }
-
-    function updateTabFontPreview(settings) {
-        const preview = document.getElementById('tabFontPreview');
-        if (!preview) return;
-        preview.style.fontFamily = settings.fontFamily;
-        preview.style.setProperty('--preview-l1', settings.level1Size + 'px');
-        preview.style.setProperty('--preview-l2', settings.level2Size + 'px');
-        preview.style.setProperty('--preview-l3', settings.level3Size + 'px');
-        preview.style.setProperty('--preview-l4', settings.level4Size + 'px');
-        preview.style.setProperty('--preview-line', settings.lineHeight);
-        preview.style.setProperty('--preview-c1', settings.colorLevel1);
-        preview.style.setProperty('--preview-c2', settings.colorLevel2);
-        preview.style.setProperty('--preview-c3', settings.colorLevel3);
-        preview.style.setProperty('--preview-body', settings.colorBody);
-    }
-
-    function previewSelectedTabFontSettings() {
-        const sectionId = getSelectedTabFontId();
-        const settings = readSelectedTabFontControls();
-        applyTabFontSettings(sectionId, settings);
-        updateTabFontPreview(settings);
-    }
-
-    function saveSelectedTabFontSettings() {
-        const sectionId = getSelectedTabFontId();
-        if (!siteData.settings) siteData.settings = {};
-        if (!siteData.settings.tabFonts) siteData.settings.tabFonts = {};
-        siteData.settings.tabFonts[sectionId] = readSelectedTabFontControls();
-        saveData();
-        applyTabFontSettings(sectionId, siteData.settings.tabFonts[sectionId]);
-        updateTabFontPreview(siteData.settings.tabFonts[sectionId]);
-        showToast('تم حفظ وتطبيق إعدادات الخطوط والعناوين والألوان لهذا التبويب');
-    }
-
-    function resetSelectedTabFontSettings() {
-        const sectionId = getSelectedTabFontId();
-        if (!siteData.settings) siteData.settings = {};
-        if (!siteData.settings.tabFonts) siteData.settings.tabFonts = {};
-        siteData.settings.tabFonts[sectionId] = Object.assign({}, TAB_FONT_DEFAULTS);
-        saveData();
-        loadSelectedTabFontSettings();
-        showToast('تمت إعادة إعدادات هذا التبويب إلى الافتراضي');
-    }
-
-    function resetAllTabFontSettings() {
-        if (!confirm('هل تريد إعادة إعدادات الخطوط والعناوين والألوان والمسافات لجميع التبويبات إلى الوضع الافتراضي؟')) return;
-        if (!siteData.settings) siteData.settings = {};
-        siteData.settings.tabFonts = {};
-        saveData();
-        applyAllTabFontSettings();
-        loadSelectedTabFontSettings();
-        showToast('تمت إعادة جميع التبويبات إلى الإعدادات الافتراضية');
-    }
-
-
-    const HOME_PAGE_DEFAULTS = {title:'نبني المستقبل بخبرة هندسية موثوقة',subtitle:'مقاولات • هندسة • استيراد • توريدات',description:'نقدم حلولًا متكاملة في المقاولات والإنشاءات الهندسية والتوريدات والاستيراد والتصدير، مع التزام بالجودة والموثوقية وخدمة المشاريع التنموية والإنسانية.',colorTitle:'#ffffff',colorSubtitle:'#d9e3ef',colorText:'#f3f6fa',colorBg:'#0f2747',titleSize:48,subtitleSize:28,textSize:18,lineHeight:1.7};
-    function getHomePageSettings(){return Object.assign({},HOME_PAGE_DEFAULTS,siteData.settings?.homePage||{});}
-    function getHomeHeroElements(){const home=document.getElementById('home'); if(!home)return{}; const h=home.querySelectorAll('h1,h2,h3'); const p=home.querySelectorAll('p'); return{home,title:h[0]||null,subtitle:h[1]||null,description:p[0]||null};}
-    function loadHomePageSettings(){const s=getHomePageSettings(); const m={homeEditTitle:s.title,homeEditSubtitle:s.subtitle,homeEditDescription:s.description,homeColorTitle:s.colorTitle,homeColorSubtitle:s.colorSubtitle,homeColorText:s.colorText,homeColorBg:s.colorBg,homeTitleSize:s.titleSize,homeSubtitleSize:s.subtitleSize,homeTextSize:s.textSize,homeLineHeight:s.lineHeight}; Object.entries(m).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v;}); applyHomePageSettings(s);}
-    function readHomePageControls(){const v=id=>document.getElementById(id)?.value; return{title:v('homeEditTitle')||HOME_PAGE_DEFAULTS.title,subtitle:v('homeEditSubtitle')||HOME_PAGE_DEFAULTS.subtitle,description:v('homeEditDescription')||HOME_PAGE_DEFAULTS.description,colorTitle:v('homeColorTitle')||HOME_PAGE_DEFAULTS.colorTitle,colorSubtitle:v('homeColorSubtitle')||HOME_PAGE_DEFAULTS.colorSubtitle,colorText:v('homeColorText')||HOME_PAGE_DEFAULTS.colorText,colorBg:v('homeColorBg')||HOME_PAGE_DEFAULTS.colorBg,titleSize:Number(v('homeTitleSize'))||48,subtitleSize:Number(v('homeSubtitleSize'))||28,textSize:Number(v('homeTextSize'))||18,lineHeight:Number(v('homeLineHeight'))||1.7};}
-    function applyHomePageSettings(s){const e=getHomeHeroElements(); if(e.title){e.title.textContent=s.title;e.title.style.color=s.colorTitle;e.title.style.fontSize=s.titleSize+'px';} if(e.subtitle){e.subtitle.textContent=s.subtitle;e.subtitle.style.color=s.colorSubtitle;e.subtitle.style.fontSize=s.subtitleSize+'px';} if(e.description){e.description.textContent=s.description;e.description.style.color=s.colorText;e.description.style.fontSize=s.textSize+'px';e.description.style.lineHeight=s.lineHeight;} if(e.home){const bg=e.home.querySelector('.hero-bg');if(bg)bg.style.background=s.colorBg;}}
-    function previewHomePage(){applyHomePageSettings(readHomePageControls());}
-    function saveHomePageSettings(){if(!siteData.settings)siteData.settings={};siteData.settings.homePage=readHomePageControls();saveData();applyHomePageSettings(siteData.settings.homePage);showToast('تم حفظ إعدادات الصفحة الرئيسية');}
-    function resetHomePageSettings(){if(!siteData.settings)siteData.settings={};siteData.settings.homePage=Object.assign({},HOME_PAGE_DEFAULTS);saveData();loadHomePageSettings();showToast('تمت إعادة الصفحة الرئيسية للوضع الافتراضي');}
-
-
-    // ===== محرر مستقل لكل صفحة =====
-    const PAGE_EDITOR_DEFAULTS = {
-        home:{title:'نبني المستقبل بخبرة هندسية موثوقة',subtitle:'مقاولات • هندسة • استيراد • توريدات',description:'نقدم حلولًا متكاملة في المقاولات والإنشاءات الهندسية والتوريدات والاستيراد والتصدير، مع التزام بالجودة والموثوقية.',fontFamily:'Tajawal, sans-serif'},
-        about:{title:'عن الشركة',subtitle:'خبرة موثوقة ورؤية مستدامة',description:'نعمل وفق منهج مؤسسي يجمع الخبرة الهندسية والتجارية وخدمة المشاريع.',fontFamily:'Tajawal, sans-serif'},
-        services:{title:'خدماتنا',subtitle:'ما نقدمه لك',description:'حلول متكاملة في المقاولات والإنشاءات والهندسة والتوريدات والاستيراد والتصدير.',fontFamily:'Tajawal, sans-serif'},
-        projects:{title:'أعمالنا',subtitle:'مشاريع نفخر بها',description:'مجموعة من الأعمال والمشاريع التي تعكس التزامنا بالجودة والتنفيذ.',fontFamily:'Tajawal, sans-serif'},
-        news:{title:'الأخبار',subtitle:'آخر المستجدات',description:'أحدث أخبار الشركة والمشاريع والأنشطة.',fontFamily:'Tajawal, sans-serif'},
-        testimonials:{title:'شهادات العملاء',subtitle:'ثقة عملائنا مصدر نجاحنا',description:'آراء وتجارب عملائنا حول خدماتنا وأعمالنا.',fontFamily:'Tajawal, sans-serif'},
-        partners:{title:'شركاؤنا',subtitle:'نبني علاقات طويلة الأمد',description:'شراكات تجارية ومهنية تدعم جودة أعمالنا وتوسع خدماتنا.',fontFamily:'Tajawal, sans-serif'},
-        faq:{title:'الأسئلة الشائعة',subtitle:'إجابات عن أهم الأسئلة',description:'إجابات مختصرة عن الخدمات والتواصل والتعامل مع الشركة.',fontFamily:'Tajawal, sans-serif'},
-        contact:{title:'تواصل معنا',subtitle:'نحن هنا لخدمتك',description:'تواصل معنا لطلب عرض أو الاستفسار عن خدمات الشركة.',fontFamily:'Tajawal, sans-serif'}
-    };
-
-    function getPageEditorSettings(id){
-        const d=PAGE_EDITOR_DEFAULTS[id]||PAGE_EDITOR_DEFAULTS.home;
-        const saved=siteData.settings?.pageEditors?.[id]||{};
-        return Object.assign({level1Size:40,level2Size:32,level3Size:22,level4Size:16,lineHeight:1.7,letterSpacing:0,color1:'#0f2747',color2:'#163b67',color3:'#1f4f7a',colorBody:'#334155',colorLinks:'#0f766e',colorBg:'#ffffff'},d,saved);
-    }
-    function currentPageEditorId(){return document.getElementById('pageEditorSelect')?.value||'home';}
-    function loadPageEditor(){
-        const s=getPageEditorSettings(currentPageEditorId());
-        const m={pageEditTitle:s.title,pageEditSubtitle:s.subtitle,pageEditDescription:s.description,pageLevel1Size:s.level1Size,pageLevel2Size:s.level2Size,pageLevel3Size:s.level3Size,pageLevel4Size:s.level4Size,pageFontFamily:s.fontFamily,pageLineHeight:s.lineHeight,pageLetterSpacing:s.letterSpacing,pageColor1:s.color1,pageColor2:s.color2,pageColor3:s.color3,pageColorBody:s.colorBody,pageColorLinks:s.colorLinks,pageColorBg:s.colorBg};
-        Object.entries(m).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v;});
-        previewPageEditor();
-    }
-    function readPageEditor(){
-        const v=id=>document.getElementById(id)?.value;
-        return {title:v('pageEditTitle'),subtitle:v('pageEditSubtitle'),description:v('pageEditDescription'),level1Size:Number(v('pageLevel1Size'))||40,level2Size:Number(v('pageLevel2Size'))||32,level3Size:Number(v('pageLevel3Size'))||22,level4Size:Number(v('pageLevel4Size'))||16,fontFamily:v('pageFontFamily')||'Tajawal, sans-serif',lineHeight:Number(v('pageLineHeight'))||1.7,letterSpacing:Number(v('pageLetterSpacing'))||0,color1:v('pageColor1')||'#0f2747',color2:v('pageColor2')||'#163b67',color3:v('pageColor3')||'#1f4f7a',colorBody:v('pageColorBody')||'#334155',colorLinks:v('pageColorLinks')||'#0f766e',colorBg:v('pageColorBg')||'#ffffff'};
-    }
-    function applyPageEditor(s){
-        const id=currentPageEditorId(), sec=document.getElementById(id); if(!sec)return;
-        sec.style.setProperty('--tab-font-family',s.fontFamily);sec.style.setProperty('--tab-level1-size',s.level1Size+'px');sec.style.setProperty('--tab-level2-size',s.level2Size+'px');sec.style.setProperty('--tab-level3-size',s.level3Size+'px');sec.style.setProperty('--tab-level4-size',s.level4Size+'px');sec.style.setProperty('--tab-line-height',s.lineHeight);sec.style.setProperty('--tab-letter-spacing',s.letterSpacing+'px');sec.style.setProperty('--tab-color-level1',s.color1);sec.style.setProperty('--tab-color-level2',s.color2);sec.style.setProperty('--tab-color-level3',s.color3);sec.style.setProperty('--tab-color-body',s.colorBody);sec.style.setProperty('--tab-color-links',s.colorLinks);sec.style.setProperty('--tab-color-muted',s.colorBody);
-        const hs=sec.querySelectorAll('h1,h2,h3'),ps=sec.querySelectorAll('p');
-        if(hs[0]){hs[0].style.fontSize=s.level1Size+'px';hs[0].style.color=s.color1;}
-        if(hs[1]){hs[1].style.fontSize=s.level2Size+'px';hs[1].style.color=s.color2;}
-        if(hs[2]){hs[2].style.fontSize=s.level3Size+'px';hs[2].style.color=s.color3;}
-        ps.forEach(p=>{p.style.fontSize=s.level4Size+'px';p.style.lineHeight=s.lineHeight;p.style.color=s.colorBody;});
-        sec.style.fontFamily=s.fontFamily;sec.style.letterSpacing=s.letterSpacing+'px';
-        const bg=sec.querySelector('.hero-bg');if(bg)bg.style.background=s.colorBg;
-        const preview=document.getElementById('pageEditorPreview');if(preview){preview.style.fontFamily=s.fontFamily;preview.style.setProperty('--preview-l1',s.level1Size+'px');preview.style.setProperty('--preview-l2',s.level2Size+'px');preview.style.setProperty('--preview-l3',s.level3Size+'px');preview.style.setProperty('--preview-l4',s.level4Size+'px');preview.style.setProperty('--preview-line',s.lineHeight);preview.style.setProperty('--preview-c1',s.color1);preview.style.setProperty('--preview-c2',s.color2);preview.style.setProperty('--preview-c3',s.color3);preview.style.setProperty('--preview-body',s.colorBody);}
-    }
-    function previewPageEditor(){
-        const s=readPageEditor(),id=currentPageEditorId(),sec=document.getElementById(id);if(!sec)return;
-        const hs=sec.querySelectorAll('h1,h2,h3'),ps=sec.querySelectorAll('p');
-        if(hs[0])hs[0].textContent=s.title;if(hs[1])hs[1].textContent=s.subtitle;if(ps[0])ps[0].textContent=s.description;
-        applyPageEditor(s);
-    }
-    function savePageEditor(){const id=currentPageEditorId();if(!siteData.settings)siteData.settings={};if(!siteData.settings.pageEditors)siteData.settings.pageEditors={};siteData.settings.pageEditors[id]=readPageEditor();saveData();showToast('تم حفظ وتطبيق صفحة '+document.getElementById('pageEditorSelect').selectedOptions[0].text);}
-    function resetPageEditor(){const id=currentPageEditorId();if(!siteData.settings)siteData.settings={};if(!siteData.settings.pageEditors)siteData.settings.pageEditors={};delete siteData.settings.pageEditors[id];saveData();loadPageEditor();showToast('تمت إعادة الصفحة للوضع الافتراضي');}
-    function initAllPagesEditor(){if(document.getElementById('pageEditorSelect'))loadPageEditor();}
-
-    function initTabFontControls() {
-        if (!document.getElementById('tabFontSectionSelect')) return;
-        loadSelectedTabFontSettings();
-        applyAllTabFontSettings();
-    }
-
-(sectionId, settings) {
         const section = document.getElementById(sectionId);
         if (!section) return;
         settings = Object.assign({}, TAB_FONT_DEFAULTS, settings || {});
@@ -2408,7 +2041,7 @@ function updateContactDisplay() {
             titleEn:'A Trusted Partner for Projects and Supply Solutions',
             textAr:'نعمل في مجالات المقاولات والإنشاءات الهندسية والتوريدات، ونوفر حلولاً متكاملة لدعم المشاريع والجهات والمؤسسات وفق متطلبات العمل ونطاق كل مشروع. كما نشارك في دعم الأعمال والمبادرات الإنسانية، ونمارس أنشطة الاستيراد والتصدير وتوفير الاحتياجات من الأسواق المحلية والدولية.',
             textEn:'We operate in contracting, engineering construction and supplies, providing integrated solutions that support projects, institutions and organizations according to each project’s requirements and scope. We also support humanitarian activities and undertake import and export operations and sourcing from local and international markets.',
-            image:'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1000&h=700&fit=crop',
+            image:'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%271000%27 height=%27700%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 stop-color=%27%2317324d%27/%3E%3Cstop offset=%27100%25%27 stop-color=%27%230b1b2b%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill=%27url(%23g)%27 width=%271000%27 height=%27700%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23b38a3e%27 font-family=%27Arial%27 font-size=%2764%27 font-weight=%27bold%27%3EAbout+Bashier%3C/text%3E%3C/svg%3E',
             features:[
                 {icon:'fa-hard-hat',titleAr:'السلامة والجودة',titleEn:'Safety & Quality',textAr:'نضع السلامة وجودة التنفيذ في مقدمة أولوياتنا.',textEn:'Safety and quality are central to our delivery approach.'},
                 {icon:'fa-drafting-compass',titleAr:'حلول هندسية',titleEn:'Engineering Solutions',textAr:'تنفيذ وتنسيق الأعمال الهندسية والإنشائية وفق متطلبات المشروع.',textEn:'Engineering and construction solutions aligned with project requirements.'},
@@ -2582,7 +2215,7 @@ function updateContactDisplay() {
         const a=siteData.about||ENHANCED_DEFAULTS.about, ar=currentLang==='ar';
         const sec=document.getElementById('about'); if(!sec) return;
         const inner=sec.querySelector('.max-w-7xl'); if(!inner) return;
-        inner.innerHTML=`<div class="grid lg:grid-cols-2 gap-16 items-center"><div class="relative"><div class="relative z-10 rounded-3xl overflow-hidden"><img src="${escAttr(a.image||'https://placehold.co/800x600/1e293b/ffffff?text=About')}" alt="${escAttr(ar?a.titleAr:a.titleEn)}" class="w-full h-auto"></div><div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-indigo-500/30 rounded-3xl -z-0"></div></div><div><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${esc(ar?a.labelAr:a.labelEn)}</span><h2 class="section-title mb-8">${esc(ar?a.titleAr:a.titleEn)}</h2><p class="text-gray-400 text-lg leading-relaxed mb-6">${esc(ar?a.textAr:a.textEn)}</p><div class="grid grid-cols-2 gap-6">${(a.features||[]).map((f,i)=>`<div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4"><i class="fas ${escAttr(f.icon||'fa-star')} text-indigo-400 text-xl"></i></div><h3 class="font-bold text-lg mb-2">${esc(ar?f.titleAr:f.titleEn)}</h3><p class="text-gray-500 text-sm">${esc(ar?f.textAr:f.textEn)}</p></div>`).join('')}</div></div></div>`;
+        inner.innerHTML=`<div class="grid lg:grid-cols-2 gap-16 items-center"><div class="relative"><div class="relative z-10 rounded-3xl overflow-hidden"><img src="${escAttr(a.image||'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%231e293b' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='60' font-weight='bold'%3EAbout%3C/text%3E%3C/svg%3E')}" alt="${escAttr(ar?a.titleAr:a.titleEn)}" class="w-full h-auto"></div><div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-indigo-500/30 rounded-3xl -z-0"></div></div><div><span class="text-indigo-400 font-bold text-sm tracking-wider uppercase mb-4 block">${esc(ar?a.labelAr:a.labelEn)}</span><h2 class="section-title mb-8">${esc(ar?a.titleAr:a.titleEn)}</h2><p class="text-gray-400 text-lg leading-relaxed mb-6">${esc(ar?a.textAr:a.textEn)}</p><div class="grid grid-cols-2 gap-6">${(a.features||[]).map((f,i)=>`<div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all"><div class="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center mb-4"><i class="fas ${escAttr(f.icon||'fa-star')} text-indigo-400 text-xl"></i></div><h3 class="font-bold text-lg mb-2">${esc(ar?f.titleAr:f.titleEn)}</h3><p class="text-gray-500 text-sm">${esc(ar?f.textAr:f.textEn)}</p></div>`).join('')}</div></div></div>`;
     }
 
     function renderServices(){
@@ -2686,7 +2319,7 @@ function updateContactDisplay() {
         } else if(currentEditor==='design'){
             const d=siteData.design;
             h=`<div class="grid grid-cols-2 gap-3">${field('اللون الرئيسي','dc1',d.primaryColor,'color')}${field('اللون الثانوي','dc2',d.secondaryColor,'color')}${field('لون التأكيد','dc3',d.accentColor,'color')}${field('لون خلفية الموقع','dbc',d.backgroundColor,'color')}
-${field('لون النصوص الرئيسية','dtm',d.textMainColor||'#334155','color')}${field('لون العناوين','dth',d.textHeadingColor||'#1f2937','color')}${field('لون النصوص الثانوية','dtmuted',d.textMutedColor||'#64748b','color')}${field('لون روابط القائمة','dtnav',d.textNavColor||'#1f2937','color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="https://..." onchange="siteData.design.backgroundImage=this.value;applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign()"></div><div class="flex gap-2 mt-4"><button class="w-full magnetic-btn justify-center" onclick="saveDesignEnhanced()"><i class="fas fa-save"></i> حفظ وتطبيق إعدادات التصميم</button></div>`;
+${field('لون النصوص الرئيسية','dtm',d.textMainColor||'#334155','color')}${field('لون العناوين','dth',d.textHeadingColor||'#1f2937','color')}${field('لون النصوص الثانوية','dtmuted',d.textMutedColor||'#64748b','color')}${field('لون روابط القائمة','dtnav',d.textNavColor||'#1f2937','color')}</div><label class="block text-sm mb-2 mt-3">رابط صورة الخلفية</label><input id="dbi" class="form-input" value="${escAttr(d.backgroundImage||'')}" placeholder="" onchange="siteData.design.backgroundImage=this.value;applyDesign()">${imgControls('background',undefined,d.backgroundImage)}<div class="mt-3"><label class="block text-sm mb-2">شفافية طبقة الخلفية: <span id="ovv">${Number(d.backgroundOverlay||0)}</span></label><input type="range" min="0" max="0.9" step="0.05" value="${Number(d.backgroundOverlay||0)}" class="w-full" oninput="document.getElementById('ovv').textContent=this.value;siteData.design.backgroundOverlay=Number(this.value);applyDesign()"></div><div class="flex gap-2 mt-4"><button class="w-full magnetic-btn justify-center" onclick="saveDesignEnhanced()"><i class="fas fa-save"></i> حفظ وتطبيق إعدادات التصميم</button></div>`;
         }
         c.innerHTML=h;
     };
@@ -2701,7 +2334,7 @@ ${field('لون النصوص الرئيسية','dtm',d.textMainColor||'#334155',
     window.addService=function(){siteData.services.push({icon:'fa-star',color1:'#6366f1',color2:'#8b5cf6',titleAr:'خدمة جديدة',titleEn:'New Service',textAr:'وصف الخدمة...',textEn:'Service description...'});saveData();renderEditorContent();renderServices();};
     window.editPartner=function(i,k,v){siteData.partners[i][k]=v;saveData();renderPartners();};
     window.deletePartner=function(i){if(!confirm('حذف الشريك؟'))return;siteData.partners.splice(i,1);saveData();renderEditorContent();renderPartners();};
-    window.addPartner=function(){siteData.partners.push({name:'شريك جديد',logo:'https://placehold.co/200x100/1e293b/ffffff?text=Partner'});saveData();renderEditorContent();renderPartners();};
+    window.addPartner=function(){siteData.partners.push({name:'شريك جديد',logo:'data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100'%3E%3Crect fill='%231e293b' width='200' height='100'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='10' font-weight='bold'%3EPartner%3C/text%3E%3C/svg%3E'});saveData();renderEditorContent();renderPartners();};
 
     // Add the missing editor tabs.
     function buildEditorTabs(){
@@ -2725,5 +2358,22 @@ ${field('لون النصوص الرئيسية','dtm',d.textMainColor||'#334155',
 })();
 </script>
 
+
+    <script>
+    // Fallback: إذا فشل unpkg، حاول cdnjs
+    (function(){
+        function loadScript(src, fallback){
+            var s = document.createElement('script');
+            s.src = src;
+            s.onerror = function(){ if(fallback) loadScript(fallback); };
+            document.head.appendChild(s);
+        }
+        // GSAP fallback
+        if(typeof gsap === 'undefined'){
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js');
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js');
+        }
+    })();
+    </script>
 </body>
 </html>
